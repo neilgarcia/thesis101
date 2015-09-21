@@ -1,0 +1,137 @@
+@font-face{
+    font-family: "Segoe UI";
+    src: url(fonts/segoeui.ttf);
+}
+::selection{
+    background-color: transparent;
+}
+::moz-selection{
+    background-color: transparent;
+}
+::webkit-selection{
+    background-color: transparent;
+}
+
+body{
+    background: url("../images/classroom2_censored.jpg");
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+}
+noscript{
+    opacity: 0.9;
+    display: block;
+    margin: auto;
+    padding: 20px 25px;
+    margin-top: 25%;
+    width: 530px;
+    color: #ffffff;
+    font-size: 16pt;
+    background-image: url(../images/gradients.png);
+    background-repeat: repeat-x;
+    background-position: 0px -480px;
+    text-align: center;
+    text-shadow: 1px 1px 0px #000000;
+    box-shadow: inset 0px 1px 1px rgba(255,255,255,0.3),
+        0px 3px 15px #666666;
+    border-radius: 15px;
+    border: #000000 solid 1px;
+}
+noscript:hover{
+    opacity: 1;
+    cursor: default;
+}
+#container{
+    padding: 5px;
+    background: brown;
+    display: none;
+    width: 850px;
+    height: 500px;
+    margin: auto;
+    box-shadow: 0px 3px 20px rgba(0,0,0,0.4);
+    border-radius: 8px;
+}
+.shadow{
+        box-shadow: 0px 3px 10px #6363B7 inset;
+}
+.sidebar{
+
+    position: absolute;
+    width: 220px;
+    height: 490px;
+    border-radius: 5px;
+    background: #311790;
+    color: black;
+}
+.avatar{
+    width: 200px;
+    margin: 10px;
+}
+.avatar img{
+    border-radius: 5px;
+}
+.chatbox{
+    position: absolute;
+    background-color: blue;
+    border-radius: 5px;
+    height: 265px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.chat{
+    position: relative;
+    margin-top: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #00A8FF;
+    height: 40px;
+    width: 614px;
+    left: 225px;
+}
+.button{
+    display: inline-block;
+    border: 1px solid transparent;
+    color: #fff;
+    border-color: rgba(0,0,0,0.7);
+    position: absolute;
+    right: 0;
+    height: 40px;
+    width: 93px;
+    font-size: 18px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: inset 1px 1px rgba(255,255,255,0.1),1px 1px rgba(0,0,0,0.1);
+    background-color: rgba(255,255,255,0.1);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(rgba(255,255,255,0.1)),to(transparent));
+    background-image: -webkit-linear-gradient(top,rgba(255,255,255,0.1),transparent);
+    background-image: linear-gradient(top,rgba(255,255,255,0.1),transparent);
+    background-repeat: repeat-x;
+    background-color: #212F28;
+}
+#content{
+    background: url("../images/paperbg.jpg");
+    background-size: cover;
+    position: relative;
+    left: 225px;
+    border-radius: 5px;
+    overflow: auto;
+    width: 614px;
+    height: 444px;
+}
+.input{
+    font-size: 24px;
+    width: 85%;
+}
+
+a{
+    text-decoration: none;
+    outline: none;
+}
+input,textarea,select{
+    outline: none;
+}
+
+
+
+
