@@ -81,6 +81,7 @@ function paren($char){
 
   function analyze($expr, $side)
   {
+    echo $expr;
     $e = explode(',', $expr);
     //var_dump($e);
     array_pop($e); //removes the last comma
@@ -125,7 +126,7 @@ function paren($char){
             if($side == 'left'){
               array_push($GLOBALS[$side], $num2);
             }else{
-              array_push($GLOBALS['left'], array_pop($GLOBALS['left'])+$num2);
+              array_push($GLOBALS['left'], array_pop($GLOBALS['left'])+$num2 . "x");
             }
           }elseif(preg_match($num_pattern, $num2)){
             //echo "<BR>num2: " , $num2 , "matched num pattern at side $side!<br>";
@@ -133,10 +134,10 @@ function paren($char){
               array_push($GLOBALS[$side], $num2);
             }else{
               if($e[$i] == '+'){
-                array_push($GLOBALS['storage'], "-" . $num1);
+                array_push($GLOBALS['storage'], "-" . $num2);
               }
               else{
-                array_push($GLOBALS['storage'], $num1);
+                array_push($GLOBALS['storage'], $num2);
               }
             }
           }
@@ -207,8 +208,8 @@ function paren($char){
     }
     echo "<pre>";
     var_dump($GLOBALS['left']);
+    var_dump($GLOBALS['right']);
     echo "</pre>";
     //echo array_pop($GLOBALS['left']);
-    echo "<br>storage: "  ;var_dump($GLOBALS['storage']);
-    echo "<br>Right: "  ;var_dump($GLOBALS['right']);
+
   ?>
