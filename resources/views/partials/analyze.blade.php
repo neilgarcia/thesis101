@@ -9,7 +9,8 @@ $GLOBALS['right'] = array();
 $GLOBALS['storage'] = array();
 $equation = str_replace('|', '/', $equation);
 $expr = explode('=', $equation);
-function postfix($equation, $side)
+
+function postfix($equation)
 {
  unset($GLOBALS['stack']);
  $GLOBALS['stack'] = array();
@@ -39,12 +40,12 @@ function postfix($equation, $side)
       break;
 }
 }
-$GLOBALS['output'] = $GLOBALS['output'] . ',';
-while(count($GLOBALS['stack']) > 0){
+    $GLOBALS['output'] = $GLOBALS['output'] . ',';
+    while(count($GLOBALS['stack']) > 0){
 
- $GLOBALS['output'] = $GLOBALS['output'] . array_pop($GLOBALS['stack']) . ',' ;
-}
-analyze($GLOBALS['output'], $side);
+     $GLOBALS['output'] = $GLOBALS['output'] . array_pop($GLOBALS['stack']) . ',' ;
+    }
+    return $GLOBALS['output'];
 }
 
 function operator($char, $num){
@@ -68,7 +69,13 @@ function operator($char, $num){
   }
   array_push($GLOBALS['stack'], $char);
 }
-
+function is_variable($e){
+  $var_pattern = "/^[0-9]*[xX]$/";
+  if(preg_match($var_pattern, $e)){
+    return true;
+  }
+  return false;
+}
 function paren($char){
   while(count($GLOBALS['stack'])){
     $ch = array_pop($GLOBALS['stack']);
@@ -81,12 +88,10 @@ function paren($char){
 
   function analyze($expr, $side)
   {
-    echo $expr;
     $e = explode(',', $expr);
-    //var_dump($e);
     array_pop($e); //removes the last comma
     $num_pattern = "/^-?[0-9]*$/";
-    $var_pattern = "/^[0-9]*[xX]$/";
+
     $operators = array('+', '-', '*', '/');
     $result = 0;
     for ($i=0; $i < count($e); $i++) {
@@ -126,7 +131,7 @@ function paren($char){
             if($side == 'left'){
               array_push($GLOBALS[$side], $num2);
             }else{
-              array_push($GLOBALS['left'], array_pop($GLOBALS['left'])+$num2 . "x");
+              array_push($GLOBALS['left'], array_pop($GLOBALS['left'])-$num2 . "x");
             }
           }elseif(preg_match($num_pattern, $num2)){
             //echo "<BR>num2: " , $num2 , "matched num pattern at side $side!<br>";
@@ -190,26 +195,103 @@ function paren($char){
   }
   //5x+3 = 3x+5
 
-  for ($i=0; $i < count($expr); $i++) {
-    if($i == 0){
-      $side = 'left';
-    }else{
-      $side = 'right';
+  function infix($expr){
+    $stack = explode(",", $expr);
+    $e = array();
+    array_pop($stack);
+    $op = array('+', '-', '*', '/');
+    for ($i=0; $i < count($stack); $i++) {
+      if(in_array($stack[$i], $op)){
+        $num2 = array_pop($e);
+        $num1 = array_pop($e);
+        $eq =  $num1 . $stack[$i] . $num2 ;
+        array_push($e, $eq);
+      }else{
+        array_push($e, $stack[$i]);
+      }
     }
-    postfix($expr[$i], $side);
-
+    $result = array_pop($e);
+    return $result;
   }
-  echo "<br>storage: "  ;var_dump($GLOBALS['storage']);
-    while(count($GLOBALS['storage']) > 0){
-      $num1 = array_pop($GLOBALS['right']);
-      $num2 = array_pop($GLOBALS['storage']);
-      $result = $num1 + $num2;
-      array_push($GLOBALS['right'], $result);
+
+  function firststep($expr){
+    //var_dump($expr);
+    $var_pattern = "/^[0-9]*[xX]$/";
+    $op = array('+', '-', '*', '/');
+    $temp = array();
+    $stack = "";
+    //echo $expr['left'];
+    $eq = explode(",", $expr['left']);
+    array_pop($eq);
+
+    for ($i=0; $i < count($eq); $i++) {
+      if(is_numeric($eq[$i])){
+        if($eq[$i+1] == '+'){
+          $expr['right'] .= $eq[$i] . ",-,";
+          $i++;
+        }elseif($eq[$i+1] == '-'){
+          $expr['right'] .= $eq[$i] . ",+,";
+          $i++;
+        }else{
+          $expr['right'] .= $eq[$i] . ",-,";
+          $stack .= "0,";
+        }
+
+      }else{
+        $stack .= $eq[$i] . ",";
+      }
+
     }
-    echo "<pre>";
-    var_dump($GLOBALS['left']);
-    var_dump($GLOBALS['right']);
-    echo "</pre>";
-    //echo array_pop($GLOBALS['left']);
+    $expr['left'] = $stack;
+    $stack = "";
+    $eq = explode(",", $expr['right']);
+    array_pop($eq);
+
+    for ($i=0; $i < count($eq); $i++) {
+      if(is_variable($eq[$i])){
+        if($eq[$i+1] == '+'){
+          $expr['left'] .= $eq[$i] . ",-,";
+          $i++;
+        }elseif($eq[$i+1] == '-'){
+          $expr['left'] .= $eq[$i] . ",+,";
+          $i++;
+        }else{
+          $expr['left'] .= $eq[$i] . ",-,";
+          $stack .= "0,";
+        }
+      }else{
+        $stack .= $eq[$i] . ",";
+      }
+    }
+    var_dump($stack);
+    return $expr;
+  }
+
+  // for ($i=0; $i < count($expr); $i++) {
+  //   if($i == 0){
+  //     $side = 'left';
+  //   }else{
+  //     $side = 'right';
+  //   }
+  //   $eq = postfix($expr[$i], $side);
+  //   $result = firststep($eq); // transfer all numbers from left to right
+
+  //   analyze($eq, $side);
+  // }
+    $eq['left'] = postfix($expr[0]);
+    $eq['right'] = postfix($expr[1]);
+    $eq = firststep($eq);
+    var_dump($eq);
+    // while(count($GLOBALS['storage']) > 0){
+    //   $num1 = array_pop($GLOBALS['right']);
+    //   $num2 = array_pop($GLOBALS['storage']);
+    //   $result = $num1 + $num2;
+    //   array_push($GLOBALS['right'], $result);
+    // }
+    // echo "<pre>";
+    // var_dump($GLOBALS['left']);
+    // var_dump($GLOBALS['right']);
+    // echo "</pre>";
+
 
   ?>
