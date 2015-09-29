@@ -155,8 +155,10 @@ function paren($char){
   function infix($expr){
     $stack = explode(",", $expr);
     $e = array();
+    if(count($stack) == 1)
+      return array_pop($stack);
     if(count($stack) > 0)
-    array_pop($stack);
+      array_pop($stack);
     $op = array('+', '-', '*', '/');
     for ($i=0; $i < count($stack); $i++) {
       if(in_array($stack[$i], $op)){
@@ -184,13 +186,13 @@ function paren($char){
     for ($i=0; $i < count($eq); $i++) {
       if(is_numeric($eq[$i])){
         if($eq[$i+1] == '+'){
-          $expr['right'] .= $eq[$i] . ",-,";
+          $expr['right'] = trim($expr['right'], ",") . "," . $eq[$i] . ",-,";
           $i++;
         }elseif($eq[$i+1] == '-'){
-          $expr['right'] .= $eq[$i] . ",+,";
+          $expr['right'] = trim($expr['right'], ",") . "," . $eq[$i] . ",+,";
           $i++;
         }else{
-          $expr['right'] .= $eq[$i] . ",-,";
+          $expr['right'] = trim($expr['right'], ",") . "," . $eq[$i] . ",-,";
           $stack .= "0,";
         }
 
@@ -206,13 +208,13 @@ function paren($char){
     for ($i=0; $i < count($eq); $i++) {
       if(is_variable($eq[$i])){
         if($eq[$i+1] == '+'){
-          $expr['left'] .= $eq[$i] . ",-,";
+          $expr['left'] = trim($expr['left'], ",") . "," . $eq[$i] . ",-,";
           $i++;
         }elseif($eq[$i+1] == '-'){
-          $expr['left'] .= $eq[$i] . ",+,";
+          $expr['left'] = trim($expr['left'], ",") . "," . $eq[$i] . ",+,";
           $i++;
         }else{
-          $expr['left'] .= $eq[$i] . ",-,";
+          $expr['left'] = trim($expr['left'], ",") . "," . $eq[$i] . ",-,";
           $stack .= "0,";
         }
       }else{
@@ -270,51 +272,104 @@ function paren($char){
   }
   function distribute($expr)
   {
+    $ctr = 1;
+    $result = array();
     foreach ($expr as $expression) {
       $e = exp_to_array($expression);
       $stack = array();
       $temp = array();
+
       for ($i=0; $i < count($e); $i++) {
         if(is_operator($e[$i])){
-          if($e[$i] == '*'){
+          $op = $e[$i];
+          $num2 = array_pop($stack);
 
-          }else{
+          $num1 = array_pop($stack);
 
+          switch($op){
+            case '+':
+            case '-':
+              $temp = trim($num1, ",") . "," . trim($num2, ",") .",". $op. ",";
+              array_push($stack, $temp);
+              break;
+            case '*':
+              $multiplier = 0;
+              $storage = array();
+              $temp = array();
+              if(is_numeric($num1) || is_variable($num1)){
+                $multiplier = $num1;
+                $temp = explode(",", $num2);
+              }else{
+                $multiplier = $num2;
+                $temp = explode(",", $num1);
+              }
+              if(count($temp) > 1)
+                array_pop($temp);
+              foreach ($temp as $ex) {
+
+                if(is_numeric($ex)){
+                  array_push($storage, $ex * $multiplier);
+
+                }elseif(is_variable($ex)){
+
+                  array_push($storage, $ex * $multiplier . "x");
+                }else{
+                  array_push($storage, $ex);
+                }
+              }
+
+              $temp = "";
+              foreach($storage as $ex) {
+                $temp .= $ex . ",";
+              }
+
+              array_push($stack, $temp);
+
+              echo "<br>";
+              break;
           }
         }else{
           array_push($stack, $e[$i]);
         }
       }
+      if($ctr == 1)
+        $result['left'] = array_pop($stack);
+      else
+        $result['right'] = array_pop($stack);
+      $ctr++;
     }
-    return 0;
+    return $result;
   }
 
     $expr = normalize($expr);
     // var_dump($expr);
     $eq['left'] = postfix($expr[0]);
-    $eq['right'] = postfix($expr[1]);
+    echo $eq['left'] . "<br>";
 
+    $eq['right'] = postfix($expr[1]);
+    echo $eq['right'] . "<br>";
     $eq = distribute($eq);
 
+    //var_dump($eq);
+
+
+
+    echo "GIVEN: $equation<br>";
+    echo "<pre>";
+    echo "Distribute: " . infix($eq['left']) . " = " . infix($eq['right']) . "<Br>";
     var_dump($eq);
+//    var_dump($eq['right']);
+    $eq = firststep($eq);
 
 
+    echo "First Step: " . infix($eq['left']) . "=" . infix($eq['right']) . " //move all variables to left and all numbers to right.";
+    // var_dump($eq['right']);
+    $eq['left'] = analyze($eq['left'], 'left');
+    $eq['right'] = analyze($eq['right'], 'right');
 
-    // echo "GIVEN: $equation<br>";
-    // echo "<pre>";
-    // echo "Evalute: " . infix($eq['left']) . " = " . infix($eq['right']) . "<Br>";
-    // //var_dump($eq);
-    // $eq = firststep($eq);
-
-
-    // echo "First Step: " . infix($eq['left']) . "=" . infix($eq['right']) . " //move all variables to left and all numbers to right.";
-
-    // $eq['left'] = analyze($eq['left'], 'left');
-    // $eq['right'] = analyze($eq['right'], 'right');
-
-    // $eq['left'] = array_pop($eq['left']);
-    // $eq['right'] = array_pop($eq['right']);
-    // echo "<br>Second Step: " . $eq['left'] . "=" . $eq['right'] . " //Perform the necessary operations";
+    $eq['left'] = array_pop($eq['left']);
+    $eq['right'] = array_pop($eq['right']);
+    echo "<br>Second Step: " . $eq['left'] . "=" . $eq['right'] . " //Perform the necessary operations";
 
     // $result = simplify($eq['left'], $eq['right']);
 
