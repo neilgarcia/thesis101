@@ -45,6 +45,7 @@ function postfix($equation)
 
      $GLOBALS['output'] = $GLOBALS['output'] . array_pop($GLOBALS['stack']) . ',' ;
     }
+    //var_dump($GLOBALS['output']);
     return $GLOBALS['output'];
 }
 
@@ -82,15 +83,13 @@ function paren($char){
     if($ch == '(')
       break;
       else
-        $GLOBALS['output'] = $GLOBALS['output'] . $ch;
+        $GLOBALS['output'] = $GLOBALS['output'] . "," .$ch;
     }
   }
 
   function analyze($expr, $side)
   {
-    $e = explode(',', $expr);
-    array_pop($e); //removes the last comma
-    $num_pattern = "/^-?[0-9]*$/";
+    $e = exp_to_array($expr);
 
     $operators = array('+', '-', '*', '/');
     $result = 0;
@@ -98,61 +97,19 @@ function paren($char){
       if(in_array($e[$i], $operators)){
         $num1 = array_pop($GLOBALS[$side]);
         $num2 = array_pop($GLOBALS[$side]);
-        if(preg_match($var_pattern, $num1) AND preg_match($var_pattern, $num2)){
+        if(is_variable($num1) AND is_variable($num2)){
           $result = calculate($num1, $num2, $e[$i]);
           array_push($GLOBALS[$side], $result . "x");
-        }elseif(preg_match($num_pattern, $num1) AND preg_match($num_pattern, $num2)){
+        }elseif(is_numeric($num1) AND is_numeric($num2)){
           $result = calculate($num1, $num2, $e[$i]);
           array_push($GLOBALS[$side], $result);
-        }else{
-          if(preg_match($var_pattern, $num1)){
-
-            if($side == 'left'){
-              array_push($GLOBALS[$side], $num1);
-            }else{
-              $temp = array_pop($GLOBALS['left']);
-              $result = transpose($temp, $num1, $e[$i]);
-              array_push($GLOBALS['left'], $result . "x");
-            }
-          }elseif(preg_match($num_pattern, $num1)){
-            //echo "<BR>num1: " , $num1 , "matched num pattern at side $side!<br>";
-            if($side == 'right'){
-              array_push($GLOBALS[$side], $num1);
-            }else{
-              if($e[$i] == '+'){
-                array_push($GLOBALS['storage'], "-" . $num1);
-              }
-              else{
-                array_push($GLOBALS['storage'], $num1);
-              }
-            }
-          }
-          if(preg_match($var_pattern, $num2)){
-            if($side == 'left'){
-              array_push($GLOBALS[$side], $num2);
-            }else{
-              array_push($GLOBALS['left'], array_pop($GLOBALS['left'])-$num2 . "x");
-            }
-          }elseif(preg_match($num_pattern, $num2)){
-            //echo "<BR>num2: " , $num2 , "matched num pattern at side $side!<br>";
-            if($side == 'right'){
-              array_push($GLOBALS[$side], $num2);
-            }else{
-              if($e[$i] == '+'){
-                array_push($GLOBALS['storage'], "-" . $num2);
-              }
-              else{
-                array_push($GLOBALS['storage'], $num2);
-              }
-            }
-          }
         }
-
       }else{
         array_push($GLOBALS[$side], $e[$i]);
       }
     }
 
+    return $GLOBALS[$side];
   }
 
   function transpose($temp, $num, $operator){
@@ -198,6 +155,7 @@ function paren($char){
   function infix($expr){
     $stack = explode(",", $expr);
     $e = array();
+    if(count($stack) > 0)
     array_pop($stack);
     $op = array('+', '-', '*', '/');
     for ($i=0; $i < count($stack); $i++) {
@@ -221,8 +179,7 @@ function paren($char){
     $temp = array();
     $stack = "";
     //echo $expr['left'];
-    $eq = explode(",", $expr['left']);
-    array_pop($eq);
+    $eq = exp_to_array($expr['left']);
 
     for ($i=0; $i < count($eq); $i++) {
       if(is_numeric($eq[$i])){
@@ -244,8 +201,7 @@ function paren($char){
     }
     $expr['left'] = $stack;
     $stack = "";
-    $eq = explode(",", $expr['right']);
-    array_pop($eq);
+    $eq = exp_to_array($expr['right']);
 
     for ($i=0; $i < count($eq); $i++) {
       if(is_variable($eq[$i])){
@@ -263,35 +219,109 @@ function paren($char){
         $stack .= $eq[$i] . ",";
       }
     }
-    var_dump($stack);
+    //var_dump($stack);
+    $expr['right'] = $stack;
     return $expr;
   }
 
-  // for ($i=0; $i < count($expr); $i++) {
-  //   if($i == 0){
-  //     $side = 'left';
-  //   }else{
-  //     $side = 'right';
-  //   }
-  //   $eq = postfix($expr[$i], $side);
-  //   $result = firststep($eq); // transfer all numbers from left to right
+  function simplify($var, $num)
+  {
+    $var = str_replace('x', '', $var);
+    if($num%$var == 0){
+      $result = $num / $var;
+    }else{
+      $result = $num . "/" . $var;
+    }
+    return $result;
+  }
 
-  //   analyze($eq, $side);
-  // }
+
+  function normalize($e)
+  {
+  $result = array();
+  foreach ($e as $expression) {
+    for ($i=0; $i < strlen($expression); $i++) {
+    if($expression{$i} == '(' && is_numeric($expression{$i-1})){
+      $expression = substr_replace($expression, '*', $i, 0);
+
+    }
+    }
+    array_push($result, $expression);
+  }
+
+  return $result;
+
+  }
+
+  function exp_to_array($expr)
+  {
+    $e = explode(",", $expr);
+    array_pop($e);
+    return $e;
+  }
+
+  function is_operator($char)
+  {
+    $op = array('+', '-', '*', '/');
+    if(in_array($char, $op)){
+      return true;
+    }
+    return false;
+  }
+  function distribute($expr)
+  {
+    foreach ($expr as $expression) {
+      $e = exp_to_array($expression);
+      $stack = array();
+      $temp = array();
+      for ($i=0; $i < count($e); $i++) {
+        if(is_operator($e[$i])){
+          if($e[$i] == '*'){
+
+          }else{
+
+          }
+        }else{
+          array_push($stack, $e[$i]);
+        }
+      }
+    }
+    return 0;
+  }
+
+    $expr = normalize($expr);
+    // var_dump($expr);
     $eq['left'] = postfix($expr[0]);
     $eq['right'] = postfix($expr[1]);
-    $eq = firststep($eq);
+
+    $eq = distribute($eq);
+
     var_dump($eq);
-    // while(count($GLOBALS['storage']) > 0){
-    //   $num1 = array_pop($GLOBALS['right']);
-    //   $num2 = array_pop($GLOBALS['storage']);
-    //   $result = $num1 + $num2;
-    //   array_push($GLOBALS['right'], $result);
-    // }
+
+
+
+    // echo "GIVEN: $equation<br>";
     // echo "<pre>";
-    // var_dump($GLOBALS['left']);
-    // var_dump($GLOBALS['right']);
+    // echo "Evalute: " . infix($eq['left']) . " = " . infix($eq['right']) . "<Br>";
+    // //var_dump($eq);
+    // $eq = firststep($eq);
+
+
+    // echo "First Step: " . infix($eq['left']) . "=" . infix($eq['right']) . " //move all variables to left and all numbers to right.";
+
+    // $eq['left'] = analyze($eq['left'], 'left');
+    // $eq['right'] = analyze($eq['right'], 'right');
+
+    // $eq['left'] = array_pop($eq['left']);
+    // $eq['right'] = array_pop($eq['right']);
+    // echo "<br>Second Step: " . $eq['left'] . "=" . $eq['right'] . " //Perform the necessary operations";
+
+    // $result = simplify($eq['left'], $eq['right']);
+
+    // echo "<br>Third Step: x = $result //Simplify";
+
     // echo "</pre>";
+
 
 
   ?>
