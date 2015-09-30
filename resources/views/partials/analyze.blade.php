@@ -344,10 +344,10 @@ function paren($char){
     $expr = normalize($expr);
     // var_dump($expr);
     $eq['left'] = postfix($expr[0]);
-    echo $eq['left'] . "<br>";
+    //echo $eq['left'] . "<br>";
 
     $eq['right'] = postfix($expr[1]);
-    echo $eq['right'] . "<br>";
+    //echo $eq['right'] . "<br>";
     $eq = distribute($eq);
 
     //var_dump($eq);
@@ -357,7 +357,7 @@ function paren($char){
     echo "GIVEN: $equation<br>";
     echo "<pre>";
     echo "Distribute: " . infix($eq['left']) . " = " . infix($eq['right']) . "<Br>";
-    var_dump($eq);
+   // var_dump($eq);
 //    var_dump($eq['right']);
     $eq = firststep($eq);
 
@@ -371,11 +371,11 @@ function paren($char){
     $eq['right'] = array_pop($eq['right']);
     echo "<br>Second Step: " . $eq['left'] . "=" . $eq['right'] . " //Perform the necessary operations";
 
-    // $result = simplify($eq['left'], $eq['right']);
+    $result = simplify($eq['left'], $eq['right']);
 
-    // echo "<br>Third Step: x = $result //Simplify";
+    echo "<br>Third Step: x = $result //Simplify";
 
-    // echo "</pre>";
+    echo "</pre>";
 
 
 

@@ -112,6 +112,7 @@ noscript:hover{
 #content{
     background: url("../images/paperbg.jpg");
     background-size: cover;
+    padding-left: 30px;
     position: relative;
     left: 225px;
     border-radius: 5px;
@@ -119,6 +120,13 @@ noscript:hover{
     width: 614px;
     height: 444px;
 }
+.a-step, .a-final{
+    display: block;
+    font-size: 22px;
+    margin: 10px;
+    padding-left: -10px;
+}
+
 .input{
     font-size: 24px;
     width: 85%;
