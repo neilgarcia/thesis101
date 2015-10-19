@@ -1,14 +1,15 @@
 <?php
 
-  $num1 = "5(3x+2)";
-  $num2 = "5(3x+2)+3(2x+1)+4(3x+1)";
-
-  for ($i=0; $i < strlen($num2); $i++) {
-    if($num2{$i} == '(' && is_numeric($num2{$i-1})){
-      $num2 = substr_replace($num2, '*', $i, 0);
-
-    }
+  function is_variable($e){
+  $var_pattern = "/[0-9]+(\.[0-9][0-9]?)?[xX]$/";
+  if($e == 0)
+    return true;
+  if(preg_match($var_pattern, $e)){
+    return true;
   }
+  return false;
+}
 
-  echo $num2;
+  $num2 = ".25x";
+  var_dump(is_variable($num2));
 ?>

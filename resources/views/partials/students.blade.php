@@ -19,11 +19,7 @@
             </div>
 
             <div id="content" class="shadow">
-                <h1>Given: 3(3x+5)=2x+16</h1>
-                <span class="a-step">First Step: 9x+15=2x+16</span>
-                <span class="a-step">Second Step: 9x-2x=16-15</span>
-                <span class="a-step">Third Step: 7x=1</span>
-                <span class="a-final">Final Answer: x=1/7</span>
+
             </div>
 
             <div class="chat">
@@ -62,7 +58,7 @@
 
                                     url: '/analyze/' + a,
                                     success: function(result){
-                                        alert(result);
+                                        $('div#content').html(result);
                                     }
                                 });
                         }else{

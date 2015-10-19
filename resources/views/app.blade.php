@@ -4,10 +4,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/Html; charset=UTF-8">
     <title>UNIVERSITY OF THE EAST Freshmen Orientation {{ Carbon::now() }}</title>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
     <!-- Latest compiled and minified CSS -->
     {!! Html::style('/css/bootstrap.min.css') !!}
-
+    {!! Html::script('/js/jquery.js') !!}
     <!-- Optional theme -->
     {!! Html::style('/css/bootstrap-theme.css') !!}
 

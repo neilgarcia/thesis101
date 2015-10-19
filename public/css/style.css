@@ -123,8 +123,8 @@ noscript:hover{
 .a-step, .a-final{
     display: block;
     font-size: 22px;
-    margin: 10px;
-    padding-left: -10px;
+    margin-top: 21px;
+
 }
 
 .input{
@@ -140,6 +140,9 @@ input,textarea,select{
     outline: none;
 }
 
+.given{
+    margin-top: 25px;
+}
 
 
 
