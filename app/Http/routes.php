@@ -11,7 +11,9 @@
 |
 */
 Route::post('/register/{id}', 'StudentController@update');
-Route::resource('register', 'StudentController');
+Route::get('pia/register', 'StudentController@register');
+Route::resource('pia', 'StudentController');
+
 Route::get('/generate/{id}', 'GenerateController@generate');
 Route::get('/showimages', 'StudentController@showpix');
 Route::get('analyze/{id}', 'DataController@analyze');

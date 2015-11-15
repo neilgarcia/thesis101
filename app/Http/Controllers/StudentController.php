@@ -87,10 +87,8 @@ class StudentController extends Controller {
 		//
 	}
 
-	public function showpix()
+	public function register()
 	{
-		$sn = Student::lists('sn');
-		return view('layouts.showpix', compact('sn'));
+		return view('register');
 	}
-
 }
