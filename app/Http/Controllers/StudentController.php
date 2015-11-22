@@ -1,9 +1,13 @@
 <?php namespace App\Http\Controllers;
 
+use App\Student;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Authenticatable;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Student;
-use Illuminate\Http\Request;
+use Redirect;
+Use Request;
+
 
 
 class StudentController extends Controller {
@@ -15,7 +19,13 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
-		return view('partials.students');
+		if(Auth::check()){
+			$user = Student::find(Auth::id());
+			return view('partials.students', compact('user'));
+		}else{
+			return view('register');
+		}
+
 	}
 
 	/**
@@ -35,7 +45,13 @@ class StudentController extends Controller {
 	 */
 	public function store()
 	{
-		return 'foo';
+
+		$student = new Student(Request::all());
+		$student->save();
+		Auth::login($student);
+
+		return Redirect::to('pia');
+
 	}
 
 	/**
@@ -46,8 +62,7 @@ class StudentController extends Controller {
 	 */
 	public function show($id)
 	{
-		$user = Student::find($id);
-		return view('layouts.modal', compact('user'));
+
 	}
 
 	/**
@@ -70,10 +85,6 @@ class StudentController extends Controller {
 	public function update($id)
 	{
 
-		$input = \Request::all();
-		$user = Student::find($id);
-		$user->fill($input);
-		$user->save();
 	}
 
 	/**
@@ -87,8 +98,4 @@ class StudentController extends Controller {
 		//
 	}
 
-	public function register()
-	{
-		return view('register');
-	}
 }

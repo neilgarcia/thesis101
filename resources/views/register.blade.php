@@ -11,10 +11,10 @@
 <body>
     @include('layouts.header');
     <div class="content">
-      {!! Form::open(array('class'=>'form-signup')) !!}
-      {!! Form::text('firstname', null, array('placeholder'=>'Enter your first name.', 'class'=>'txt text-signup')) !!}
-      {!! Form::text('lastname', null, array('placeholder'=>'Enter your last name.', 'class'=>'txt text-signup')) !!}
-      {!! Form::text('studentnumber', null, array('placeholder'=>'Enter your student number.', 'class'=>'txt text-signup')) !!}
+      {!! Form::open(array('class'=>'form-signup', 'method'=>'POST', 'url'=>'pia')) !!}
+      {!! Form::text('student_number', null, array('placeholder'=>'Enter your student number.', 'class'=>'txt text-signup')) !!}
+      {!! Form::text('first_name', null, array('placeholder'=>'Enter your first name.', 'class'=>'txt text-signup')) !!}
+      {!! Form::text('last_name', null, array('placeholder'=>'Enter your last name.', 'class'=>'txt text-signup')) !!}
       {!! Form::submit('Sign me up!', array('class'=>'txt btn-signup')) !!}
       {!! Form::close() !!}
 

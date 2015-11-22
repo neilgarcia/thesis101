@@ -1,17 +1,15 @@
 @extends('app')
 
 @section('content')
-<div class="background">
-
-            </div>
-
-    <div id="container">
 
 
+        <div id="container">
+
+            <h1>{!! $user->student_number !!}</h1>
 
             <div class="sidebar shadow">
                 <div class="avatar">
-                    <img src="images/avatar-female.png" width="100%" alt="">
+                    <img src="/images/avatar-female.png" width="100%" alt="">
                 </div>
                 <div class="chatbox">
 

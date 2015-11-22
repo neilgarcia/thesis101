@@ -15,8 +15,8 @@
     box-sizing: border-box;
 }
 body{
-    //background: url("../images/classroom2_censored.jpg");
-    background-size: cover;
+    background: #181818 url("/images/design.png") center repeat;
+
     margin: 0px;
     padding: 0px;
 }

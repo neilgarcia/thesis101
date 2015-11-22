@@ -11,10 +11,7 @@
 |
 */
 Route::post('/register/{id}', 'StudentController@update');
-Route::get('pia/register', 'StudentController@register');
+//Route::get('pia/register', 'StudentController@register');
+//Route::post('pia/register', 'StudentController@store');
 Route::resource('pia', 'StudentController');
 
-Route::get('/generate/{id}', 'GenerateController@generate');
-Route::get('/showimages', 'StudentController@showpix');
-Route::get('analyze/{id}', 'DataController@analyze');
-Route::get('/test', 'DataController@test');

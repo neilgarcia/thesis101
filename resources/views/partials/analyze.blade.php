@@ -66,7 +66,7 @@ function postfix($equation)
     default:
       $GLOBALS['output'] = $GLOBALS['output'] . $char;
       break;
-}
+    }
 }
     $GLOBALS['output'] = $GLOBALS['output'] . ',';
     while(count($GLOBALS['stack']) > 0){
