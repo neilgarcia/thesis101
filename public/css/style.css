@@ -15,37 +15,15 @@
     box-sizing: border-box;
 }
 body{
-    background: #181818 url("/images/design.png") center repeat;
+    background: #edeef1 url("/images/design.png") center repeat;
 
     margin: 0px;
     padding: 0px;
 }
-noscript{
-    opacity: 0.9;
-    display: block;
-    margin: auto;
-    padding: 20px 25px;
-    margin-top: 25%;
-    width: 530px;
-    color: #ffffff;
-    font-size: 16pt;
-    background-image: url(../images/gradients.png);
-    background-repeat: repeat-x;
-    background-position: 0px -480px;
-    text-align: center;
-    text-shadow: 1px 1px 0px #000000;
-    box-shadow: inset 0px 1px 1px rgba(255,255,255,0.3),
-        0px 3px 15px #666666;
-    border-radius: 15px;
-    border: #000000 solid 1px;
-}
-noscript:hover{
-    opacity: 1;
-    cursor: default;
-}
+
 #container{
-    padding: 5px;
-    background: brown;
+    padding: 8px;
+    background: url('/images/bg/woody2.jpg');
     display: none;
     width: 850px;
     height: 500px;
@@ -54,23 +32,26 @@ noscript:hover{
     border-radius: 8px;
 }
 .shadow{
-        box-shadow: 0px 3px 10px #6363B7 inset;
+        box-shadow: 0px 3px 10px #252525 inset;
 }
 .sidebar{
 
     position: absolute;
-    width: 220px;
-    height: 490px;
+    width: 217px;
+    height: 484px;
     border-radius: 5px;
-    background: #311790;
+    /*background: #6CA5CF;*/
     color: black;
+    overflow: hidden;
 }
 .avatar{
-    width: 200px;
-    margin: 10px;
+    width: 220px;
+    /*margin: 10px;*/
 }
-.avatar img{
-    border-radius: 5px;
+.avatar embed{
+    height: 215px;
+
+    /*border-radius: 5px;*/
 }
 .chatbox{
     position: absolute;
@@ -83,12 +64,12 @@ noscript:hover{
 }
 .chat{
     position: relative;
-    margin-top: 5px;
+    margin-top: 8px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     background: #00A8FF;
     height: 40px;
-    width: 614px;
+    width: 611px;
     left: 225px;
 }
 .button{
@@ -112,15 +93,15 @@ noscript:hover{
     background-color: #212F28;
 }
 #content{
-    background: url("../images/paperbg.jpg");
+    background: url("../images/bg/chalkboard.jpg");
     background-size: cover;
     padding-left: 30px;
     position: relative;
     left: 225px;
     border-radius: 5px;
     overflow: auto;
-    width: 614px;
-    height: 444px;
+    width: 608px;
+    height: 435px;
 }
 .a-step, .a-final{
     display: block;

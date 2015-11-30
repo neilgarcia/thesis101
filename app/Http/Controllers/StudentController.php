@@ -1,16 +1,19 @@
 <?php namespace App\Http\Controllers;
 
-use App\Student;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Authenticatable;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateStudentRequest;
+use App\Http\Requests\LoginUserRequest;
+use Illuminate\Support\Facades\Hash;
 use Redirect;
-Use Request;
+use App\Student;
 
 
 
 class StudentController extends Controller {
+
 
 	/**
 	 * Display a listing of the resource.
@@ -19,11 +22,12 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
+
 		if(Auth::check()){
-			$user = Student::find(Auth::id());
+			$user = Auth::user();
 			return view('partials.students', compact('user'));
 		}else{
-			return view('register');
+			return view('partials.students');
 		}
 
 	}
@@ -43,15 +47,12 @@ class StudentController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateStudentRequest $request)
 	{
-
-		$student = new Student(Request::all());
-		$student->save();
-		Auth::login($student);
-
+		$request['password'] = Hash::make(ucfirst(strtolower($request->last_name)) . substr($request->student_number, -3));
+		Student::create($request->all());
+		Auth::loginUsingId($request->student_number);
 		return Redirect::to('pia');
-
 	}
 
 	/**
@@ -96,6 +97,29 @@ class StudentController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function login(LoginUserRequest $request)
+	{
+		$credentials = [
+
+			'student_number' => $request->student_number,
+			'password' => $request->password
+
+		];
+		if(Auth::attempt($credentials)){
+			return Redirect::to('pia');
+		}else{
+			return 'test';
+		}
+	}
+	/**
+	 * logs out the user
+	 * @return Response
+	 */
+	public function logout()
+	{
+		Auth::logout();
 	}
 
 }

@@ -11,7 +11,7 @@
 |
 */
 Route::post('/register/{id}', 'StudentController@update');
-//Route::get('pia/register', 'StudentController@register');
-//Route::post('pia/register', 'StudentController@store');
+Route::post('pia/login', 'StudentController@login');
+Route::get('pia/logout', 'StudentController@logout');
 Route::resource('pia', 'StudentController');
 

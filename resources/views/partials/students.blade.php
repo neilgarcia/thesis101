@@ -5,11 +5,11 @@
 
         <div id="container">
 
-            <h1>{!! $user->student_number !!}</h1>
+
 
             <div class="sidebar shadow">
                 <div class="avatar">
-                    <img src="/images/avatar-female.png" width="100%" alt="">
+                    <embed src="" id="avatar" width="100%" alt="" loop="false">
                 </div>
                 <div class="chatbox">
 
