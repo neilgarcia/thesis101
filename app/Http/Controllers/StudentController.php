@@ -113,6 +113,12 @@ class StudentController extends Controller {
 			return 'test';
 		}
 	}
+
+	public function analyze($value)
+	{
+		# code...
+	}
+
 	/**
 	 * logs out the user
 	 * @return Response
