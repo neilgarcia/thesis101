@@ -8,10 +8,25 @@
       </button>
       <a class="navbar-brand" href="#">PIA: Personal Instructing Agent</a>
     </div>
-    <center>
-      <div class="navbar-collapse collapse" id="navbar-main">
 
-        <ul class="nav navbar-nav navbar-right">
+      <div class="navbar-collapse collapse" id="navbar-main">
+        @if ($user)
+      <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{!! $user->first_name !!}</b> <span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+                  <li><a href="#">My Account</a></li>
+                  <li><a href="#">My Logs</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+
+      </li>
+    </ul>
+        @else
+          <ul class="nav navbar-nav navbar-right">
           <li><p class="navbar-text">Already have an account?</p></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -38,7 +53,9 @@
         </ul>
       </li>
     </ul>
+        @endif
+
   </div>
-</center>
+
 </div>
 </div>

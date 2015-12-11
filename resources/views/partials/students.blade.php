@@ -9,7 +9,12 @@
 
             <div class="sidebar shadow">
                 <div class="avatar">
-                    <embed src="" id="avatar" width="100%" alt="" loop="false">
+ {{--                    <object >
+ <param name="allowScriptAccess" value="sameDomain" />
+ <param name="allowFullScreen" value="false" />
+ <param name="movie" value="/images/reactions/welcome.swf" /> --}}
+ <embed src="/images/reactions/welcome.swf" loop="false">
+ {{-- </object> --}}
                 </div>
                 <div class="chatbox">
 
@@ -23,7 +28,7 @@
             <div class="chat">
                 <form>
                     <input type="text" class="input" id="input">
-                    <input type="button" class="button" id="analyze">
+                    <input type="button" class="button" value="Submit" id="analyze">
                 </form>
 
             </div>
@@ -57,6 +62,7 @@
                                     url: '/analyze/' + a,
                                     success: function(result){
                                         $('div#content').html(result);
+                                        $(".avatar > object > embed").attr("src", "/images/reactions/welcome-new.swf");
                                     }
                                 });
                         }else{

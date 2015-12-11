@@ -1,4 +1,4 @@
-<?php namespace  Pia\Solver
+<?php namespace  Pia\Solver;
 
   use Auth;
 
@@ -6,11 +6,6 @@
 
     function __construct(PostfixRepository $repo) {
       $this->repo = $repo;
-    }
-
-    public function FunctionName($value='')
-    {
-      # code...
     }
 
   }

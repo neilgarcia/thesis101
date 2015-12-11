@@ -38,12 +38,12 @@ $equation = str_replace('|', '/', $equation);
 $equation = str_replace(' ', '', $equation);
 $expr = explode('=', $equation);
 
-function postfix($equation)
-{
- unset($GLOBALS['stack']);
- $GLOBALS['stack'] = array();
- $GLOBALS['output'] = "";
- for ($i=0; $i < strlen($equation); $i++) {
+  function postfix($equation)
+  {
+  unset($GLOBALS['stack']);
+  $GLOBALS['stack'] = array();
+  $GLOBALS['output'] = "";
+  for ($i=0; $i < strlen($equation); $i++) {
     //123+5*6
    $char = $equation{$i};
    switch ($char) {
@@ -67,7 +67,7 @@ function postfix($equation)
       $GLOBALS['output'] = $GLOBALS['output'] . $char;
       break;
     }
-}
+  }
     $GLOBALS['output'] = $GLOBALS['output'] . ',';
     while(count($GLOBALS['stack']) > 0){
 
@@ -75,7 +75,7 @@ function postfix($equation)
     }
     //var_dump($GLOBALS['output']);
     return $GLOBALS['output'];
-}
+  }
 
 function operator($char, $num){
   while(count($GLOBALS['stack']) > 0){
@@ -286,7 +286,9 @@ function paren($char){
     for ($i=0; $i < strlen($expression); $i++) {
     if($expression{$i} == '(' && $i != 0 && is_numeric($expression{$i-1})){
       $expression = substr_replace($expression, '*', $i, 0);
-
+    }
+    if($i > 0 && $expression{$i} == "x" && !is_numeric($expression{$i-1})){
+      $expression = substr_replace($expression, '1', $i, 0);
     }
     }
     array_push($result, $expression);

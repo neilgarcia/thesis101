@@ -15,8 +15,7 @@
     box-sizing: border-box;
 }
 body{
-    background: #edeef1 url("/images/design.png") center repeat;
-
+       background: #edeef1 url("/images/design.png") center repeat;
     margin: 0px;
     padding: 0px;
 }
@@ -50,7 +49,7 @@ body{
 }
 .avatar embed{
     height: 215px;
-
+    width: 220px;
     /*border-radius: 5px;*/
 }
 .chatbox{
@@ -95,6 +94,10 @@ body{
 #content{
     background: url("../images/bg/chalkboard.jpg");
     background-size: cover;
+    font-family: "Justaword";
+    letter-spacing: 5px;
+    color: white;
+    background-color: #1e571e;
     padding-left: 30px;
     position: relative;
     left: 225px;

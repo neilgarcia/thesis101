@@ -27,7 +27,8 @@ class StudentController extends Controller {
 			$user = Auth::user();
 			return view('partials.students', compact('user'));
 		}else{
-			return view('partials.students');
+			$user = false;
+			return view('partials.register', compact('user'));
 		}
 
 	}
@@ -116,7 +117,7 @@ class StudentController extends Controller {
 
 	public function analyze($value)
 	{
-		# code...
+
 	}
 
 	/**
@@ -126,6 +127,7 @@ class StudentController extends Controller {
 	public function logout()
 	{
 		Auth::logout();
+		return Redirect::to('pia');
 	}
 
 }
