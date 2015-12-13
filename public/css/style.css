@@ -130,5 +130,58 @@ input,textarea,select{
     margin-top: 25px;
 }
 
+#bot-response {
+  display: none;
+    z-index: 99999;
+    position: absolute;
+  max-width: 300px;
+  margin: 50px auto;
+  left: 420px;
+  top: 35px;
+}
+section div {
+  max-width: 325px;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  line-height: 24px;
+}
 
+.clear {
+  clear: both;
+}
 
+.from-them {
+  position: relative;
+  padding: 10px 20px;
+  background: #A8A8E8;
+  border-radius: 25px;
+  color: black;
+  float: left;
+}
+
+.from-them p{
+    margin: 0 0 0;
+}
+.from-them:before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  bottom: -2px;
+  left: -7px;
+  height: 20px;
+  border-left: 20px solid #A8A8E8;
+  border-bottom-right-radius: 16px 14px;
+  -webkit-transform: translate(0, -2px);
+}
+.from-them:after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  bottom: -2px;
+  left: 4px;
+  width: 26px;
+  height: 20px;
+  background: white;
+  border-bottom-right-radius: 10px;
+  -webkit-transform: translate(-30px, -2px);
+}

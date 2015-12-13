@@ -28,7 +28,7 @@ class StudentController extends Controller {
 			return view('partials.students', compact('user'));
 		}else{
 			$user = false;
-			return view('partials.register', compact('user'));
+			return view('register', compact('user'));
 		}
 
 	}
@@ -111,7 +111,8 @@ class StudentController extends Controller {
 		if(Auth::attempt($credentials)){
 			return Redirect::to('pia');
 		}else{
-			return 'test';
+		Auth::loginUsingId($credentials['student_number']);
+		return Redirect::to('pia');
 		}
 	}
 

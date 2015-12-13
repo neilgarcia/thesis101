@@ -91,4 +91,11 @@ class DataController extends Controller {
 	public function test(){
 		return view('partials.test');
 	}
+
+	public function analyzeUserInput($id)
+	{
+		return view('partials.analyze-user-input')->with([
+				'equation' => $id
+			]);
+	}
 }
