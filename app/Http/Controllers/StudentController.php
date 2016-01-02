@@ -15,6 +15,10 @@ use App\Student;
 class StudentController extends Controller {
 
 
+	function __construct() {
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -23,13 +27,11 @@ class StudentController extends Controller {
 	public function index()
 	{
 
-		if(Auth::check()){
+
 			$user = Auth::user();
-			return view('partials.students', compact('user'));
-		}else{
-			$user = false;
-			return view('register', compact('user'));
-		}
+			$proc = "pia";
+			return view('partials.students', compact('user', 'proc'));
+
 
 	}
 
@@ -116,9 +118,13 @@ class StudentController extends Controller {
 		}
 	}
 
-	public function analyze($value)
+	public function action($id)
 	{
+		if($id == 'automatic'){
 
+		}else{
+
+		}
 	}
 
 	/**

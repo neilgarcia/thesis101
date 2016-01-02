@@ -40,7 +40,8 @@ class Authenticate {
 			}
 			else
 			{
-				return redirect()->guest('auth/login');
+				$user = false;
+			return view('register', compact('user'));
 			}
 		}
 

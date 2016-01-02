@@ -28,8 +28,9 @@
     @yield('content')
 
     <!-- Scripts -->
+
     {!! Html::script('js/core.js') !!}
     {!! Html::script('js/login.js') !!}
-
+    @yield('js')
 </body>
 </Html>

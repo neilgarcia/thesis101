@@ -41,15 +41,19 @@ body{
     border-radius: 5px;
     /*background: #6CA5CF;*/
     color: black;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .avatar{
-    width: 220px;
+    width: 325px;
     /*margin: 10px;*/
 }
 .avatar embed{
     height: 215px;
-    width: 220px;
+    width: 217px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
     /*border-radius: 5px;*/
 }
 .chatbox{
@@ -133,10 +137,10 @@ input,textarea,select{
 #bot-response {
   display: none;
     z-index: 99999;
-    position: absolute;
+    position: relative;
   max-width: 300px;
-  margin: 50px auto;
-  left: 420px;
+  /*margin: 50px auto;*/
+  left: 200px;
   top: 35px;
 }
 section div {
@@ -166,22 +170,22 @@ section div {
   content: "";
   position: absolute;
   z-index: 2;
-  bottom: -2px;
+  top: 50px;
   left: -7px;
   height: 20px;
   border-left: 20px solid #A8A8E8;
-  border-bottom-right-radius: 16px 14px;
-  -webkit-transform: translate(0, -2px);
+  border-top-right-radius: 16px 14px;
+  -webkit-transform: translate(0, -49px);
 }
 .from-them:after {
   content: "";
   position: absolute;
   z-index: 3;
-  bottom: -2px;
+  top: 50px;
   left: 4px;
   width: 26px;
   height: 20px;
   background: white;
-  border-bottom-right-radius: 10px;
-  -webkit-transform: translate(-30px, -2px);
+  border-top-right-radius: 10px;
+    -webkit-transform: translate(-30px, -49px);
 }

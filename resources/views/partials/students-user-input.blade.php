@@ -1,26 +1,22 @@
 @extends('app')
 
-@section('js')
-  <script type="text/javascript" src="/js/autosolve.js"></script>
-@stop
-
 @section('content')
 
 
         <div id="container">
 
-
+    <section id="bot-response">
+                        <div class="from-them">
+      <p>Hello {!! $user->first_name !!}. I am PIA and
+      I'm here to teach you about the basics of linear equations.
+      First input an equation and Ill help you solve it step by step.</p>
+    </div>
+                </section>
 
             <div class="sidebar shadow">
 
                 <div class="avatar">
-                <section id="bot-response">
-                        <div class="from-them">
-                        <p>Hello {!! $user->first_name !!}. I am PIA and
-                        I'm here to teach you about the basics of linear equations.
-                        First input an equation and Ill help you solve it step by step.</p>
-                      </div>
-                </section>
+
                      {{--                    <object >
                      <param name="allowScriptAccess" value="sameDomain" />
                      <param name="allowFullScreen" value="false" />
