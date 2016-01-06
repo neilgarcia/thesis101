@@ -18,6 +18,7 @@ body{
        background: #edeef1 url("/images/design.png") center repeat;
     margin: 0px;
     padding: 0px;
+
 }
 
 #container{
@@ -47,7 +48,9 @@ body{
     width: 325px;
     /*margin: 10px;*/
 }
-.avatar embed{
+
+
+#embed embed{
     height: 215px;
     width: 217px;
     position: absolute;
@@ -55,7 +58,17 @@ body{
     right: 0;
     z-index: 0;
     /*border-radius: 5px;*/
+
 }
+#embed{
+  width: 217px;
+    height: 215px;
+    background: #fff url("/images/bg/209x260.png") no-repeat;
+    background-position-x: 22px;
+    background-size: contain;
+}
+
+
 .chatbox{
     position: absolute;
     background-color: blue;

@@ -81,10 +81,13 @@ class DataController extends Controller {
 		//
 	}
 
-	public function analyze($id)
+	public function analyze($id, $given, $method)
 	{
+
 		return view('partials.analyze')->with([
-				'equation' => $id
+				'equation' => $id,
+				'given' => $given,
+				'method' => $method
 			]);
 	}
 

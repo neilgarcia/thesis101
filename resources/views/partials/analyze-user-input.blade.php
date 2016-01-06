@@ -388,7 +388,7 @@ function paren($char){
   }
 
   $distribute = false;
-
+  $leftToright = false;
     foreach ($expr as $expression) {
       $paren = strpos($expression, "(");
       if($paren !== false && $paren > 0 && is_numeric($expression{$paren-1})){
@@ -396,12 +396,20 @@ function paren($char){
         echo "Distribute " , $expression{$paren-1};
       }
     }
+    $e = explode(',', postfix($expr[0]));
+    for ($i=0; $i < count($e); $i++) {
+      if(is_numeric($e[$i])){
+        $leftToright = true;
+      }
+    }
+
     if(!$distribute){
       echo "nothing to distribute";
     }
+
     $arr = array("distribute"=>$distribute);
 
-    return json_encode($arr);
+    // echo json_encode($arr);
     //$expr = normalize($expr);
      // var_dump($expr);
     // $eq['left'] = postfix($expr[0]);

@@ -1,29 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <style type="text/css">
-  .a-step, .a-final{
-    display: block;
-    font-size: 22px;
-    margin-top: 21px;
-
-}
-
-.input{
-    font-size: 24px;
-    width: 85%;
-}
-
-.given{
-    margin-top: 25px;
-}
-  </style>
-</head>
-<body>
-
-</body>
-</html>
 
 <?php
 
@@ -37,6 +11,7 @@ $GLOBALS['storage'] = array();
 $equation = str_replace('|', '/', $equation);
 $equation = str_replace(' ', '', $equation);
 $expr = explode('=', $equation);
+$given = explode('=', $given);
 
   function postfix($equation)
   {
@@ -314,6 +289,8 @@ function paren($char){
     }
     return false;
   }
+
+
   function distribute($expr)
   {
 
@@ -371,7 +348,7 @@ function paren($char){
 
               array_push($stack, $temp);
 
-              echo "<br>";
+
               break;
           }
         }else{
@@ -387,43 +364,107 @@ function paren($char){
     return $result;
   }
 
+    function check($expr, $given)
+    {
+      $eq['left'] = postfix($expr[0]);
+      $eq['right'] = postfix($expr[1]);
+      $eq = distribute($eq);
+      $eq = firststep($eq);
+      $eq['left'] = analyze($eq['left'], 'left');
+      $eq['right'] = analyze($eq['right'], 'right');
+      $eq['left'] = array_pop($eq['left']);
+      $eq['right'] = array_pop($eq['right']);
+      $resultExpr = $eq['right'] / $eq['left'];
+      $eq['left'] = postfix($given[0]);
+      $eq['right'] = postfix($given[1]);
+      $eq = distribute($eq);
+      $eq = firststep($eq);
+      $eq['left'] = analyze($eq['left'], 'left');
+      $eq['right'] = analyze($eq['right'], 'right');
+      $eq['left'] = array_pop($eq['left']);
+      $eq['right'] = array_pop($eq['right']);
+      $resultGiven = $eq['right'] / $eq['left'];
+      if($resultGiven == $resultExpr){
+        return true;
+      }
+      return false;
+    }
+
     $expr = normalize($expr);
-    // var_dump($expr);
+    $given = normalize($given);
+
+     if($method == 'auto'){
+
     $eq['left'] = postfix($expr[0]);
-    //echo $eq['left'] . "<br>";
-
     $eq['right'] = postfix($expr[1]);
-    //echo $eq['right'] . "<br>";
-
     $eq = distribute($eq);
-
-    //var_dump($eq);
-
-
-
     echo "<h1 class='given'>GIVEN: $equation</h1>";
     echo "<span class='a-step'>Distribute: " . infix($eq['left']) . " = " . infix($eq['right']) . "</span>";
-    //     var_dump($eq);
-    //     var_dump($eq['right']);
-
-     $eq = firststep($eq);
-     //var_dump($eq);
-
+    $eq = firststep($eq);
     echo "<span class='a-step'>First Step: " . infix($eq['left']) . "=" . infix($eq['right']) . "</span>";
-     //var_dump($eq['right']);
-     $eq['left'] = analyze($eq['left'], 'left');
-
-     $eq['right'] = analyze($eq['right'], 'right');
-
+    $eq['left'] = analyze($eq['left'], 'left');
+    $eq['right'] = analyze($eq['right'], 'right');
     $eq['left'] = array_pop($eq['left']);
     $eq['right'] = array_pop($eq['right']);
-
     echo "<span class='a-step'>Second Step: " . $eq['left'] . "=" . $eq['right'] . "</span>";
-    //var_dump($eq);
     $result = simplify($eq['left'], $eq['right']);
-
     echo "<span class='a-step'>Third Step: x = $result </span>";
 
+     }else{
+      if($given[0] <> "none")
+        $checkIfEqual = check($expr, $given);
+      else
+        $checkIfEqual = true;
+      if($checkIfEqual){
+        $distribute = array();
+        $leftToRight = array();
+        $rightToLeft = array();
+        $compute = false;
+        $simplify = false;
+          foreach ($expr as $expression) {
+            $num = "";
+            for ($i=0; $i < strlen($expression)-2; $i++) {
+
+              if(is_numeric($expression{$i})){
+                  //echo $expression{$i};
+                  $num = $num . $expression{$i};
+              }elseif($expression{$i} == "*" && $expression{$i+1} == "("){
+                array_push($distribute, $num);
+                $num = "";
+              }else{
+                $num = "";
+              }
+            }
+
+          }
+
+          $left = postfix($expr[0]);
+          $left = explode(",", $left);
+
+          foreach ($left as $part) {
+            if(is_numeric($part)){
+              array_push($leftToRight, $part);
+            }
+          }
+
+          $right = postfix($expr[1]);
+          $right = explode(",", $right);
+
+          foreach ($right as $part) {
+            if(is_variable($part)){
+              array_push($rightToLeft, $part);
+            }
+          }
+
+          $data['distribute'] = $distribute;
+          $data['left'] = $leftToRight;
+          $data['right'] = $rightToLeft;
+
+          echo json_encode($data);
+      }
+
+
+     }
 
 
 

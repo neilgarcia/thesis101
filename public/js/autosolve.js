@@ -18,10 +18,10 @@
                         if(a){
                                 $.ajax({
 
-                                    url: '/analyze/' + a,
+                                    url: '/analyze/' + a + '/method/auto',
                                     success: function(result){
                                         $('div#content').html(result);
-                                        $(".avatar > object > embed").attr("src", "/images/reactions/welcome-new.swf");
+                                        // $(".avatar > object > embed").attr("src", "/images/reactions/welcome-new.swf");
                                     }
                                 });
                         }else{
@@ -31,3 +31,14 @@
 
 
                     });
+
+function fadeInResponse () {
+          $('#bot-response').fadeIn(500);
+        }
+        function fadeOutResponse () {
+          $('#bot-response').fadeOut(500);
+        }
+        function respond(){
+          setTimeout(fadeInResponse, 800);
+          setTimeout(fadeOutResponse, 3000);
+        }

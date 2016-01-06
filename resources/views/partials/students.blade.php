@@ -1,15 +1,17 @@
 @extends('app')
 
 @section('js')
-  <script type="text/javascript" src="/js/autosolve.js"></script>
+  @if ($method == "auto")
+    <script type="text/javascript" src="/js/autosolve.js"></script>
+  @else
+    <script type="text/javascript" src="/js/manualsolve.js"></script>
+  @endif
 @stop
 
 @section('content')
 
 
         <div id="container">
-
-
 
             <div class="sidebar shadow">
 
@@ -25,8 +27,10 @@
                      <param name="allowScriptAccess" value="sameDomain" />
                      <param name="allowFullScreen" value="false" />
                      <param name="movie" value="/images/reactions/welcome.swf" /> --}}
-                     <embed src="/images/reactions/welcome.swf" loop="false">
-                     {{-- </object> --}}
+                  <div id="embed">
+                     <embed id="avatar-main" loop="false">
+
+                  </div>
                 </div>
                 <div class="chatbox">
 
@@ -34,7 +38,7 @@
             </div>
 
             <div id="content" class="shadow">
-
+              <h1 class="given" id="given-equation"></h1>
             </div>
 
             <div class="chat">

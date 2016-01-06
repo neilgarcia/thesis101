@@ -6,6 +6,8 @@ function initialize(){
 
         placeForm();
 
+
+
         // var parent = $('embed#avatar').parent();
         // var newAvatar = "<embed src='/images/reactions/welcome.swf' id='avatar' width='100%' loop='false'>";
 

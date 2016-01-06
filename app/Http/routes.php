@@ -11,10 +11,11 @@
 |
 */
 Route::post('/register/{id}', 'StudentController@update');
-Route::get('/analyze/{id}', 'DataController@analyze');
+Route::get('/analyze/{id}/given/{given}/method/{method}', 'DataController@analyze');
 Route::get('/analyze/user/{id}', 'DataController@analyzeUserInput');
 Route::post('pia/login', 'StudentController@login');
 Route::get('pia/logout', 'StudentController@logout');
+Route::get('pia/method/{method}', 'StudentController@method');
 Route::get('pia/{id}', 'StudentController@action');
 Route::resource('pia', 'StudentController');
 

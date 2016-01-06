@@ -16,7 +16,7 @@ class StudentController extends Controller {
 
 
 	function __construct() {
-		$this->middleware('auth');
+		$this->middleware('auth', ['except'=>'login']);
 	}
 
 	/**
@@ -26,13 +26,9 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
-
-
 			$user = Auth::user();
-			$proc = "pia";
-			return view('partials.students', compact('user', 'proc'));
-
-
+			$method = "auto";
+			return view('partials.students', compact('user', 'method'));
 	}
 
 	/**
@@ -118,13 +114,10 @@ class StudentController extends Controller {
 		}
 	}
 
-	public function action($id)
+	public function method($method)
 	{
-		if($id == 'automatic'){
-
-		}else{
-
-		}
+		$user = Auth::user();
+		return view("partials.students", compact('user', 'method'));
 	}
 
 	/**
