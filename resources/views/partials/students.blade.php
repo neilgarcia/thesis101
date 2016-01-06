@@ -28,8 +28,11 @@
                      <param name="allowFullScreen" value="false" />
                      <param name="movie" value="/images/reactions/welcome.swf" /> --}}
                   <div id="embed">
-                     <embed id="avatar-main" loop="false">
-
+                     <embed src="/images/reactions/Welcome.swf" id="avatar-welcome" loop="false">
+                     <embed src="/images/reactions/Happy.swf" id="avatar-happy" loop="false">
+                     <embed src="/images/reactions/Sad.swf" id="avatar-sad" loop="false">
+                     <embed src="/images/reactions/Surprised.swf" id="avatar-surprised" loop="false">
+                     <embed src="/images/reactions/Very Happy2.swf" id="avatar-very-happy" loop="false">
                   </div>
                 </div>
                 <div class="chatbox">
@@ -39,6 +42,7 @@
 
             <div id="content" class="shadow">
               <h1 class="given" id="given-equation"></h1>
+              <input type="hidden" id="current-equation">
             </div>
 
             <div class="chat">

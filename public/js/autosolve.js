@@ -18,7 +18,7 @@
                         if(a){
                                 $.ajax({
 
-                                    url: '/analyze/' + a + '/method/auto',
+                                    url: '/analyze/' + a + '/given/' + a + '/method/auto',
                                     success: function(result){
                                         $('div#content').html(result);
                                         // $(".avatar > object > embed").attr("src", "/images/reactions/welcome-new.swf");

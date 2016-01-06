@@ -10,7 +10,7 @@ function initialize(){
 
         // var parent = $('embed#avatar').parent();
         // var newAvatar = "<embed src='/images/reactions/welcome.swf' id='avatar' width='100%' loop='false'>";
-
+        $('#avatar-welcome').css("display", "block");
         // $('embed#avatar').remove();
         // parent.append(newAvatar);
         function fadeInResponse () {

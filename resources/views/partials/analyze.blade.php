@@ -374,7 +374,10 @@ function paren($char){
       $eq['right'] = analyze($eq['right'], 'right');
       $eq['left'] = array_pop($eq['left']);
       $eq['right'] = array_pop($eq['right']);
-      $resultExpr = $eq['right'] / $eq['left'];
+      if($eq['left'] == "x")
+        $resultExpr = $eq['right'] / 1;
+      else
+        $resultExpr = $eq['right'] / $eq['left'];
       $eq['left'] = postfix($given[0]);
       $eq['right'] = postfix($given[1]);
       $eq = distribute($eq);
@@ -411,16 +414,23 @@ function paren($char){
     echo "<span class='a-step'>Third Step: x = $result </span>";
 
      }else{
+      $distribute = array();
+        $leftToRight = array();
+        $rightToLeft = array();
+        $simplifyLeft = false;
+        $simplifyRight = false;
+        $finalize = array();
+        $finalAnswer = false;
+        $data['error'] = false;
       if($given[0] <> "none")
         $checkIfEqual = check($expr, $given);
       else
         $checkIfEqual = true;
-      if($checkIfEqual){
-        $distribute = array();
-        $leftToRight = array();
-        $rightToLeft = array();
-        $compute = false;
-        $simplify = false;
+      if(!$checkIfEqual){
+        $data['error'] = true;
+        $expr = $given;
+      }
+
           foreach ($expr as $expression) {
             $num = "";
             for ($i=0; $i < strlen($expression)-2; $i++) {
@@ -456,12 +466,34 @@ function paren($char){
             }
           }
 
+          if(count($leftToRight) == 0 && count($rightToLeft) == 0){
+
+            if(count($left) > 2){
+              $simplifyLeft = true;
+            }elseif(count($right) > 2){
+              $simplifyRight = true;
+            }else{
+              array_pop($left);
+              array_pop($right);
+              array_push($finalize, array_pop($left));
+              array_push($finalize, array_pop($right));
+              if($finalize[0] == "1x" || $finalize[0] == "x")
+                  $finalAnswer = true;
+
+              //$finalize = array_push(array_pop($right));
+            }
+
+          }
+
           $data['distribute'] = $distribute;
           $data['left'] = $leftToRight;
           $data['right'] = $rightToLeft;
-
+          $data['simplifyleft'] = $simplifyLeft;
+          $data['simplifyright'] = $simplifyRight;
+          $data['finalize'] = $finalize;
+          $data['finalAnswer'] = $finalAnswer;
           echo json_encode($data);
-      }
+
 
 
      }
