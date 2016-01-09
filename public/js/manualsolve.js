@@ -93,24 +93,28 @@
 
                      $('body').on('click', '#analyze',function(){
                         var eq = $('#input').val();  //GET VALUE
+                        $('#input').val("");
                         var given = $('#current-equation').val();
                         if(given == "")
                             given = "none";
                         else if(given != "none")
                             given = $('#current-equation').val();
                         eq = eq.replace(/\//g, '|');
+                        given = given.replace(/\//g, '|');
                         if(eq){
                                 $.ajax({
 
                                     url: '/analyze/' + eq + '/given/' + given + '/method/manual',
 
                                     success: function(result){
+
                                         var data = jQuery.parseJSON(result);
                                         if($('#given-equation').text() == ""){
 
                                             $('#given-equation').text("GIVEN: " + eq);
                                             $('#current-equation').val(eq);
                                         }else if(!data.error){
+                                            eq = eq.replace('|', '/');
                                             $('#current-equation').val(eq);
                                             $('#content').append("<span class=a-step>" + eq + "</span>");
                                         }

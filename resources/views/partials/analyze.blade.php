@@ -10,6 +10,8 @@ $GLOBALS['right'] = array();
 $GLOBALS['storage'] = array();
 $equation = str_replace('|', '/', $equation);
 $equation = str_replace(' ', '', $equation);
+$given = str_replace('|', '/', $given);
+$given = str_replace(' ', '', $given);
 $expr = explode('=', $equation);
 $given = explode('=', $given);
 
@@ -24,6 +26,10 @@ $given = explode('=', $given);
    switch ($char) {
      case '+':
      case '-':
+     if($i == 0){
+      $GLOBALS['output'] = $char . $GLOBALS['output'];
+      break;
+     }
      $GLOBALS['output'] = $GLOBALS['output'] . ',';
      operator($char, 1);
      break;
@@ -277,7 +283,7 @@ function paren($char){
   {
     $e = explode(",", $expr);
     if(count($e) > 1)
-    array_pop($e);
+      array_pop($e);
     return $e;
   }
 
@@ -311,6 +317,7 @@ function paren($char){
           switch($op){
             case '+':
             case '-':
+            case '/':
               $temp = trim($num1, ",") . "," . trim($num2, ",") .",". $op. ",";
               array_push($stack, $temp);
               break;
@@ -370,6 +377,7 @@ function paren($char){
       $eq['right'] = postfix($expr[1]);
       $eq = distribute($eq);
       $eq = firststep($eq);
+
       $eq['left'] = analyze($eq['left'], 'left');
       $eq['right'] = analyze($eq['right'], 'right');
       $eq['left'] = array_pop($eq['left']);
@@ -378,7 +386,9 @@ function paren($char){
         $resultExpr = $eq['right'] / 1;
       else
         $resultExpr = $eq['right'] / $eq['left'];
+
       $eq['left'] = postfix($given[0]);
+
       $eq['right'] = postfix($given[1]);
       $eq = distribute($eq);
       $eq = firststep($eq);
@@ -386,7 +396,10 @@ function paren($char){
       $eq['right'] = analyze($eq['right'], 'right');
       $eq['left'] = array_pop($eq['left']);
       $eq['right'] = array_pop($eq['right']);
-      $resultGiven = $eq['right'] / $eq['left'];
+      if($eq['left'] == "x")
+        $resultGiven = $eq['right'] / 1;
+      else
+        $resultGiven = $eq['right'] / $eq['left'];
       if($resultGiven == $resultExpr){
         return true;
       }
@@ -470,11 +483,12 @@ function paren($char){
 
             if(count($left) > 2){
               $simplifyLeft = true;
-            }elseif(count($right) > 2){
+            }elseif(count($right)>2 && count($right) <> 4){
               $simplifyRight = true;
             }else{
               array_pop($left);
               array_pop($right);
+
               array_push($finalize, array_pop($left));
               array_push($finalize, array_pop($right));
               if($finalize[0] == "1x" || $finalize[0] == "x")
@@ -484,7 +498,6 @@ function paren($char){
             }
 
           }
-
           $data['distribute'] = $distribute;
           $data['left'] = $leftToRight;
           $data['right'] = $rightToLeft;
