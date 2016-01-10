@@ -28,12 +28,12 @@
                      <param name="allowFullScreen" value="false" />
                      <param name="movie" value="/images/reactions/welcome.swf" /> --}}
                   <div id="embed">
-                     <embed src="/images/reactions/Welcome.swf" id="avatar-welcome" loop="false">
-                     <embed src="/images/reactions/Happy.swf" id="avatar-happy" loop="false">
-                     <embed src="/images/reactions/Sad.swf" id="avatar-sad" loop="false">
-                     <embed src="/images/reactions/Surprised.swf" id="avatar-surprised" loop="false">
-                     <embed src="/images/reactions/Very Happy2.swf" id="avatar-very-happy" loop="false">
+                    <video id="avatar-vid">
+                      <source src="/images/reactions/output.webm" type="video/webm">
+                      {{-- <source src="/images/reactions/output.mp4" type="video/mp4"> --}}
+                    </video>
                   </div>
+
                 </div>
                 <div class="chatbox">
 

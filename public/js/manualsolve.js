@@ -107,7 +107,10 @@
                                     url: '/analyze/' + eq + '/given/' + given + '/method/manual',
 
                                     success: function(result){
-
+                                        video = document.getElementById('avatar-vid')[0];
+                                        video.currentTime = 10;
+                                        video.play();
+                                        eq = eq.replace('|', '/');
                                         var data = jQuery.parseJSON(result);
                                         if($('#given-equation').text() == ""){
 

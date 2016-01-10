@@ -483,12 +483,19 @@ function paren($char){
 
             if(count($left) > 2){
               $simplifyLeft = true;
-            }elseif(count($right)>2 && count($right) <> 4){
-              $simplifyRight = true;
+            }elseif(count($right)>2){
+              array_pop($right);
+              $op = array_pop($right);
+              if($op == "/"){
+                $num2 = array_pop($right);
+                $num1 = array_pop($right);
+                echo "test";
+                $simplifyRight = true;
+              }
+
             }else{
               array_pop($left);
               array_pop($right);
-
               array_push($finalize, array_pop($left));
               array_push($finalize, array_pop($right));
               if($finalize[0] == "1x" || $finalize[0] == "x")
