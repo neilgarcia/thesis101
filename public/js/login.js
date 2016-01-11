@@ -23,13 +23,6 @@ function initialize(){
 
         respond();
 
-        video = document.getElementById('avatar-vid');
-        video.addEventListener('loadedmetadata', function(){
-          video.currentTime = 10;
-          video.play();
-        });
-        //video.play();
-
     });
 }
 

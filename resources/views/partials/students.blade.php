@@ -28,8 +28,8 @@
                      <param name="allowFullScreen" value="false" />
                      <param name="movie" value="/images/reactions/welcome.swf" /> --}}
                   <div id="embed">
-                    <video id="avatar-vid">
-                      <source src="/images/reactions/output.webm" type="video/webm">
+                    <video id="avatar-vid" preload>
+                    <source src="/images/reactions/reactions.webm" type="video/webm">
                       {{-- <source src="/images/reactions/output.mp4" type="video/mp4"> --}}
                     </video>
                   </div>
@@ -43,6 +43,8 @@
             <div id="content" class="shadow">
               <h1 class="given" id="given-equation"></h1>
               <input type="hidden" id="current-equation">
+              <input type="hidden" id="input-correct" value=0>
+              <input type="hidden" id="input-wrong" value=0>
             </div>
 
             <div class="chat">

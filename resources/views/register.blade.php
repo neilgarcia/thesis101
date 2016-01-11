@@ -13,7 +13,7 @@
 <body>
     @include('layouts.header')
     <div class="content">
-      {!! Form::open(array('class'=>'form-signup', 'method'=>'POST', 'url'=>'pia')) !!}
+      {!! Form::open(array('class'=>'form-signup', 'method'=>'POST', 'url'=>'pia/register')) !!}
       {!! Form::text('student_number', null, array('placeholder'=>'Enter your student number...', 'class'=>'txt text-signup')) !!}
       {!! Form::text('first_name', null, array('placeholder'=>'Enter your first name...', 'class'=>'txt text-signup')) !!}
       {!! Form::text('last_name', null, array('placeholder'=>'Enter your last name...', 'class'=>'txt text-signup')) !!}

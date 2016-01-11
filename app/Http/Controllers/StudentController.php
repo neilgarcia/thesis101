@@ -16,7 +16,7 @@ class StudentController extends Controller {
 
 
 	function __construct() {
-		$this->middleware('auth', ['except'=>'login']);
+		$this->middleware('auth', ['except'=>['login','store']]);
 	}
 
 	/**
@@ -101,16 +101,14 @@ class StudentController extends Controller {
 	public function login(LoginUserRequest $request)
 	{
 		$credentials = [
-
 			'student_number' => $request->student_number,
 			'password' => $request->password
-
 		];
+
 		if(Auth::attempt($credentials)){
 			return Redirect::to('pia');
 		}else{
-		Auth::loginUsingId($credentials['student_number']);
-		return Redirect::to('pia');
+			return Redirect::to('pia');
 		}
 	}
 

@@ -31,5 +31,20 @@ function inArray(list,element){
     return false;
 }
 
+function idle(){
+    video = document.getElementById('avatar-vid');
+    video.currentTime = 13;
+}
 
+video = document.getElementById('avatar-vid');
+
+video.addEventListener('loadedmetadata', function() {
+    this.play();
+    setTimeout(idle ,2000);
+}, false);
+
+video.addEventListener('ended', function(){
+    this.currentTime = 13;
+    this.play();
+});
 

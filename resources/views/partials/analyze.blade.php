@@ -484,12 +484,24 @@ function paren($char){
             if(count($left) > 2){
               $simplifyLeft = true;
             }elseif(count($right)>2){
+              $clone = $right;
               array_pop($right);
               $op = array_pop($right);
+
               if($op == "/"){
                 $num2 = array_pop($right);
                 $num1 = array_pop($right);
-                echo "test";
+                if($num1%$num2 == 0)
+                  $simplifyRight = true;
+                else{
+                  array_pop($left);
+                  $right = $num1 . "/" . $num2;
+                  array_push($finalize, array_pop($left));
+                  array_push($finalize, $right);
+                  if($finalize[0] == "1x" || $finalize[0] == "x")
+                    $finalAnswer = true;
+                }
+              }else{
                 $simplifyRight = true;
               }
 

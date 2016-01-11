@@ -62,11 +62,9 @@ body{
 
 }
 #embed{
-  width: 217px;
+    width: 217px;
     height: 215px;
-    background: #fff url("/images/bg/209x260.png") no-repeat;
-    background-position-x: 22px;
-    background-size: contain;
+    background: #fff;
 }
 
 
@@ -190,6 +188,8 @@ section div {
   border-left: 20px solid #A8A8E8;
   border-top-right-radius: 16px 14px;
   -webkit-transform: translate(0, -49px);
+  -moz-transform: translate(0, -49px);
+  transform: translate(0, -49px);
 }
 .from-them:after {
   content: "";
@@ -201,5 +201,7 @@ section div {
   height: 20px;
   background: white;
   border-top-right-radius: 10px;
-    -webkit-transform: translate(-30px, -49px);
+  -webkit-transform: translate(-30px, -49px);
+  -moz-transform: : translate(-30px, -49px);
+  transform: translate(-30px, -49px);
 }

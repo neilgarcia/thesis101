@@ -2,6 +2,7 @@
 <!DOCTYPE Html>
 <Html>
 <head>
+    {{-- desolate-escarpment-5702 --}}
     <meta http-equiv="Content-Type" content="text/Html; charset=UTF-8">
     <title>UNIVERSITY OF THE EAST Freshmen Orientation {{ Carbon::now() }}</title>
 
@@ -21,15 +22,12 @@
     {!! Html::style('/css/style.css') !!}
     {!! Html::style('/css/sidebarinput.css') !!}
     {!! Html::style('/css/sidebarfield.css') !!}
-    <link href="http://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet">
-    <script src="http://vjs.zencdn.net/4.2/video.js"></script>
 </head>
 <body>
     @include('layouts.header');
     @yield('content')
 
     <!-- Scripts -->
-    {!! HTML::script('js/script.js') !!}
     {!! Html::script('js/core.js') !!}
     {!! Html::script('js/login.js') !!}
     @yield('js')
