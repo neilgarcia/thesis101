@@ -15,11 +15,17 @@ class Student extends Model implements AuthenticatableContract, CanResetPassword
 
 	protected $primaryKey = 'student_number';
 
-  protected $fillable = ['first_name', 'last_name', 'student_number', 'password', 'log_id'];
+
+  protected $fillable = ['first_name', 'last_name', 'student_number', 'password'];
 
   public function logs()
   {
-    return $this->hasMany('App\Log');
+    return $this->hasMany('App\Log', 'student_number');
+  }
+
+  public function equations()
+  {
+    return $this->hasMany('App\Equation', 'student_number');
   }
 
 }

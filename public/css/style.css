@@ -2,6 +2,7 @@
     font-family: "Segoe UI";
     src: url(fonts/segoeui.ttf);
 }
+
 ::selection{
     background-color: transparent;
 }
@@ -25,8 +26,8 @@ body{
     padding: 8px;
     background: url('/images/bg/woody2.jpg');
     display: none;
-    width: 850px;
-    height: 500px;
+    width: 1030px;
+    height: 600px;
     margin: auto;
     box-shadow: 0px 3px 20px rgba(0,0,0,0.4);
     border-radius: 8px;
@@ -37,8 +38,8 @@ body{
 .sidebar{
 
     position: absolute;
-    width: 217px;
-    height: 484px;
+    width: 395px;
+    height: 584px;
     border-radius: 5px;
     /*background: #6CA5CF;*/
     color: black;
@@ -62,7 +63,7 @@ body{
 
 }
 #embed{
-    width: 217px;
+    width: 395px;
     height: 215px;
     background: #fff;
 }
@@ -72,7 +73,7 @@ body{
     position: absolute;
     background-color: blue;
     border-radius: 5px;
-    height: 265px;
+    height: 318px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -84,8 +85,8 @@ body{
     border-bottom-right-radius: 5px;
     background: #00A8FF;
     height: 40px;
-    width: 611px;
-    left: 225px;
+    width: 608px;
+    left: 405px;
 }
 .button{
     display: inline-block;
@@ -108,19 +109,19 @@ body{
     background-color: #212F28;
 }
 #content{
-    background: url("../images/bg/chalkboard.jpg");
     background-size: cover;
     font-family: "Justaword";
     letter-spacing: 5px;
     color: white;
     background-color: #1e571e;
+    opacity: 0.9;
     padding-left: 30px;
     position: relative;
-    left: 225px;
+    left: 405px;
     border-radius: 5px;
     overflow: auto;
     width: 608px;
-    height: 435px;
+    height: 534px;
 }
 .a-step, .a-final{
     display: block;
@@ -154,6 +155,7 @@ input,textarea,select{
   /*margin: 50px auto;*/
   left: 210px;
   top: 35px;
+  font: 32px;
 }
 section div {
   max-width: 325px;
@@ -204,4 +206,94 @@ section div {
   -webkit-transform: translate(-30px, -49px);
   -moz-transform: : translate(-30px, -49px);
   transform: translate(-30px, -49px);
+}
+
+.icon-hint, .icon-abandon, .icon-clear-board{
+  display: inline-block;
+  /*font-size: 35px;*/
+  cursor: pointer;
+  /*transition: all 0.2s ease 0s;*/
+  color: #fff;
+  margin-bottom: 1px;
+  border-radius: 20px;
+  float: right;
+}
+
+.helper{
+  display: inline-block;
+  float: right;
+  text-align: right;
+  margin-right: 7px;
+
+}
+
+.hint:hover, .abandon:hover, .clear-board:hover{
+
+
+}
+
+
+.hint:hover{
+  width: 120px;
+  transition: 0.1s ease-out;
+}
+
+.clear-board:hover{
+  width: 130px;
+  transition: 0.1s ease-out;
+}
+
+.abandon:hover{
+  width: 170px;
+  transition: 0.1s ease-out;
+}
+
+.icon-container:hover > #hint-message, .icon-container:hover > #board-message, .icon-container:hover > #abandon-message{
+  margin-bottom: 8px;
+  margin-right: 3px;
+  transition: 0.2s;
+  margin-top: 0;
+  /*margin-left: 10px;*/
+}
+
+
+
+
+.icon-container {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  width: 45px;
+  overflow: hidden;
+  height: 42px;
+  font-size: 24px;
+  border-radius: 35px;
+  margin: 10px;
+
+  padding-right: 5px;
+  padding-top: 8px;
+  text-align: left;
+}
+/*
+.icon-container:hover > .hint, .icon-container:hover > .clear-board, .icon-container:hover > .abandon{
+  color: #1e571e;
+}
+
+.icon-container:hover{
+  width: 120px;
+  background-color: white;
+  transition: 0.9s;
+}
+
+.icon-container:hover > #hint-message{
+  visibility: visible;
+  opacity: 1;
+  left: 10px;
+}*/
+
+#hint-message, #abandon-message, #board-message{
+  display: inline-block;
+  position: relative;
+  margin-top: 10px;
+  left: 10px;
 }

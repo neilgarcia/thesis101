@@ -15,18 +15,17 @@ class CreateLogsTable extends Migration {
 		Schema::create('logs', function(Blueprint $table)
 		{
 			$table->increments('log_id')->unsigned();
-			$table->string('student_number', 20);
+			$table->unsignedInteger('equation_id');
 			$table->string('equation', 20);
-			$table->integer('correct')->unsigned();
-			$table->integer('wrong')->unsigned();
-			$table->integer('hints_used')->unsigned();
-
+			$table->string('status', 20);
+			$table->string('emotion', 20);
 			$table->timestamps();
 
-			$table->foreign('student_number')
-						->references('student_number')
-						->on('students')
+			$table->foreign('equation_id')
+						->references('equation_id')
+						->on('equations')
 						->onDelete('cascade');
+
 		});
 	}
 
@@ -37,7 +36,9 @@ class CreateLogsTable extends Migration {
 	 */
 	public function down()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 		Schema::drop('logs');
+		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 
 }

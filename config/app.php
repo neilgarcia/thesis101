@@ -145,7 +145,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-
+		'Maatwebsite\Excel\ExcelServiceProvider',
 
 	],
 
@@ -197,7 +197,7 @@ return [
 		'Carbon'    => 'Carbon\Carbon',
 		'Form'			=> 'Illuminate\Html\FormFacade',
     'Html'			=> 'Illuminate\Html\HtmlFacade',
-
+    'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
 	],
 

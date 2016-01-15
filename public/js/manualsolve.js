@@ -1,4 +1,110 @@
-        function fadeInResponse () {
+
+$(document).ready(function(){
+
+
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $('#form-log').on('submit', function(e){
+            e.preventDefault();
+
+        });
+
+        $('.hint').on('click', function(e){
+            eq = '';
+            if($('#current-equation').val()){
+                eq = $('#current-equation').val();
+            }else if($('#given-equation').val()){
+                eq = $('#given-equation').val();
+            }else{
+                // alert('test');
+            }
+
+            $.ajax({
+
+                url: '/analyze/' + eq + '/given/' + eq + '/method/hint',
+                success: function(result){
+                    id = $('#equation_id').val();
+                    $('#content-board').append("<span class=a-step>" + result + "</span>");
+                    $('#current-equation').val(result);
+                    saveHint(result, id);
+                }
+            });
+        });
+
+        $('.abandon').on('click', function(){
+            BootstrapDialog.show({
+                title: 'Confirm',
+                message: 'Are you sure you want to abandon the equation?',
+                buttons: [{
+                    label: 'Yes',
+                    cssClass: 'btn-primary',
+                    action: function(){
+                        $('#given-equation').text("");
+                        $('#current-equation').val("");
+                        $('#input-given').val("");
+                        $('#content-board').html("");
+                    }
+                },{
+                    label: 'No',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
+
+
+        });
+
+        $('.clear-board').on('click', function(){
+            BootstrapDialog.show({
+                title: 'Confirm',
+                message: 'Are you sure you want to clear the board?',
+                buttons: [{
+                    label: 'Yes',
+                    cssClass: 'btn-primary',
+                    action: function(){
+                        $('#content-board').html("");
+                    }
+                },{
+                    label: 'No',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
+
+        });
+
+        function saveEquation (equation) {
+            $.ajax({
+                url: '/pia/equation/' + equation,
+                success: function(result){
+                    $('#equation_id').val(result);
+                }
+            });
+        }
+
+        function saveLog (eq, id, status, emotion) {
+            $.ajax({
+                url: '/pia/equation/' + eq + '/id/' + id + '/status/' + status + '/mood/' + mood,
+                success: function(result){
+
+                }
+            });
+        }
+
+
+        function saveHint (eq, id) {
+            $.ajax({
+                url: '/pia/equation/' + eq + '/id/' + id,
+                success: function(){
+
+                }
+            });
+        }
+
+       function fadeInResponse () {
           $('#bot-response').fadeIn(500);
         }
         function fadeOutResponse () {
@@ -86,14 +192,7 @@
           }
 
         }
-                    $.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner =
-                    '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' +
-                        '<div class="progress progress-striped active">' +
-                            '<div class="progress-bar" style="width: 100%;"></div>' +
-                        '</div>' +
-                    '</div>';
-
-                  $.fn.modalmanager.defaults.resize = true;
+                  // $.fn.modalmanager.defaults.resize = true;
 
                     //ajax demo:
 
@@ -114,14 +213,17 @@
 
                                     success: function(result){
                                         mood = "happy";
-                                        eq = eq.replace('|', '/');
+                                        eq2 = eq.replace('|', '/');
+                                        eqID = $('#equation_id').val();
                                         var data = jQuery.parseJSON(result);
                                         if($('#given-equation').text() == ""){
-                                            $('#given-equation').text("GIVEN: " + eq);
-                                            $('#current-equation').val(eq);
+                                            saveEquation(eq);
+                                            $('#given-equation').text("GIVEN: " + eq2);
+                                            $('#current-equation').val(eq2);
+                                            $('#input-given').val(eq2);
                                         }else if(!data.error){
-                                            correct = $('#input-correct').val();
-                                            wrong = $('#input-wrong').val();
+                                            correct = $('#input-correct-ctr').val();
+                                            wrong = $('#input-wrong-ctr').val();
                                             if(correct >= 2){
                                                 mood = "excited";
                                             }else if(wrong >= 3){
@@ -129,21 +231,24 @@
                                             }else{
                                                 mood = "happy";
                                             }
-                                            $('#input-correct').val(parseInt(correct) + 1);
-                                            $('#input-wrong').val(0);
-                                            eq = eq.replace('|', '/');
-                                            $('#current-equation').val(eq);
-                                            $('#content').append("<span class=a-step>" + eq + "</span>");
+                                            saveLog(eq, eqID, 'correct', mood);
+                                            $('#input-correct').val(parseInt($('#input-correct').val()) + 1);
+                                            $('#input-correct-ctr').val(parseInt(correct) + 1);
+                                            $('#input-wrong-ctr').val(0);
+                                            $('#current-equation').val(eq2);
+                                            $('#content-board').append("<span class=a-step>" + eq2 + "</span>");
                                         }else{
-                                            wrong = $('#input-wrong').val();
-                                            correct = $('#input-correct').val();
+                                            wrong = $('#input-wrong-ctr').val();
+                                            correct = $('#input-correct-ctr').val();
                                             if(correct >= 3){
                                                 mood = "surprised";
                                             }else{
                                                 mood = "sad";
                                             }
-                                            $('#input-wrong').val(parseInt(wrong) + 1);
-                                            $('#input-correct').val(0);
+                                            saveLog(eq, eqID, 'wrong', mood);
+                                            $('#input-wrong').val(parseInt($('#input-wrong').val()) + 1);
+                                            $('#input-wrong-ctr').val(parseInt(wrong) + 1);
+                                            $('#input-correct-ctr').val(0);
                                         }
 
                                         if(data.distribute.length){
@@ -187,7 +292,7 @@
                                             respond(mood, "simplifyRight", data.error);
                                         }else if(data.finalAnswer){
                                             respond("finalAnswer");
-
+                                            $('#form-log').submit();
                                         }else if(data.finalize.length){
                                             // $('.from-them p').text("Divide " + data.finalize[0].substring(0, data.finalize[0].length-1) + " from " + data.finalize[1] + " to simplify x.");
                                             respond(mood, "finalize", data.error, data.finalize);
@@ -202,3 +307,7 @@
 
 
                     });
+
+});
+
+

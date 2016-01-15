@@ -54,7 +54,11 @@ $given = explode('=', $given);
 
      $GLOBALS['output'] = $GLOBALS['output'] . array_pop($GLOBALS['stack']) . ',' ;
     }
-    //var_dump($GLOBALS['output']);
+
+    if(substr($GLOBALS['output'], -1) == ","){
+      $GLOBALS['output'] = rtrim($GLOBALS['output'],',');
+
+    }
     return $GLOBALS['output'];
   }
 
@@ -79,6 +83,7 @@ function operator($char, $num){
   }
   array_push($GLOBALS['stack'], $char);
 }
+
 function is_variable($e){
   $var_pattern = "/[0-9]+(\.[0-9][0-9]?)?[xX]$/";
 
@@ -87,6 +92,7 @@ function is_variable($e){
   }
   return false;
 }
+
 function paren($char){
   while(count($GLOBALS['stack'])){
     $ch = array_pop($GLOBALS['stack']);
@@ -167,7 +173,7 @@ function paren($char){
     $e = array();
     if(count($stack) == 1)
       return array_pop($stack);
-    if(count($stack) > 0)
+    if(end($stack) == "")
       array_pop($stack);
     $op = array('+', '-', '*', '/');
     for ($i=0; $i < count($stack); $i++) {
@@ -211,6 +217,9 @@ function paren($char){
       }
 
     }
+    if(substr($stack, -1) == ","){
+      $stack = rtrim($stack, ',');
+    }
     $expr['left'] = $stack;
     $stack = "";
     $eq = exp_to_array($expr['right']);
@@ -232,6 +241,10 @@ function paren($char){
       }
     }
     //var_dump($stack);
+
+    if(substr($stack, -1) == ","){
+      $stack = rtrim($stack, ',');
+    }
     $expr['right'] = $stack;
     return $expr;
   }
@@ -282,7 +295,7 @@ function paren($char){
   function exp_to_array($expr)
   {
     $e = explode(",", $expr);
-    if(count($e) > 1)
+    if(end($e) == "")
       array_pop($e);
     return $e;
   }
@@ -362,10 +375,16 @@ function paren($char){
           array_push($stack, $e[$i]);
         }
       }
-      if($ctr == 1)
+      if($ctr == 1){
         $result['left'] = array_pop($stack);
-      else
+        if(substr($result['left'], -1) == ",")
+          $result['left'] = rtrim($result['left'], ',');
+      }
+      else{
         $result['right'] = array_pop($stack);
+        if(substr($result['right'], -1) == ",")
+        $result['right'] = rtrim($result['right'], ',');
+    }
       $ctr++;
     }
     return $result;
@@ -411,20 +430,64 @@ function paren($char){
 
      if($method == 'auto'){
 
-    $eq['left'] = postfix($expr[0]);
-    $eq['right'] = postfix($expr[1]);
-    $eq = distribute($eq);
-    echo "<h1 class='given'>GIVEN: $equation</h1>";
-    echo "<span class='a-step'>Distribute: " . infix($eq['left']) . " = " . infix($eq['right']) . "</span>";
-    $eq = firststep($eq);
-    echo "<span class='a-step'>First Step: " . infix($eq['left']) . "=" . infix($eq['right']) . "</span>";
-    $eq['left'] = analyze($eq['left'], 'left');
-    $eq['right'] = analyze($eq['right'], 'right');
-    $eq['left'] = array_pop($eq['left']);
-    $eq['right'] = array_pop($eq['right']);
-    echo "<span class='a-step'>Second Step: " . $eq['left'] . "=" . $eq['right'] . "</span>";
-    $result = simplify($eq['left'], $eq['right']);
-    echo "<span class='a-step'>Third Step: x = $result </span>";
+        $eq['left'] = postfix($expr[0]);
+        $eq['right'] = postfix($expr[1]);
+        $eq = distribute($eq);
+        echo "<h1 class='given'>GIVEN: $equation</h1>";
+        echo "<span class='a-step'>Distribute: " . infix($eq['left']) . " = " . infix($eq['right']) . "</span>";
+        $eq = firststep($eq);
+        echo "<span class='a-step'>First Step: " . infix($eq['left']) . "=" . infix($eq['right']) . "</span>";
+        $eq['left'] = analyze($eq['left'], 'left');
+        $eq['right'] = analyze($eq['right'], 'right');
+        $eq['left'] = array_pop($eq['left']);
+        $eq['right'] = array_pop($eq['right']);
+        echo "<span class='a-step'>Second Step: " . $eq['left'] . "=" . $eq['right'] . "</span>";
+        $result = simplify($eq['left'], $eq['right']);
+        echo "<span class='a-step'>Third Step: x = $result </span>";
+
+     }else if($method == 'hint'){
+
+      $eq['left'] = postfix($expr[0]);
+      $eq['right'] = postfix($expr[1]);
+      $distribute = distribute($eq);
+      // var_dump($distribute);
+      // var_dump($eq);
+      if($distribute <> $eq){
+        echo infix($distribute['left']) . " = " . infix($distribute['right']);
+        // echo "d";
+        return "";
+      }
+      $firststep = firststep($distribute);
+      // var_dump($firststep);
+      // var_dump($distribute);
+      if($firststep <> $distribute){
+        echo infix($firststep['left']) . " = " . infix($firststep['right']);
+        // echo "f";
+        return "";
+      }
+
+      $eq['left'] = analyze($firststep['left'], 'left');
+      $eq['right'] = analyze($firststep['right'], 'right');
+      $eq['left'] = array_pop($eq['left']);
+      $eq['right'] = array_pop($eq['right']);
+      // var_dump($eq);
+      // var_dump($firststep);
+      if($eq <> $firststep){
+
+        echo $eq['left'] . "=" . $eq['right'];
+        // echo "a";
+        return "";
+      }
+
+      $result = simplify($eq['left'], $eq['right']);
+
+      if($result <> $eq['right']){
+        echo "x = " . $result;
+        // echo "s";
+        return "";
+      }
+
+
 
      }else{
       $distribute = array();
@@ -485,16 +548,16 @@ function paren($char){
               $simplifyLeft = true;
             }elseif(count($right)>2){
               $clone = $right;
-              array_pop($right);
-              $op = array_pop($right);
+              // array_pop($right);
 
+              $op = array_pop($right);
               if($op == "/"){
                 $num2 = array_pop($right);
                 $num1 = array_pop($right);
                 if($num1%$num2 == 0)
                   $simplifyRight = true;
                 else{
-                  array_pop($left);
+                  // array_pop($left);
                   $right = $num1 . "/" . $num2;
                   array_push($finalize, array_pop($left));
                   array_push($finalize, $right);
@@ -506,8 +569,8 @@ function paren($char){
               }
 
             }else{
-              array_pop($left);
-              array_pop($right);
+              // array_pop($left);
+              // array_pop($right);
               array_push($finalize, array_pop($left));
               array_push($finalize, array_pop($right));
               if($finalize[0] == "1x" || $finalize[0] == "x")
@@ -525,8 +588,6 @@ function paren($char){
           $data['finalize'] = $finalize;
           $data['finalAnswer'] = $finalAnswer;
           echo json_encode($data);
-
-
 
      }
 

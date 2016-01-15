@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentsTable extends Migration {
+class CreateHintsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,17 @@ class CreateStudentsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('students', function(Blueprint $table)
+		Schema::create('hints', function(Blueprint $table)
 		{
-			$table->string('student_number', 20);
-			$table->string('first_name', 100);
-			$table->string('last_name', 100);
+			$table->increments('hint_id');
+			$table->string('equation', 100);
+			$table->unsignedInteger('equation_id')->unsigned();
 			$table->timestamps();
 
-			$table->primary('student_number');
+			$table->foreign('equation_id')
+						->references('equation_id')
+						->on('equations')
+						->onDelete('cascade');
 		});
 	}
 
@@ -31,7 +34,7 @@ class CreateStudentsTable extends Migration {
 	public function down()
 	{
 		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-		Schema::drop('students');
+		Schema::drop('hints');
 		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 

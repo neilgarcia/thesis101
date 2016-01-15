@@ -9,7 +9,7 @@ use App\Http\Requests\LoginUserRequest;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
 use App\Student;
-
+use App\Log;
 
 
 class StudentController extends Controller {
@@ -26,6 +26,7 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
+
 			$user = Auth::user();
 			$method = "auto";
 			return view('partials.students', compact('user', 'method'));
@@ -105,11 +106,8 @@ class StudentController extends Controller {
 			'password' => $request->password
 		];
 
-		if(Auth::attempt($credentials)){
-			return Redirect::to('pia');
-		}else{
-			return Redirect::to('pia');
-		}
+		Auth::attempt($credentials);
+		return Redirect::back();
 	}
 
 	public function method($method)
@@ -126,6 +124,13 @@ class StudentController extends Controller {
 	{
 		Auth::logout();
 		return Redirect::to('pia');
+	}
+
+	public function test()
+	{
+		$logs = Student::with('equations.logs', 'equations.hints')->get();
+		// dd($logs);
+		return view('partials.test', compact('logs'));
 	}
 
 }
