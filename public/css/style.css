@@ -26,7 +26,7 @@ body{
     padding: 8px;
     background: url('/images/bg/woody2.jpg');
     display: none;
-    width: 1030px;
+    width: 1280px;
     height: 600px;
     margin: auto;
     box-shadow: 0px 3px 20px rgba(0,0,0,0.4);
@@ -38,7 +38,7 @@ body{
 .sidebar{
 
     position: absolute;
-    width: 395px;
+    width: 480px;
     height: 584px;
     border-radius: 5px;
     /*background: #6CA5CF;*/
@@ -52,10 +52,10 @@ body{
 
 
 #embed video{
-    height: 215px;
+    height: 270px;
     width: 217px;
     position: absolute;
-    left: 0;
+    left: 30px;
     right: 0;
     z-index: 0;
     /*display: none;*/
@@ -63,8 +63,11 @@ body{
 
 }
 #embed{
-    width: 395px;
-    height: 215px;
+    position: absolute;
+    height: 270px;
+    left: 0;
+    right: 0;
+    border-radius: 4px;
     background: #fff;
 }
 
@@ -73,7 +76,7 @@ body{
     position: absolute;
     background-color: blue;
     border-radius: 5px;
-    height: 318px;
+    height: 303px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -85,8 +88,8 @@ body{
     border-bottom-right-radius: 5px;
     background: #00A8FF;
     height: 40px;
-    width: 608px;
-    left: 405px;
+    width: 770px;
+    left: 490px;
 }
 .button{
     display: inline-block;
@@ -117,10 +120,10 @@ body{
     opacity: 0.9;
     padding-left: 30px;
     position: relative;
-    left: 405px;
+    left: 490px;
     border-radius: 5px;
     overflow: auto;
-    width: 608px;
+    width: 772px;
     height: 534px;
 }
 .a-step, .a-final{
@@ -132,7 +135,7 @@ body{
 
 .input{
     font-size: 24px;
-    width: 85%;
+    width: 88%;
 }
 
 a{
@@ -153,9 +156,9 @@ input,textarea,select{
     position: relative;
   max-width: 300px;
   /*margin: 50px auto;*/
-  left: 210px;
+  left: 284px;
   top: 35px;
-  font: 32px;
+  font: 40px;
 }
 section div {
   max-width: 325px;
@@ -169,6 +172,7 @@ section div {
 }
 
 .from-them {
+  font-size: 18px;
   position: relative;
   padding: 10px 20px;
   background: #A8A8E8;

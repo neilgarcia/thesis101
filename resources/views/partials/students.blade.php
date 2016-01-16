@@ -39,7 +39,7 @@
                   </div>
 
                 </div>
-                <div class="chatbox">
+                <div class="chatbox shadow">
 
                 </div>
             </div>
@@ -68,7 +68,7 @@
               <input type="hidden" id="current-equation" autocomplete="off">
               <input type="hidden" id="input-correct-ctr" value=0 autocomplete="off">
               <input type="hidden" id="input-wrong-ctr" value=0 autocomplete="off">
-              <form method="post" action="/pia/finished" id="form-log">
+              <form method="post" id="form-log">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="equation_id" id="equation_id" autocomplete="off">
                 <input type="hidden" name="equation" id="input-given" autocomplete="off">

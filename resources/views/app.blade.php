@@ -1,7 +1,7 @@
 <Html>
 <head>
     <meta http-equiv="Content-Type" content="text/Html; charset=UTF-8">
-    @yield('csrf');
+    <meta name="csrf-token" value="{{ csrf_token() }}">
     <title>UNIVERSITY OF THE EAST Freshmen Orientation {{ Carbon::now() }}</title>
 
     <!-- Latest compiled and minified CSS -->

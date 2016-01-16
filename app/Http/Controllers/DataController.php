@@ -58,10 +58,11 @@ class DataController extends Controller {
 
 	public function updateStatus()
 	{
-		$id = Input::get('equation_id');
-		$eq = Equation::find($id);
-		$eq->status = "finished";
-		$eq->save();
+			$id = Input::get('equation_id');
+			$eq = Equation::find($id);
+			$eq->status = "finished";
+			$eq->save();
+			return $eq->toArray();
 	}
 
 }

@@ -28,13 +28,16 @@
   @foreach ($logs as $log)
     @foreach ($log->equations as $equations)
       @foreach ($equations->logs as $steps)
-         {{-- {!! $steps->equation !!} --}}
+         <tr>
+          <td>{!! $equations->equation !!}</td>
+          <td>{!! $steps->equation !!}</td>
+          <td>{!! $equations->status !!}</td>
       @endforeach
-      <div class="clear"></div>
-      @foreach ($equations->hints as $hints)
+      {{-- <div class="clear"></div> --}}
+      {{-- @foreach ($equations->hints as $hints) --}}
         {{-- {!! $hints->equation !!} --}}
-      @endforeach
-
+      {{-- @endforeach --}}
+{{--
       <tr>
       <td>{!! $log->first_name . " " . $log->last_name !!}</td>
       <td>{!! $equations->equation !!}</td>
@@ -44,7 +47,7 @@
       <td>{!! $hints_used !!}</td>
       <td>{!! $num_hints !!}</td>
       <td>{!! $equations->status !!}</td>
-      </tr>
+      </tr> --}}
     @endforeach
   @endforeach
 

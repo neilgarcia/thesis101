@@ -3,10 +3,24 @@ $(document).ready(function(){
 
 
 
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
 
         $('#form-log').on('submit', function(e){
             e.preventDefault();
+            data = $('#form-log').serialize();
+            $.ajax({
+                url: '/pia/finished',
+                method: 'post',
+                data: data,
+                success: function(e){
+                    console.log(e);
+                }
+            });
+            $('#input').attr('disabled', 'disabled');
 
         });
 
@@ -17,7 +31,9 @@ $(document).ready(function(){
             }else if($('#given-equation').val()){
                 eq = $('#given-equation').val();
             }else{
-                // alert('test');
+                $('.from-them p').text("Please input an equation first.");
+                respond();
+                return;
             }
 
             $.ajax({
@@ -158,7 +174,7 @@ $(document).ready(function(){
                 }
                 react(mood);
             }
-          }else{
+          }else if(arguments.length == 4){
             if(type == "distribute"){
                 if(!error){
                     $('.from-them p').text("Distribute " + num + ".");
