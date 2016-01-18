@@ -5,7 +5,7 @@ function initialize(){
     $(document).ready(function(){
 
         placeForm();
-
+        $('#input').removeAttr('disabled');
         // var parent = $('embed#avatar').parent();
         // var newAvatar = "<embed src='/images/reactions/welcome.swf' id='avatar' width='100%' loop='false'>";
         // $('embed#avatar').remove();

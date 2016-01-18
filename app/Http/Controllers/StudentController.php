@@ -1,16 +1,20 @@
 <?php namespace App\Http\Controllers;
 
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Authenticatable;
+use App\Equation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\LoginUserRequest;
+use App\Log;
+use App\Student;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
-use App\Student;
-use App\Log;
-
+use ReverseRegex\Generator\Scope;
+use ReverseRegex\Lexer;
+use ReverseRegex\Parser;
+use ReverseRegex\Random\SimpleRandom;
 
 class StudentController extends Controller {
 
@@ -52,7 +56,7 @@ class StudentController extends Controller {
 		$request['password'] = Hash::make(ucfirst(strtolower($request->last_name)) . substr($request->student_number, -3));
 		Student::create($request->all());
 		Auth::loginUsingId($request->student_number);
-		return Redirect::to('pia');
+		return Redirect::to('pia/method/manual');
 	}
 
 	/**
@@ -113,6 +117,13 @@ class StudentController extends Controller {
 	public function method($method)
 	{
 		$user = Auth::user();
+		if($method == "manual"){
+			$given = $this->generateEquation();
+			$data = array('equation'=>$given);
+			$model = $user->equations()->create($data);
+			$id = $model->equation_id;
+			return view("partials.students", compact('user', 'method', 'given', 'id'));
+		}
 		return view("partials.students", compact('user', 'method'));
 	}
 
@@ -128,9 +139,23 @@ class StudentController extends Controller {
 
 	public function test()
 	{
-		$logs = Student::with('equations.logs', 'equations.hints')->get();
+		$logs = Student::with('equations.hints')->get();
 		// dd($logs);
 		return view('partials.test', compact('logs'));
 	}
 
+	public function generateEquation()
+	{
+		$lexer = new  Lexer('[1-9]{1}[x]([\+\-]{1}[1-9]{1}[x]{0,1}){0,1}=[1-9]{1}([\+\-]{1}[1-9]{1}[x]{0,1}){0,1}');
+		$rand = rand(1, 99999);
+		$gen   = new SimpleRandom($rand);
+		$result = '';
+
+		$parser = new Parser($lexer,new Scope(),new Scope());
+		$parser->parse()->getResult()->generate($result,$gen);
+
+		return $result;
+	}
+
 }
+

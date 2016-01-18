@@ -3,21 +3,18 @@ $(document).ready(function(){
 
 
 
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
+
 
         $('#form-log').on('submit', function(e){
             e.preventDefault();
             data = $('#form-log').serialize();
+            // alert(data);
             $.ajax({
                 url: '/pia/finished',
                 method: 'post',
                 data: data,
                 success: function(e){
-                    console.log(e);
+                    // console.log(e);
                 }
             });
             $('#input').attr('disabled', 'disabled');
@@ -28,8 +25,8 @@ $(document).ready(function(){
             eq = '';
             if($('#current-equation').val()){
                 eq = $('#current-equation').val();
-            }else if($('#given-equation').val()){
-                eq = $('#given-equation').val();
+            }else if($('#input-given').val()){
+                eq = $('#input-given').val();
             }else{
                 $('.from-them p').text("Please input an equation first.");
                 respond();
@@ -37,7 +34,6 @@ $(document).ready(function(){
             }
 
             $.ajax({
-
                 url: '/analyze/' + eq + '/given/' + eq + '/method/hint',
                 success: function(result){
                     id = $('#equation_id').val();
@@ -113,9 +109,15 @@ $(document).ready(function(){
 
         function saveHint (eq, id) {
             $.ajax({
-                url: '/pia/equation/' + eq + '/id/' + id,
-                success: function(){
-
+                url: '/pia/savehint',
+                method: "post",
+                data: { 'equation': eq, 'id': id},
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+                success: function(e){
+                    console.log(e);
+                },error: function(xhr, status, error) {
+                  // var err = eval("(" + xhr.responseText + ")");
+                  console.log(error);
                 }
             });
         }

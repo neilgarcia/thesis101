@@ -13,6 +13,7 @@
 
 
 //
+Route::post('/pia/savehint', 'DataController@savehint');
 Route::post('/pia/finished', 'DataController@updateStatus');
 Route::post('/pia/register', 'StudentController@store');
 Route::get('pia', 'StudentController@index');
@@ -26,5 +27,4 @@ Route::get('pia/method/{method}', 'StudentController@method');
 // Route::get('pia/{id}', 'StudentController@action');
 Route::get('pia/equation/{equation}', 'DataController@savegiven');
 Route::get('pia/equation/{equation}/id/{id}/status/{status}/mood/{mood}', 'DataController@savelog');
-Route::get('/pia/equation/{equation}/id/{id}', 'DataController@savehint');
-
+Route::get('pia/data/seed', 'DataController@seed');

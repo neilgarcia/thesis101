@@ -27,27 +27,19 @@
 <?php $num_hints = 0; ?>
   @foreach ($logs as $log)
     @foreach ($log->equations as $equations)
-      @foreach ($equations->logs as $steps)
-         <tr>
+        @foreach ($equations->logs as $steps)
+          <tr>
           <td>{!! $equations->equation !!}</td>
+
           <td>{!! $steps->equation !!}</td>
+          <td>{!! $steps->status !!}</td>
           <td>{!! $equations->status !!}</td>
-      @endforeach
-      {{-- <div class="clear"></div> --}}
-      {{-- @foreach ($equations->hints as $hints) --}}
-        {{-- {!! $hints->equation !!} --}}
-      {{-- @endforeach --}}
-{{--
-      <tr>
-      <td>{!! $log->first_name . " " . $log->last_name !!}</td>
-      <td>{!! $equations->equation !!}</td>
-      <td>{!! $ctrCorrect !!}</td>
-      <td>{!! $ctrWrong !!}</td>
-      <td>{!! $ctrCorrect + $ctrWrong !!}</td>
-      <td>{!! $hints_used !!}</td>
-      <td>{!! $num_hints !!}</td>
-      <td>{!! $equations->status !!}</td>
-      </tr> --}}
+          </tr>
+        @endforeach
+
+        @foreach ($equations->hints as $hints)
+          {!! $hints->equation !!}
+        @endforeach
     @endforeach
   @endforeach
 

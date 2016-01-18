@@ -267,7 +267,12 @@ function paren($char){
       $gcd = gcd($num, $var);
       $num /= $gcd;
       $var /= $gcd;
-      $result = "$num/$var or " . round($num/$var, 2);
+      if($num%$var == 0){
+        $result = $num/$var;
+      }else{
+        $result = "$num/$var";
+      }
+
     }
     return $result;
   }
@@ -483,7 +488,6 @@ function paren($char){
 
       if($result <> $eq['right']){
         echo "x = " . $result;
-        // echo "s";
         return "";
       }
 

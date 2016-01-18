@@ -8,13 +8,17 @@ use App\Log;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use ReverseRegex\Lexer;
+use ReverseRegex\Random\SimpleRandom;
+use ReverseRegex\Parser;
+use ReverseRegex\Generator\Scope;
 
 class DataController extends Controller {
 
 
 	public function savelog($equation, $id, $status, $mood)
 	{
-
+		$equation = str_replace('|', '/', $equation);
 		$log = array('equation'=>$equation, 'equation_id'=>$id, 'status'=>$status, 'emotion'=>$mood);
 		$model = Log::create($log);
 		// dd($model);
@@ -49,8 +53,10 @@ class DataController extends Controller {
 		return $model->equation_id;
 	}
 
-	public function savehint($equation, $id)
+	public function savehint()
 	{
+		$equation = Input::get('equation');
+		$id = Input::get('id');
 		$hint = array('equation' => $equation, 'equation_id'=>$id);
 		Hint::create($hint);
 
@@ -63,6 +69,19 @@ class DataController extends Controller {
 			$eq->status = "finished";
 			$eq->save();
 			return $eq->toArray();
+	}
+
+	public function seed()
+	{
+		$lexer = new  Lexer('[2-9]{1}[x]([\+\-]{1}[2-9]{1}[x]{0,1}){0,1}=[2-9]{1}([\+\-]{1}[2-9]{1}[x]{0,1}){0,1}');
+		$rand = rand(1, 99999);
+		$gen   = new SimpleRandom($rand);
+		$result = '';
+
+		$parser = new Parser($lexer,new Scope(),new Scope());
+		$parser->parse()->getResult()->generate($result,$gen);
+
+		echo $result;
 	}
 
 }
