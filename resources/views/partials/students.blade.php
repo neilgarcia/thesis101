@@ -50,7 +50,7 @@
                 </a>
                 <embed src="/images/Lecture.swf" style="position: absolute; z-index: 0" wmode="opaque">
             </div>
-            <div id="content" class="shadow tab-pane  active in">
+            <div id="content" class="shadow tab-pane fade active in">
 
             <div class="helper">
 

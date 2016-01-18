@@ -89,19 +89,27 @@ $(document).ready(function(){
         });
 
         function saveEquation (equation) {
+
             $.ajax({
-                url: '/pia/equation/' + equation,
+                method: 'post',
+                data: { 'equation': equation },
+                url: '/pia/saveEquation',
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
                 success: function(result){
                     $('#equation_id').val(result);
+                    console.log("success!");
                 }
             });
         }
 
         function saveLog (eq, id, status, emotion) {
             $.ajax({
-                url: '/pia/equation/' + eq + '/id/' + id + '/status/' + status + '/mood/' + mood,
+                method: 'post',
+                url: '/pia/savelogs',
+                data : { 'equation': eq, 'id':id, 'status': status, 'mood': emotion },
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
                 success: function(result){
-
+                    console.log("logs saved!");
                 }
             });
         }

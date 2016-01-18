@@ -16,9 +16,12 @@ use ReverseRegex\Generator\Scope;
 class DataController extends Controller {
 
 
-	public function savelog($equation, $id, $status, $mood)
+	public function savelog()
 	{
-		$equation = str_replace('|', '/', $equation);
+		$equation = Input::get('equation');
+		$id = Input::get('id');
+		$status = Input::get('status');
+		$mood = Input::get('mood');
 		$log = array('equation'=>$equation, 'equation_id'=>$id, 'status'=>$status, 'emotion'=>$mood);
 		$model = Log::create($log);
 		// dd($model);
@@ -46,8 +49,9 @@ class DataController extends Controller {
 			]);
 	}
 
-	public function savegiven($equation)
+	public function savegiven()
 	{
+		$equation = Input::get('equation');
 		$array = array('equation' => $equation);
 		$model = Auth::user()->equations()->create($array);
 		return $model->equation_id;

@@ -16,6 +16,7 @@
 Route::post('/pia/savehint', 'DataController@savehint');
 Route::post('/pia/finished', 'DataController@updateStatus');
 Route::post('/pia/register', 'StudentController@store');
+Route::post('pia/saveEquation', 'DataController@savegiven');
 Route::get('pia', 'StudentController@index');
 Route::get('/analyze/{id}/given/{given}/method/{method}', 'DataController@analyze');
 Route::get('/analyze/user/{id}', 'DataController@analyzeUserInput');
@@ -25,6 +26,5 @@ Route::post('pia/login', 'StudentController@login');
 Route::get('pia/logout', 'StudentController@logout');
 Route::get('pia/method/{method}', 'StudentController@method');
 // Route::get('pia/{id}', 'StudentController@action');
-Route::get('pia/equation/{equation}', 'DataController@savegiven');
-Route::get('pia/equation/{equation}/id/{id}/status/{status}/mood/{mood}', 'DataController@savelog');
+Route::post('pia/savelogs', 'DataController@savelog');
 Route::get('pia/data/seed', 'DataController@seed');
