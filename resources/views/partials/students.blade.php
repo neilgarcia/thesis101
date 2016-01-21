@@ -4,12 +4,24 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
 
+@section('css')
+
+  {!! Html::style('/css/font-awesome.min.css') !!}
+  {!! Html::style('/css/style.css') !!}
+
+@stop
+
 @section('js')
+{!! Html::script('js/core.js') !!}
+    {!! Html::script('js/login.js') !!}
+    {!! Html::script('/js/bootstrap-dialog.min.js') !!}
   @if ($method == "auto")
     <script type="text/javascript" src="/js/autosolve.js"></script>
   @else
     <script type="text/javascript" src="/js/manualsolve.js"></script>
   @endif
+
+
 @stop
 
 @section('content')
@@ -21,10 +33,11 @@
 
                 <div class="avatar">
                 <section id="bot-response">
+
                         <div class="from-them">
                         <p>Hello {!! $user->first_name !!}. I am PIA and
                         I'm here to teach you about the basics of linear equations.
-                        First input an equation and Ill help you solve it step by step.</p>
+                        Please click on the New Problem icon on the right side of the board to start.</p>
                       </div>
                 </section>
                      {{--                    <object >
@@ -40,13 +53,18 @@
 
                 </div>
                 <div class="chatbox shadow">
+                  <h1>User Logs</h1>
+                  <div class="chat-logs nano">
+                      <div class="nano-content">
 
+                      </div>
+                  </div>
                 </div>
             </div>
             <div class="tab-content" >
             <div class="tab-pane fade" id="lecture-board">
                 <a href="#content" class="top" role="tab" data-toggle="tab">
-                  <span class="glyphicon glyphicon-remove close-lecture"></span>
+                  <span class="glyphicon glyphicon-circle-arrow-left close-lecture"></span>
                 </a>
                 <embed src="/images/Lecture.swf" style="position: absolute; z-index: 0" wmode="opaque">
             </div>
@@ -98,7 +116,9 @@
                 <input type="hidden" name="wrong" id="input-wrong" value=0 autocomplete="off">
                 <input type="hidden" name="hints_used" id="hints-used" value=0 autocomplete="off">
               </form>
-              <div id="content-board"></div>
+              <div id="content-board">
+
+              </div>
             </div>
             </div>
             <div class="chat">

@@ -146,7 +146,7 @@ class StudentController extends Controller {
 
 	public function generateEquation()
 	{
-		$lexer = new  Lexer('[1-9]{1}[x]([\+\-]{1}[1-9]{1}[x]{0,1}){0,1}=[1-9]{1}([\+\-]{1}[1-9]{1}[x]{0,1}){0,1}');
+		$lexer = new  Lexer('[2-9]{1}[x]=[1-9]{1}([\+\-]{1}[2-9]{1}[x]{0,1}){0,1}');
 		$rand = rand(1, 99999);
 		$gen   = new SimpleRandom($rand);
 		$result = '';
@@ -155,6 +155,20 @@ class StudentController extends Controller {
 		$parser->parse()->getResult()->generate($result,$gen);
 
 		return $result;
+	}
+
+	public function profile()
+	{
+		$user = Auth::user();
+		$equations = $user->equations()->get();
+	  $correctEquations = $user->equations()->where('status', '=', 'finished')->get();
+		$wrongEquations = $user->equations()->where('status', '=', 'abandoned')->get();
+		$hints = $user->hints()->with('equation')->get();
+		$easy = $user->equations()->where('difficulty', '=', 'easy')->where('status', '=', 'finished')->get();
+		$average  = $user->equations()->where('difficulty', '=', 'average')->where('status', '=', 'finished')->get();
+		$difficult = $user->equations()->where('difficulty', '=', 'difficult')->where('status', '=', 'finished')->get();
+		return view('partials.profile', compact('user', 'equations', 'correctEquations' ,'wrongEquations', 'hints', 'easy', 'average', 'difficult'));
+
 	}
 
 }

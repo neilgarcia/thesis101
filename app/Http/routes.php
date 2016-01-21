@@ -27,4 +27,5 @@ Route::get('pia/logout', 'StudentController@logout');
 Route::get('pia/method/{method}', 'StudentController@method');
 // Route::get('pia/{id}', 'StudentController@action');
 Route::post('pia/savelogs', 'DataController@savelog');
-Route::get('pia/data/seed', 'DataController@seed');
+Route::post('pia/data/seed', 'DataController@seed');
+Route::get('pia/user/logs', 'StudentController@profile');

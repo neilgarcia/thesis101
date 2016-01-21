@@ -23,6 +23,8 @@ function initialize(){
 
         respond();
 
+        $(".nano").nanoScroller();
+
     });
 }
 

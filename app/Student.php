@@ -28,4 +28,9 @@ class Student extends Model implements AuthenticatableContract, CanResetPassword
     return $this->hasMany('App\Equation', 'student_number');
   }
 
+  public function hints()
+  {
+    return $this->hasMany('App\Hint', 'student_number');
+  }
+
 }

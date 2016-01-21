@@ -494,7 +494,13 @@ function paren($char){
 
 
      }else{
-      $distribute = array();
+        $ctr = 0;
+        $equationSteps = 0;
+        $givenSteps = 0;
+
+        $equations = array($given, $expr);
+        foreach ($equations as $expr) {
+          $distribute = array();
         $leftToRight = array();
         $rightToLeft = array();
         $simplifyLeft = false;
@@ -502,6 +508,7 @@ function paren($char){
         $finalize = array();
         $finalAnswer = false;
         $data['error'] = false;
+          $ctr++;
       if($given[0] <> "none")
         $checkIfEqual = check($expr, $given);
       else
@@ -584,6 +591,55 @@ function paren($char){
             }
 
           }
+
+          if($distribute){
+            if($ctr == 1){
+              $givenSteps = 1;
+            }else{
+              $equationSteps = 1;
+            }
+          }else if($leftToRight){
+            if($ctr == 1){
+              $givenSteps = 2;
+            }else{
+              $equationSteps = 2;
+            }
+          }else if($rightToLeft){
+            if($ctr == 1){
+              $givenSteps = 3;
+            }else{
+              $equationSteps = 3;
+            }
+          }else if($simplifyLeft){
+            if($ctr == 1){
+              $givenSteps = 4;
+            }else{
+              $equationSteps = 4;
+            }
+          }else if($simplifyRight){
+            if($ctr == 1){
+              $givenSteps = 5;
+            }else{
+              $equationSteps = 5;
+            }
+          }else if($finalAnswer){
+            if($ctr == 1){
+              $givenSteps = 6;
+            }else{
+              $equationSteps = 6;
+            }
+          }else if($finalize){
+            if($ctr == 1){
+              $givenSteps = 5;
+            }else{
+              $equationSteps = 5;
+            }
+          }
+        }
+
+          if($equationSteps < $givenSteps){
+            $data['error'] = true;
+          }
           $data['distribute'] = $distribute;
           $data['left'] = $leftToRight;
           $data['right'] = $rightToLeft;
@@ -592,6 +648,7 @@ function paren($char){
           $data['finalize'] = $finalize;
           $data['finalAnswer'] = $finalAnswer;
           echo json_encode($data);
+
 
      }
 

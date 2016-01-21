@@ -14,7 +14,7 @@
       <ul class="nav navbar-nav navbar-right">
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{!! $user->first_name !!}</b> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b id="user-name">{!! $user->first_name !!}</b> <span class="caret"></span></a>
 
               <ul class="dropdown-menu">
                   <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;My Account</a></li>
