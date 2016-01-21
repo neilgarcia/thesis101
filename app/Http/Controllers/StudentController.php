@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\LoginUserRequest;
 use App\Log;
 use App\Student;
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -119,7 +120,8 @@ class StudentController extends Controller {
 		$user = Auth::user();
 		if($method == "manual"){
 			$given = $this->generateEquation();
-			$data = array('equation'=>$given);
+			$data = array('equation'=>$given, 'time_started'=>Carbon::now());
+
 			$model = $user->equations()->create($data);
 			$id = $model->equation_id;
 			return view("partials.students", compact('user', 'method', 'given', 'id'));

@@ -100,7 +100,9 @@ class DataController extends Controller {
 		// echo "</table>";
 
 		$parser->parse()->getResult()->generate($result,$gen);
-		$data = array('equation'=>$result);
+
+		$data = array('equation'=>$result, 'time_started'=>Carbon::now());
+
 		$model = Auth::user()->equations()->create($data);
 		return json_encode($model);
 

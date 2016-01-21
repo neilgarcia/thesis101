@@ -7,7 +7,7 @@ class Equation extends Model {
 	//
   //
   protected $primaryKey = 'equation_id';
-  protected $fillable = ['equation_id', 'equation', 'student_number', 'status'];
+  protected $fillable = ['equation_id', 'equation', 'student_number', 'status', 'time_started', 'time_finished'];
 
   public function student()
   {
