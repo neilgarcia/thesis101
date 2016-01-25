@@ -155,6 +155,7 @@ class DataController extends Controller {
 										"student_number"=>$name[1] . $name[0][0],
 										"student_group"=>"emphatic");
 			Student::create($data);
+		}
 		$students = array("Patrick Bularon",
 											"Paulette del Monte",
 											"Walet Walet", "Ivy Ocenar",
@@ -189,7 +190,7 @@ class DataController extends Controller {
 			Student::create($data);
 
 
-
+		}
 	}
 
 	public function generateLexer()
