@@ -72,9 +72,9 @@
 
             <div class="helper">
 
-            <div class="icon-container hint ">
+            <div class="icon-container hint">
               <span class="glyphicon glyphicon-question-sign icon-hint"></span>
-              <span id="hint-message">Hint</span>
+              <span id="hint-message">Assist me!</span>
             </div>
             <div class="clear"></div>
             <div class="icon-container clear-board">
@@ -94,19 +94,19 @@
               </a>
             </div>
             </div>
-              @if (isset($given))
-                    <h1 class="given" id="given-equation">Given: {!! $given !!}</h1>
+              @if (isset($eq))
+                    <h1 class="given" id="given-equation">Given: {!! $eq !!}</h1>
                   @else
                     <h1 class="given" id="given-equation"></h1>
                   @endif
-              <input type="hidden" id="current-equation" value={!! isset($given) ? $given : "" !!} autocomplete="off">
+              <input type="hidden" id="current-equation" value={!! isset($eq) ? $eq : "" !!} autocomplete="off">
               <input type="hidden" id="input-correct-ctr" value=0 autocomplete="off">
               <input type="hidden" id="input-wrong-ctr" value=0 autocomplete="off">
               <form method="post" id="form-log">
                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-                @if (isset($given))
+                @if (isset($eq))
                   <input type="hidden" name="equation_id" id="equation_id" value={!! $id !!} autocomplete="off">
-                  <input type="hidden" name="equation" id="input-given" value={!! $given !!} autocomplete="off">
+                  <input type="hidden" name="equation" id="input-given" value={!! $eq !!} autocomplete="off">
                 @else
                   <input type="hidden" name="equation_id" id="equation_id" autocomplete="off">
                   <input type="hidden" name="equation" id="input-given" autocomplete="off">

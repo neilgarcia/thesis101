@@ -16,7 +16,7 @@ class CreateEquationsTable extends Migration {
 		{
 			$table->increments('equation_id');
 			$table->string('equation', 100);
-			$table->string('student_number', 100);
+			$table->string('student_number', 20);
 			$table->string('status', 20)->default('abandoned');
 			$table->timestamps();
 

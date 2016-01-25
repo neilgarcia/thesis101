@@ -14,6 +14,7 @@
 
 //
 Route::post('/pia/savehint', 'DataController@savehint');
+Route::post('/pia/savereact', "DataController@savereaction");
 Route::post('/pia/finished', 'DataController@updateStatus');
 Route::post('/pia/register', 'StudentController@store');
 Route::post('pia/saveEquation', 'DataController@savegiven');

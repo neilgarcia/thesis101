@@ -33,4 +33,9 @@ class Student extends Model implements AuthenticatableContract, CanResetPassword
     return $this->hasMany('App\Hint', 'student_number');
   }
 
+  public function reactions()
+  {
+    return $this->hasMany('App\PiaLog', 'student_number');
+  }
+
 }

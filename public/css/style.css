@@ -24,7 +24,9 @@
 
 body{
     /*background: #edeef1 url("/images/design.png") center repeat;*/
-    background: #EEF none repeat scroll 0% 0%;
+    /*background: #EEF none repeat scroll 0% 0%;*/
+    background: url('/images/bg/bg.png');
+    background-size: cover;
     margin: 0px;
     padding: 0px;
 
@@ -83,7 +85,7 @@ body{
 .chatbox{
     position: absolute;
     font-family: "Just A Word";
-    background-color: #1e571e;
+    background-color: rgba(60,46,19, 0.9);
     border-radius: 5px;
     height: 303px;
     bottom: 0;
@@ -291,7 +293,7 @@ section div {
 }
 
 .hint:hover{
-  width: 120px;
+  width: 180px;
   transition: 0.1s ease-out;
 }
 
@@ -336,22 +338,10 @@ section div {
   padding-top: 8px;
   text-align: left;
 }
-/*
-.icon-container:hover > .hint, .icon-container:hover > .clear-board, .icon-container:hover > .abandon{
-  color: #1e571e;
-}
 
-.icon-container:hover{
-  width: 120px;
-  background-color: white;
-  transition: 0.9s;
+.hint{
+  display: none;
 }
-
-.icon-container:hover > #hint-message{
-  visibility: visible;
-  opacity: 1;
-  left: 10px;
-}*/
 
 #lecture-message, #hint-message, #abandon-message, #board-message{
   display: inline-block;

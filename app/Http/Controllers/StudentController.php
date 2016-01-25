@@ -120,11 +120,13 @@ class StudentController extends Controller {
 		$user = Auth::user();
 		if($method == "manual"){
 			$given = $this->generateEquation();
-			$data = array('equation'=>$given, 'time_started'=>Carbon::now());
+
+			$data = array('equation'=>$given['equation'], 'difficulty'=>$given['difficulty'], 'time_started'=>Carbon::now());
 
 			$model = $user->equations()->create($data);
 			$id = $model->equation_id;
-			return view("partials.students", compact('user', 'method', 'given', 'id'));
+			$eq = $model->equation;
+			return view("partials.students", compact('user', 'method', 'eq', 'id'));
 		}
 		return view("partials.students", compact('user', 'method'));
 	}
@@ -148,15 +150,47 @@ class StudentController extends Controller {
 
 	public function generateEquation()
 	{
-		$lexer = new  Lexer('[2-9]{1}[x]=[1-9]{1}([\+\-]{1}[2-9]{1}[x]{0,1}){0,1}');
+		// $lexer = new  Lexer('[2-9]{1}[x]=[1-9]{1}([\+\-]{1}[2-9]{1}[x]{0,1}){0,1}');
+		$data = json_decode($this->generateLexer());
+		$lexer = new Lexer($data->{'lexer'});
+		// $lexer = new  Lexer('[2-9]{1}[x]=[1-9]{1,2}');
 		$rand = rand(1, 99999);
 		$gen   = new SimpleRandom($rand);
 		$result = '';
 
 		$parser = new Parser($lexer,new Scope(),new Scope());
 		$parser->parse()->getResult()->generate($result,$gen);
+		$eq = array('equation'=>$result, 'difficulty'=>$data->{'difficulty'});
+		return $eq;
+	}
 
-		return $result;
+	public function generateLexer()
+	{
+		$user = Auth::user();
+		$lexer = "";
+		$difficulty = "";
+		$difficult = $user->equations()->where('difficulty', '=', 'difficult')
+												 ->where('status', '=', 'finished')
+												 ->count();
+		$average = $user->equations()->where('difficulty', '=', 'average')
+												 ->where('status', '=', 'finished')
+												 ->count();
+		$easy = $user->equations()->where('difficulty', '=', 'easy')
+												 ->where('status', '=', 'finished')
+												 ->count();
+
+		if($average > 25){
+			 $difficulty = "difficult";
+			 $lexer = '[2-9]\([2-9][x][\+\-]{1}[2-9]\)=[2-9]\([2-9][x][\+\-]{1}[2-9]\)([\+\-]{1}[2-9][x]{0,1}){0,1}';
+		}else if($easy > 25){
+			 $lexer = '[2-9][x]([\-\+]{1}[2-9]{1,2}){1}=[1-9]{1,2}(\-[2-9][x]){0,1}';
+			 $difficulty = "average";
+		}else{
+			$difficulty = "easy";
+			$lexer = '[2-9]{1}[x]=[1-9]{1,2}';
+		}
+		$data = array('lexer'=>$lexer, 'difficulty'=>$difficulty);
+		return json_encode($data);
 	}
 
 	public function profile()

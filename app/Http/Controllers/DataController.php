@@ -8,6 +8,7 @@ use App\Log;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use ReverseRegex\Generator\Scope;
 use ReverseRegex\Lexer;
@@ -79,11 +80,21 @@ class DataController extends Controller {
 			return $eq->toArray();
 	}
 
+
+	public function savereaction()
+	{
+		$data = Input::all();
+		$user = Auth::user();
+		$user->reactions()->create($data);
+
+	}
+
 	public function seed()
 	{
-		$lexer = new  Lexer('[2-9]{1}[x]=[2-9]{1}([\+\-]{1}[2-9]{1}[x]{0,1}){0,1}');
-		$rand = rand(1, 100000);
-		$gen   = new SimpleRandom($rand);
+		$data = json_decode($this->generateLexer());
+		$lexer = new  Lexer($data->{'lexer'});
+		srand();
+		$gen   = new SimpleRandom(rand());
 		$result = '';
 
 		$parser = new Parser($lexer,new Scope(),new Scope());
@@ -101,12 +112,76 @@ class DataController extends Controller {
 
 		$parser->parse()->getResult()->generate($result,$gen);
 
-		$data = array('equation'=>$result, 'time_started'=>Carbon::now());
+		$data = array('equation'=>$result, 'time_started'=>Carbon::now(), 'difficulty'=>$data->{'difficulty'});
 
 		$model = Auth::user()->equations()->create($data);
 		return json_encode($model);
-
-
 	}
 
+
+	public function seed_students()
+	{
+		$students = array("Ronalette Aman",
+											"Stephen Cudia",
+											"Amando Golondrina",
+											"Veronica Reyes",
+											"Benjie Vega",
+											"Jeric Acosta",
+											"Kenneth Bucad",
+											"Jan Nombre",
+											"Alex Palana",
+											"Francis Reynante",
+											"Ronadine Amata",
+											"Maisie Ariz",
+											"Shane Canete",
+											"Shaira Castor",
+											"Jellana Magadia",
+											"Angel Moneda",
+											"Janella Sonon",
+											"Jeane Soriano",
+											"Alfonso Ansaldo",
+											"Khier Bejar",
+											"Charles Cerez",
+											"Kyla Perucho",
+											"Judith Ramiso",
+											"Kathleen Tabi",
+											"Blase Blase");
+		foreach ($students as $student) {
+			$name = explode(" ", $student);
+			$data = array("first_name"=>$name[0],
+										"last_name"=>$name[1],
+										"password"=>Hash::make('1234'),
+										"student_group"=>"emphatic");
+			Equation::create($data);
+		}
+	}
+
+	public function generateLexer()
+	{
+		$user = Auth::user();
+		$lexer = "";
+		$difficulty = "";
+		$difficult = $user->equations()->where('difficulty', '=', 'difficult')
+												 ->where('status', '=', 'finished')
+												 ->count();
+		$average = $user->equations()->where('difficulty', '=', 'average')
+												 ->where('status', '=', 'finished')
+												 ->count();
+		$easy = $user->equations()->where('difficulty', '=', 'easy')
+												 ->where('status', '=', 'finished')
+												 ->count();
+
+		if($average > 25){
+			 $difficulty = "difficult";
+			 $lexer = '[2-9]\([2-9][x][\+\-]{1}[2-9]\)=[2-9]\([2-9][x][\+\-]{1}[2-9]\)([\+\-]{1}[2-9][x]{0,1}){0,1}';
+		}else if($easy > 25){
+			 $lexer = '[2-9][x]([\-\+]{1}[2-9]{1,2}){1}=[1-9]{1,2}(\-[2-9][x]){0,1}';
+			 $difficulty = "average";
+		}else{
+			$difficulty = "easy";
+			$lexer = '[2-9]{1}[x]=[1-9]{1,2}';
+		}
+		$data = array('lexer'=>$lexer, 'difficulty'=>$difficulty);
+		return json_encode($data);
+	}
 }

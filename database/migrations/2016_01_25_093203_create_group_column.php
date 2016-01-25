@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentNumberColumn extends Migration {
+class CreateGroupColumn extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,9 @@ class CreateStudentNumberColumn extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('hints', function(Blueprint $table)
+		Schema::table('students', function(Blueprint $table)
 		{
-			$table->string('student_number', 20);
+			$table->string('student_group', 20);
 		});
 	}
 
@@ -25,7 +25,7 @@ class CreateStudentNumberColumn extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('hint', function(Blueprint $table)
+		Schema::table('students', function(Blueprint $table)
 		{
 			//
 		});

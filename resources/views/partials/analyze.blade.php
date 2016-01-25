@@ -395,6 +395,13 @@ function paren($char){
     return $result;
   }
 
+  function lowestTerm($e)
+  {
+    $part = explode('/', $e);
+    $gcd = gcd($part[0], $part[1]);
+    return $gcd;
+  }
+
     function check($expr, $given)
     {
       $eq['left'] = postfix($expr[0]);
@@ -424,6 +431,7 @@ function paren($char){
         $resultGiven = $eq['right'] / 1;
       else
         $resultGiven = $eq['right'] / $eq['left'];
+
       if($resultGiven == $resultExpr){
         return true;
       }
@@ -494,10 +502,11 @@ function paren($char){
 
 
      }else{
+
         $ctr = 0;
         $equationSteps = 0;
         $givenSteps = 0;
-
+        $lowestTerm = false;
         $equations = array($given, $expr);
         foreach ($equations as $expr) {
           $distribute = array();
@@ -508,7 +517,7 @@ function paren($char){
         $finalize = array();
         $finalAnswer = false;
         $data['error'] = false;
-          $ctr++;
+        $ctr++;
       if($given[0] <> "none")
         $checkIfEqual = check($expr, $given);
       else
@@ -565,15 +574,28 @@ function paren($char){
               if($op == "/"){
                 $num2 = array_pop($right);
                 $num1 = array_pop($right);
-                if($num1%$num2 == 0)
+                if(fmod($num1, $num2) == 0){
                   $simplifyRight = true;
+
+                }
                 else{
                   // array_pop($left);
                   $right = $num1 . "/" . $num2;
                   array_push($finalize, array_pop($left));
                   array_push($finalize, $right);
-                  if($finalize[0] == "1x" || $finalize[0] == "x")
-                    $finalAnswer = true;
+                  if($finalize[0] == "1x" || $finalize[0] == "x"){
+
+                    if(lowestTerm($finalize[1]) > 1){
+
+                      $lowestTerm = true;
+                      $simplifyRight = true;
+                    }
+                    else{
+                      $finalAnswer = true;
+
+                    }
+                  }
+
                 }
               }else{
                 $simplifyRight = true;
@@ -616,6 +638,13 @@ function paren($char){
             }else{
               $equationSteps = 4;
             }
+          }else if($lowestTerm){
+            if($ctr == 1){
+              $givenSteps = 6;
+            }else{
+              $equationSteps = 6;
+            }
+
           }else if($simplifyRight){
             if($ctr == 1){
               $givenSteps = 5;
@@ -635,9 +664,12 @@ function paren($char){
               $equationSteps = 5;
             }
           }
+
         }
 
+
           if($equationSteps < $givenSteps){
+
             $data['error'] = true;
           }
           $data['distribute'] = $distribute;
@@ -648,7 +680,6 @@ function paren($char){
           $data['finalize'] = $finalize;
           $data['finalAnswer'] = $finalAnswer;
           echo json_encode($data);
-
 
      }
 
