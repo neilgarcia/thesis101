@@ -61,9 +61,11 @@ class StudentController extends Controller {
 	public function store(CreateStudentRequest $request)
 	{
 		$request['password'] = Hash::make(ucfirst(strtolower($request->last_name)) . substr($request->student_number, -3));
+		$request['student_group'] = "emphatic";
 		Student::create($request->all());
 		Auth::loginUsingId($request->student_number);
-		return Redirect::to('pia/method/manual');
+		$user = Auth::user();
+		return Redirect::to('pia/method/manual')->with("user", $user);
 	}
 
 	/**
