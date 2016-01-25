@@ -40,7 +40,7 @@ video = document.getElementById('avatar-vid');
 
 video.addEventListener('loadedmetadata', function() {
     this.play();
-    setTimeout(idle ,2000);
+    setTimeout(idle ,2500);
 }, false);
 
 video.addEventListener('ended', function(){

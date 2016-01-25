@@ -31,10 +31,16 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
-
 			$user = Auth::user();
-			$method = "auto";
-			return view('partials.students', compact('user', 'method'));
+			$method = "manual";
+			$given = $this->generateEquation();
+
+			$data = array('equation'=>$given['equation'], 'difficulty'=>$given['difficulty'], 'time_started'=>Carbon::now());
+
+			$model = $user->equations()->create($data);
+			$id = $model->equation_id;
+			$eq = $model->equation;
+			return view("partials.students", compact('user', 'method', 'eq', 'id'));
 	}
 
 	/**
