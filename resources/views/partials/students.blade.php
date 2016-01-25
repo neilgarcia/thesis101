@@ -94,23 +94,18 @@
               </a>
             </div>
             </div>
-              @if (isset($eq))
-                    <h1 class="given" id="given-equation">Given: {!! $eq !!}</h1>
-                  @else
-                    <h1 class="given" id="given-equation"></h1>
-                  @endif
+
+                    <h1 class="given" id="given-equation">Given: {!! isset($eq) ? $eq : "" !!}</h1>
+
               <input type="hidden" id="current-equation" value={!! isset($eq) ? $eq : "" !!} autocomplete="off">
               <input type="hidden" id="input-correct-ctr" value=0 autocomplete="off">
               <input type="hidden" id="input-wrong-ctr" value=0 autocomplete="off">
+              <input type="hidden" id="student-group" value={!! $user->student_group !!}>
+
               <form method="post" id="form-log">
                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-                @if (isset($eq))
-                  <input type="hidden" name="equation_id" id="equation_id" value={!! $id !!} autocomplete="off">
-                  <input type="hidden" name="equation" id="input-given" value={!! $eq !!} autocomplete="off">
-                @else
-                  <input type="hidden" name="equation_id" id="equation_id" autocomplete="off">
-                  <input type="hidden" name="equation" id="input-given" autocomplete="off">
-                @endif
+                  <input type="hidden" name="equation_id" id="equation_id" value={!! isset($id) ? $id : "" !!} autocomplete="off">
+                  <input type="hidden" name="equation" id="input-given" value={!! isset($eq) ? $eq : "" !!} autocomplete="off">
 
                 <input type="hidden" name="correct" id="input-correct" value=0 autocomplete="off">
                 <input type="hidden" name="wrong" id="input-wrong" value=0 autocomplete="off">

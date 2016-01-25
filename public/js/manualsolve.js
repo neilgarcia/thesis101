@@ -8,7 +8,10 @@ var correctResponse = ["Good Job!",
                        "You're one of a kind!",
                        "Very Good!",
                        "You're doing a pretty good job",
-                       "Well Played!"];
+                       "Well Played!",
+                       "That's the way to do it!",
+                       "Amazing! That's right!",
+                       "Yahoo! You're pretty good."];
 
 var simplifyLeftResponse = ["Something's wrong with your answer. Please simplify left first.",
                             "Your answer is wrong. Please simplify the left side of the equation first.",
@@ -340,8 +343,9 @@ function setIdle() {
 function react(mood) {
             // alert(mood);
             video = document.getElementById('avatar-vid');
-
-            if(mood == "happy"){
+            group = $('#student-group').val();
+            if(group == "emphatic"){
+                if(mood == "happy"){
                 video.currentTime = 2.5;
                 setTimeout(setIdle, 2200);
             }else if(mood == "sad"){
@@ -354,6 +358,8 @@ function react(mood) {
                 video.currentTime = 5.5;
                 setTimeout(setIdle, 2000);
             }
+            }
+
         }
         function respond(mood, type, error, num){
           setTimeout(fadeInResponse, 100);
@@ -368,7 +374,8 @@ function react(mood) {
                     $('.from-them p').text(text);
                 }
                 else{
-                    $('.from-them p').text("Hmmm. Something is wrong with your answer. Please simplify left first.");
+                    var text = simplifyLeftResponse[Math.floor(Math.random()*simplifyLeftResponse.length)];
+                    $('.from-them p').text(text);
                 }
                 react(mood);
             }else{
@@ -377,7 +384,8 @@ function react(mood) {
                     $('.from-them p').text(text);
                 }
                 else{
-                    $('.from-them p').text("Something seems wrong.");
+                    var text = simplifyRightResponse[Math.floor(Math.random()*simplifyRightResponse.length)];
+                    $('.from-them p').text(text);
                 }
                 react(mood);
             }
