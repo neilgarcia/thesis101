@@ -1,6 +1,7 @@
 <Html>
 <head>
-    <meta http-equiv="Content-Type" content="text/Html; charset=UTF-8">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <meta id="token" name="token" content="{{ csrf_token() }}">
     <title>UNIVERSITY OF THE EAST Freshmen Orientation {{ Carbon::now() }}</title>
 
