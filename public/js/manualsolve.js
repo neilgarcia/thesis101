@@ -334,7 +334,7 @@ function fadeOutResponse () {
 }
 function setIdle() {
     video = document.getElementById('avatar-vid');
-    video.currentTime = 13;
+    video.currentTime = 14;
 }
 
 function react(mood) {
@@ -342,16 +342,16 @@ function react(mood) {
             video = document.getElementById('avatar-vid');
 
             if(mood == "happy"){
-                video.currentTime = 2.3;
-                setTimeout(setIdle, 1900);
+                video.currentTime = 2.5;
+                setTimeout(setIdle, 2200);
             }else if(mood == "sad"){
-                video.currentTime = 10.5;
-                setTimeout(setIdle, 1800);
+                video.currentTime = 11.2;
+                setTimeout(setIdle, 2100);
             }else if(mood == "surprised"){
-                video.currentTime = 8.2;
-                setTimeout(setIdle, 1400);
+                video.currentTime = 8.4;
+                setTimeout(setIdle, 1900);
             }else{
-                video.currentTime = 5.4;
+                video.currentTime = 5.5;
                 setTimeout(setIdle, 2000);
             }
         }

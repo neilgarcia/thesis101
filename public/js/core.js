@@ -33,7 +33,7 @@ function inArray(list,element){
 
 function idle(){
     video = document.getElementById('avatar-vid');
-    video.currentTime = 13;
+    video.currentTime = 14;
 }
 
 video = document.getElementById('avatar-vid');
@@ -44,7 +44,7 @@ video.addEventListener('loadedmetadata', function() {
 }, false);
 
 video.addEventListener('ended', function(){
-    this.currentTime = 13;
+    this.currentTime = 14;
     this.play();
 });
 

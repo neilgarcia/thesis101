@@ -46,7 +46,7 @@
                      <param name="movie" value="/images/reactions/welcome.swf" /> --}}
                   <div id="embed">
                     <video id="avatar-vid" preload>
-                    <source src="/images/reactions/reactions.webm" type="video/webm">
+                    <source src="/images/reactions/out.mp4" type="video/mp4">
                       {{-- <source src="/images/reactions/output.mp4" type="video/mp4"> --}}
                     </video>
                   </div>

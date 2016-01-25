@@ -122,40 +122,70 @@ class DataController extends Controller {
 
 	public function seed_students()
 	{
-		$students = array("Ronalette Aman",
-											"Stephen Cudia",
-											"Amando Golondrina",
-											"Veronica Reyes",
-											"Benjie Vega",
-											"Jeric Acosta",
-											"Kenneth Bucad",
-											"Jan Nombre",
-											"Alex Palana",
-											"Francis Reynante",
-											"Ronadine Amata",
-											"Maisie Ariz",
-											"Shane Canete",
-											"Shaira Castor",
-											"Jellana Magadia",
-											"Angel Moneda",
-											"Janella Sonon",
-											"Jeane Soriano",
-											"Alfonso Ansaldo",
-											"Khier Bejar",
-											"Charles Cerez",
-											"Kyla Perucho",
-											"Judith Ramiso",
-											"Kathleen Tabi",
-											"Blase Blase");
-		foreach ($students as $student) {
-			$name = explode(" ", $student);
-			$data = array("first_name"=>$name[0],
-										"last_name"=>$name[1],
-										"password"=>Hash::make('1234'),
-										"student_number"=>$name[1] . $name[0][0],
-										"student_group"=>"emphatic");
-			Student::create($data);
+		// $students = array("Ronalette Aman",
+		// 									"Stephen Cudia",
+		// 									"Amando Golondrina",
+		// 									"Veronica Reyes",
+		// 									"Benjie Vega",
+		// 									"Jeric Acosta",
+		// 									"Kenneth Bucad",
+		// 									"Jan Nombre",
+		// 									"Alex Palana",
+		// 									"Francis Reynante",
+		// 									"Ronadine Amata",
+		// 									"Maisie Ariz",
+		// 									"Shane Canete",
+		// 									"Shaira Castor",
+		// 									"Jellana Magadia",
+		// 									"Angel Moneda",
+		// 									"Janella Sonon",
+		// 									"Jeane Soriano",
+		// 									"Alfonso Ansaldo",
+		// 									"Khier Bejar",
+		// 									"Charles Cerez",
+		// 									"Kyla Perucho",
+		// 									"Judith Ramiso",
+		// 									"Kathleen Tabi",
+		// 									"Blase Blase");
+
+		// $students = array("Patrick Bularon",
+		// 									"Paulette del Monte",
+		// 									"Walet Walet", "Ivy Ocenar",
+		// 									"Angelica Tapar",
+		// 									"Ralph Luanzon",
+		// 									"Blys Ong",
+		// 									"Jarlwayne Tordecilla",
+		// 									"Saimah Abdullah",
+		// 									"Caryll Arcilla",
+		// 									"Juvy Bautista",
+		// 									"Franzes Canete",
+		// 									"Jeanette Carrancho",
+		// 									"Dorothy Denorog",
+		// 									"Ivy Maguad",
+		// 									"Madel Rieza",
+		// 									"Erica Seno",
+		// 									"Xyril Singson",
+		// 									"Sofia Suruiz",
+		// 									"Adrian Gonzales",
+		// 									"Andrei Pansacala",
+		// 									"Emmanuel Quinones",
+		// 									"Justine Fortunado",
+		// 									"Michelle Pamplina",
+		// 									"Talamor Talamor");
+		// foreach ($students as $student) {
+		// 	$name = explode(" ", $student);
+		// 	$data = array("first_name"=>$name[0],
+		// 								"last_name"=>$name[1],
+		// 								"password"=>Hash::make('1234'),
+		// 								"student_number"=>$name[1] . $name[0][0],
+		// 								"student_group"=>"non-emphatic");
+		// 	Student::create($data);
+		$user = Student::all();
+
+		foreach ($user as $student) {
+			echo $student->student_number . "<br>";
 		}
+
 	}
 
 	public function generateLexer()
