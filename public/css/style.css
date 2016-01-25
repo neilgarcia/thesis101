@@ -24,8 +24,8 @@
 
 body{
     /*background: #edeef1 url("/images/design.png") center repeat;*/
-    /*background: #EEF none repeat scroll 0% 0%;*/
-    background: url('/images/bg/bg.png');
+    background: #EEF none repeat scroll 0% 0%;
+    /*background: url('/images/bg/bg.png');*/
     background-size: cover;
     margin: 0px;
     padding: 0px;
