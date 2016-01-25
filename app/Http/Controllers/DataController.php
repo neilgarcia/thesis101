@@ -5,6 +5,7 @@ use App\Hint;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Log;
+use App\Student;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -151,8 +152,9 @@ class DataController extends Controller {
 			$data = array("first_name"=>$name[0],
 										"last_name"=>$name[1],
 										"password"=>Hash::make('1234'),
+										"student_number"=>$name[1] . $name[0][0],
 										"student_group"=>"emphatic");
-			Equation::create($data);
+			Student::create($data);
 		}
 	}
 

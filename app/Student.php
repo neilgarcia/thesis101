@@ -16,7 +16,7 @@ class Student extends Model implements AuthenticatableContract, CanResetPassword
 	protected $primaryKey = 'student_number';
 
 
-  protected $fillable = ['first_name', 'last_name', 'student_number', 'password'];
+  protected $fillable = ['first_name', 'last_name', 'student_number', 'password', 'student_group'];
 
   public function logs()
   {
