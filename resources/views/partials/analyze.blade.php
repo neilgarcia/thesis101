@@ -466,17 +466,15 @@ function paren($char){
       // var_dump($distribute);
       // var_dump($eq);
       if($distribute <> $eq){
-        echo infix($distribute['left']) . " = " . infix($distribute['right']);
-        // echo "d";
-        return "";
+        $result = infix($distribute['left']) . " = " . infix($distribute['right']);
+        echo json_encode(array('result'=>$result, 'finalAnswer'=>false));
       }
       $firststep = firststep($distribute);
       // var_dump($firststep);
       // var_dump($distribute);
       if($firststep <> $distribute){
-        echo infix($firststep['left']) . " = " . infix($firststep['right']);
-        // echo "f";
-        return "";
+        $result = infix($firststep['left']) . " = " . infix($firststep['right']);
+        echo json_encode(array('result'=>$result, 'finalAnswer'=>false));
       }
 
       $eq['left'] = analyze($firststep['left'], 'left');
@@ -487,16 +485,16 @@ function paren($char){
       // var_dump($firststep);
       if($eq <> $firststep){
 
-        echo $eq['left'] . "=" . $eq['right'];
-        // echo "a";
-        return "";
+        $result = $eq['left'] . "=" . $eq['right'];
+        echo json_encode(array('result'=>$result, 'finalAnswer'=>false));
       }
 
       $result = simplify($eq['left'], $eq['right']);
 
       if($result <> $eq['right']){
-        echo "x = " . $result;
-        return "";
+        $answer = "x = " . $result;
+        $data = array('result'=>$answer, 'finalAnswer'=>true);
+        echo json_encode($data);
       }
 
 

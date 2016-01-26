@@ -69,7 +69,7 @@ if(eq){
                 wrong = $('#input-wrong-ctr').val();
                 correct = $('#input-correct-ctr').val();
                 if(wrong >= 2){
-                    $('.hint').fadeIn(1500);
+                    $('.hint').css({'opacity':'1', 'visibility':'visible'});
                 }
                 if(correct >= 3){
                     mood = "surprised";
@@ -189,6 +189,7 @@ $('#form-log').on('submit', function(e){
 });
 
 $('.hint').on('click', function(e){
+    $('#input-wrong-ctr').val(0);
     eq = '';
     if($('#current-equation').val()){
         eq = $('#current-equation').val();
@@ -202,12 +203,16 @@ $('.hint').on('click', function(e){
 
     $.ajax({
         url: '/analyze/' + eq + '/given/' + eq + '/method/hint',
+        dataType: 'json',
         success: function(result){
             id = $('#equation_id').val();
-            $('#content-board').append("<span class=a-step>" + result + "</span>");
-            $('#current-equation').val(result);
-            $('.hint').fadeOut(2000);
-            saveHint(result, id);
+            $('#content-board').append("<span class=a-step>" + result.result + "</span>");
+            $('#current-equation').val(result.result);
+            $('.hint').css({'opacity':'0', 'visibility':'hidden'});
+            saveHint(result.result, id);
+            if(result.finalAnswer){
+                $('#form-log').submit();
+            }
         }
     });
 });
