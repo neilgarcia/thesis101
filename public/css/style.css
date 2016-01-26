@@ -213,10 +213,11 @@ input,textarea,select{
 
 #bot-response {
   display: none;
-    z-index: 99999;
+    z-index: 1;
     position: relative;
-  max-width: 300px;
+  max-width: 335px;
   /*margin: 50px auto;*/
+  font-family: monospace;
   left: 284px;
   top: 35px;
   font: 40px;
@@ -233,7 +234,7 @@ section div {
 }
 
 .from-them {
-  font-size: 15px;
+  font-size: 19px;
   position: relative;
   padding: 10px 20px;
   background: #A8A8E8;
