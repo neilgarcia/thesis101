@@ -24,4 +24,9 @@ class Equation extends Model {
     return $this->hasMany('App\Hint', 'equation_id');
   }
 
+  public function piaLogs()
+  {
+    return $this->hasMany('App\PiaLog', 'equation_id');
+  }
+
 }

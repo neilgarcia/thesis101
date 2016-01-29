@@ -8,7 +8,7 @@ class Log extends Model {
 
   protected $fillable = ['log_id', 'equation', 'equation_id', 'status', 'emotion'];
 
-  public function student()
+  public function equation()
   {
     return $this->belongsTo('App\Equation', 'equation_id');
   }

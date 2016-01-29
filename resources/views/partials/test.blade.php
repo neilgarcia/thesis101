@@ -1,9 +1,9 @@
 <?php
 
-//   $file="demo.xls";
-// $test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
-// header("Content-type: application/vnd.ms-excel");
-// header("Content-Disposition: attachment; filename=$file");
+  $file="demo.xls";
+$test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
+header("Content-type: application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=$file");
 
 
 ?>
@@ -13,34 +13,52 @@
   <table border = 1>
   <tr>
     <th>Student Name</th>
-    <th>Equation</th>
-    <th>Correct Solutions</th>
-    <th>Wrong Solutions</th>
-    <th>Total Steps</th>
-    <th>Hints Used</th>
-    <th>Number of Hints</th>
-    <th>Status</th>
+    <th>Software Category</th>
+    <th>Math Performance</th>
+    <th>No. of Problems Solved</th>
+    <th>No. of hints</th>
+    <th>Hints Said</th>
+    <th>Emotions Exhibited</th>
   </tr>
 <?php $ctrCorrect =  0; ?>
 <?php $ctrWrong =  0 ?>
 <?php $hints_used = "" ?>
-<?php $num_hints = 0; ?>
+
+<?php $responses = array("Good Job!",
+                       "Keep it up!",
+                       "You're doing great.",
+                       "Nice",
+                       "You're one of a kind!",
+                       "Very Good!",
+                       "Congratulations!",
+                       "You're doing a pretty good job",
+                       "Well Played!",
+                       "That's the way to do it!",
+                       "Amazing! That's right!",
+                       "Yahoo! You're pretty good.") ?>
   @foreach ($logs as $log)
-    @foreach ($log->equations as $equations)
-        @foreach ($equations->logs as $steps)
-          <tr>
-          <td>{!! $equations->equation !!}</td>
-
-          <td>{!! $steps->equation !!}</td>
-          <td>{!! $steps->status !!}</td>
-          <td>{!! $equations->status !!}</td>
-          </tr>
-        @endforeach
-
-        @foreach ($equations->hints as $hints)
-          {!! $hints->equation !!}
-        @endforeach
+    <tr>
+    <td>{!! $log->first_name . " " . $log->last_name !!}
+    <td>{!! $log->student_group !!}</td>
+    <td>High</td>
+    <td>{!! $log->equations()->where('status', '=', 'finished')->count() !!}</td>
+    <td>{!! $log->hints->count() !!}</td>
+    <?php $chat = "" ?>
+    @foreach ($log->piaLogs as $pl)
+    @if (!in_array($pl->reaction, $responses))
+      <?php $chat = $chat . $pl->reaction . "," ?>
+    @endif
     @endforeach
+    <td>{!! $chat !!}</td>
+    <?php $hints = ""; ?>
+    @foreach ($log->equations as $e)
+      @foreach ($e->logs as $em)
+
+        <?php $hints = $hints . $em->emotion . "," ?>
+      @endforeach
+
+    @endforeach
+<td>{!! $hints !!}</td>
   @endforeach
 
   </table>

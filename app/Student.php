@@ -18,9 +18,9 @@ class Student extends Model implements AuthenticatableContract, CanResetPassword
 
   protected $fillable = ['first_name', 'last_name', 'student_number', 'password', 'student_group'];
 
-  public function logs()
+  public function piaLogs()
   {
-    return $this->hasMany('App\Log', 'student_number');
+    return $this->hasMany('App\PiaLog', 'student_number');
   }
 
   public function equations()

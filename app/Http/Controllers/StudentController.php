@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\LoginUserRequest;
 use App\Log;
 use App\Student;
+use App\PiaLog;
 use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -151,7 +152,7 @@ class StudentController extends Controller {
 
 	public function test()
 	{
-		$logs = Student::with('equations.hints')->get();
+		$logs = Student::with('equations', 'piaLogs')->get();
 		// dd($logs);
 		return view('partials.test', compact('logs'));
 	}
