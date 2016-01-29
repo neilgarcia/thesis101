@@ -1,9 +1,9 @@
 <?php
 
-  $file="demo.xls";
-$test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
-header("Content-type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=$file");
+//   $file="demo.xls";
+// $test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
+// header("Content-type: application/vnd.ms-excel");
+// header("Content-Disposition: attachment; filename=$file");
 
 
 ?>
@@ -31,6 +31,7 @@ header("Content-Disposition: attachment; filename=$file");
                        "You're one of a kind!",
                        "Very Good!",
                        "Congratulations!",
+                       "Congrats!",
                        "You're doing a pretty good job",
                        "Well Played!",
                        "That's the way to do it!",
