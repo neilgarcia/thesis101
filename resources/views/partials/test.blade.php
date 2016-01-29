@@ -12,10 +12,12 @@ header("Content-Disposition: attachment; filename=$file");
 
   <table border = 1>
   <tr>
+    <th>Student Code</th>
     <th>Student Name</th>
     <th>Software Category</th>
     <th>Math Performance</th>
     <th>No. of Problems Solved</th>
+    <th>No. of Problems Unsolved</th>
     <th>No. of hints</th>
     <th>Hints Said</th>
     <th>Emotions Exhibited</th>
@@ -39,10 +41,12 @@ header("Content-Disposition: attachment; filename=$file");
                        "Yahoo! You're pretty good.") ?>
   @foreach ($logs as $log)
     <tr>
+    <td>{!! $log->student_number !!}</td>
     <td>{!! $log->first_name . " " . $log->last_name !!}
     <td>{!! $log->student_group !!}</td>
     <td>High</td>
     <td>{!! $log->equations()->where('status', '=', 'finished')->count() !!}</td>
+    <td>{!! $log->equations()->where('status', '=', 'abandoned')->count() !!}</td>
     <td>{!! $log->hints->count() !!}</td>
     <?php $chat = "" ?>
     @foreach ($log->piaLogs as $pl)
