@@ -58,7 +58,7 @@ use Carbon\Carbon;
     <?php $hints = ""; ?>
     <?php $sum = 0 ?>
     @foreach ($log->equations as $e)
-    <?php $sum += strtotime($e->time_finished) - strtotime($e->time_started) ?>
+    <?php $e->status == 'finished' ? $sum += (strtotime($e->time_finished) - strtotime($e->time_started)) : "" ?>
       @foreach ($e->logs as $em)
 
         <?php $hints = $hints . $em->emotion . "," ?>
