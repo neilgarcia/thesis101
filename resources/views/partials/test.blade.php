@@ -1,9 +1,7 @@
 <?php
 
-  $file="demo.xls";
-$test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
-header("Content-type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=$file");
+use Carbon\Carbon;
+
 
 
 ?>
@@ -21,6 +19,8 @@ header("Content-Disposition: attachment; filename=$file");
     <th>No. of hints</th>
     <th>Hints Said</th>
     <th>Emotions Exhibited</th>
+    <th>Time Spent</th>
+    <th>Average Time Spent For Each Equation</th>
   </tr>
 <?php $ctrCorrect =  0; ?>
 <?php $ctrWrong =  0 ?>
@@ -56,7 +56,9 @@ header("Content-Disposition: attachment; filename=$file");
     @endforeach
     <td>{!! $chat !!}</td>
     <?php $hints = ""; ?>
+    <?php $sum = 0 ?>
     @foreach ($log->equations as $e)
+    <?php $sum += strtotime($e->time_finished) - strtotime($e->time_started) ?>
       @foreach ($e->logs as $em)
 
         <?php $hints = $hints . $em->emotion . "," ?>
@@ -64,6 +66,8 @@ header("Content-Disposition: attachment; filename=$file");
 
     @endforeach
 <td>{!! $hints !!}</td>
+<td>{!! $sum !!}</td>
+<td>{!! $log->equations->count() == 0 ? 0 : $sum/$log->equations->count() !!}</td>
   @endforeach
 
   </table>
