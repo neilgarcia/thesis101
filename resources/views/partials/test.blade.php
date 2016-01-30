@@ -20,7 +20,7 @@ use Carbon\Carbon;
     <th>Hints Said</th>
     <th>Emotions Exhibited</th>
     <th>Time Spent</th>
-    <th>Average Time Spent For Each Equation</th>
+    <th>Average Time Spent Answering an Equation</th>
   </tr>
 <?php $ctrCorrect =  0; ?>
 <?php $ctrWrong =  0 ?>
@@ -67,7 +67,7 @@ use Carbon\Carbon;
     @endforeach
 <td>{!! $hints !!}</td>
 <td>{!! $sum !!}</td>
-<td>{!! $log->equations->count() == 0 ? 0 : $sum/$log->equations->count() !!}</td>
+<td>{!! $log->equations()->where('status', '=', 'finished')->count() == 0 ? 0 : $sum/$log->equations()->where('status', '=', 'finished')->count() !!}</td>
   @endforeach
 
   </table>
