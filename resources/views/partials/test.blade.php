@@ -58,7 +58,7 @@ header("Cache-Control: private",false);
 
     <?php $emotion_exhibited = "" ?>
     @foreach ($equation->logs as $emotion)
-      <?php $emotion_exhibited = $emotion_exhibited . $emotion->emotion ?>
+      <?php $emotion_exhibited = $emotion_exhibited . $emotion->emotion . " "?>
     @endforeach
     <td>{!! $emotion_exhibited !!}</td>
     <td>{!! $equation->status == 'finished' ? strtotime($equation->time_finished) - strtotime($equation->time_started) : "N/A" !!}</td>
