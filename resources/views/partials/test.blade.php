@@ -39,6 +39,7 @@ header("Cache-Control: private",false);
   <tr><td colspan=6>{!! $log->first_name . " " . $log->last_name !!}</td></tr>
     <tr>
     <td>Equations</td>
+    <td>Difficulty</td>
     <td>Status</td>
     <td>Hints Said</td>
     <td>Number of Assist</td>
@@ -48,6 +49,7 @@ header("Cache-Control: private",false);
   @foreach ($log->equations as $equation)
   <tr>
     <td>{!! $equation->equation !!}</td>
+    <td>{!! $equation->difficulty !!}</td>
     <td>{!! $equation->status !!}</td>
     <?php $hint_said = "" ?>
     @foreach ($equation->PiaLogs as $plogs)
