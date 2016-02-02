@@ -37,10 +37,10 @@
           <br>
           An intelligent tutoring system built for students learning linear equation.
         </h1>
-        <h2>Please choose a module for PIA</h2>
-        <a href="/pia/method/auto" id="moduleA" class="btn option">User Given Equation-Auto</a>
-        <a href="#" id="moduleB" class="btn option">User Given Equation-Manual</a>
-        <a href="/pia" id="moduleC" class="btn option">Computer Generated Equation</a>
+        <h2>Please login in order to use PIA.</h2>
+        <input type="text" class="login-form" placeholder="Enter student number">
+        <input type="text" class="login-form" placeholder="Enter password">
+        <input type="submit" class="login-btn">
     </div>
     <div class="module-message">
 
