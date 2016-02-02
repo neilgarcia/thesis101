@@ -44,6 +44,12 @@ class StudentController extends Controller {
 			return view("partials.students", compact('user', 'method', 'eq', 'id'));
 	}
 
+	public function module()
+	{
+		$user = Auth::user();
+		return view('module')->with('user', $user);
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -215,6 +221,8 @@ class StudentController extends Controller {
 		return view('partials.profile', compact('user', 'equations', 'correctEquations' ,'wrongEquations', 'hints', 'easy', 'average', 'difficult'));
 
 	}
+
+
 
 }
 

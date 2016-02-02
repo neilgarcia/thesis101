@@ -6,7 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">PIA: Personal Instructing Agent</a>
+
+      <a class="navbar-brand" href="#">
+      <span class="glyphicon glyphicon-education" style="top: 3px;margin-right: 3px;font-size:32px;top: -4px;left: 18px;"></span>
+        <p style="display: inline-block;position: relative;top: -14px;left: 30px;font-weight: 600;">PIA: Personal Instructing Agent</p>
+      </a>
     </div>
 
       <div class="navbar-collapse collapse" id="navbar-main">

@@ -1,11 +1,34 @@
-body{
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+@font-face{
+  font-family: "Proxima Nova";
+  src: url('/fonts/ProximaNova-Light.otf')
 }
+
+@font-face{
+    font-family: "Helvetica Neue";
+    src: url('/fonts/HelveticaNeue.otf');
+}
+
+body{
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #F3F5F7;
+}
+
 .content{
     position: relative;
     margin: 0 auto;
-    width: 970px;
+    width: 100%;
+    height: 480px;
+    background: #181818 url('/images/design.png') fixed repeat ;
 }
+
+.wrapper{
+    width: 970px;
+    margin: 0 auto;
+}
+
+/*
 .content:before {
   content: "";
   position: fixed;
@@ -14,16 +37,16 @@ body{
   z-index: -1;
 
   display: block;
-  background: #181818 url('/images/design.png') center repeat;
+
   width: 100%;
-  height: 100%;
-/*
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);*/
-}
+  height: 470px;
+
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}*/
 .title{
     font-style: bold;
 }
@@ -32,7 +55,7 @@ body{
     width: 320px;
     position: relative;
     margin-left: 40px;
-    top: 200px;
+    top: 115px;
 }
 
 .form-signup .txt{
@@ -45,7 +68,7 @@ body{
     color: #333;
     margin-right: 0;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-top: 10px;
     vertical-align: middle;
     width: 100%;
     max-width: 100%;
@@ -93,23 +116,116 @@ body{
     position: relative;
     color: white;
     width: 500px;
-    top: 180px;
+    top: 135px;
     float: right;
     text-shadow: 0 1px 3px #000;
 }
 
 .message h1{
-    font-size: 62px;
+    font-size: 59px;
+    font-family: "Helvetica Neue";
     font-weight: normal;
     line-height: 1;
-    letter-spacing: -1;
+    /*letter-spacing: -1;*/
 }
 
 .message h2{
-    font-size: 18px;
+    font-size: 19px;
+    line-height: 1.5;
 }
 
+.main-content{
+    background: #fff;
+    margin: auto;
+    max-width: 1400px;
+    padding: 60px 80px 20px;
+    border: 1px solid #ddd;
+}
 
+.module-type{
+    color: #666;
+    display: inline-block;
+    position: relative;
+    width: 45%;
+    /*background: white;*/
+}
+
+.module-message{
+    color: #666;
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    min-height: 570px;
+    padding-left: 55px;
+    padding-top: 18px;
+    float: right;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 39px;
+    border-left: 1px solid #efefef;
+}
+
+.module-message > h1{
+    font-weight: 100;
+    font-size: 46px;
+    line-height: 56px;
+    margin: 0;
+    text-align: left;
+    letter-spacing: -1.5px;
+}
+
+.module-type > h1{
+    font-weight: 100;
+    font-size: 36px;
+    line-height: 56px;
+    margin: 0;
+    text-align: left;
+    letter-spacing: -1.5px;
+}
+
+.module-type > h1 > strong{
+    font-size: 61px;
+}
+
+.module-type > h1:after, .module-message > h1:after{
+    height: 1px;
+    background-color: #bbb;
+    margin: 30px 0;
+    display: block;
+    width: 150px;
+    content: " ";
+}
+
+.module-type > h2, .module-message > h2{
+    margin-bottom: 60px;
+}
+
+.module-type >.option{
+    display: block;
+    width: 80%;
+    min-height: 60px;
+    max-height: 60px;
+    padding-top: 16px;
+    /*max-height: 52px;*/
+    /*background-color: #3071a9;*/
+    background-color: #288feb;
+
+    border-color: #285e8e;
+    color: #fff;
+    font-weight: 400;
+    font-size: 19px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+
+.module-type > .option:hover{
+    background-color: #2180d7;
+}
 
 #login-dp{
     min-width: 250px;
@@ -160,4 +276,13 @@ body{
         background-color: inherit;
         border-top:0 none;
     }
+}
+
+.notif{
+    display: inline-block;
+    color: #767676;
+    font-size: 14px;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    font-weight: 500;
 }

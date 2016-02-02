@@ -14,6 +14,7 @@
 
 //
 Route::get('pia', 'StudentController@index');
+Route::get('pia/module', 'StudentController@module');
 Route::get('/', 'StudentController@index');
 Route::post('/pia/savehint', 'DataController@savehint');
 Route::post('/pia/savereact', "DataController@savereaction");
@@ -32,3 +33,4 @@ Route::post('pia/savelogs', 'DataController@savelog');
 Route::post('pia/data/seed', 'DataController@seed');
 Route::get('pia/user/logs', 'StudentController@profile');
 Route::get('pia/seedstudents', 'DataController@seed_students');
+

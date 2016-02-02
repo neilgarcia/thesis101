@@ -7,7 +7,6 @@
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/css/register-style.css">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="/js/jquery.js"></script>
   <script src="/js/bootstrap.min.js"></script>
 
@@ -15,10 +14,13 @@
 <body>
     @include('layouts.header')
     <div class="content">
+    <div class="wrapper">
+
       {!! Form::open(array('class'=>'form-signup', 'method'=>'POST', 'url'=>'pia/register')) !!}
       {!! Form::text('student_number', null, array('placeholder'=>'Enter your student number...', 'class'=>'txt text-signup')) !!}
       {!! Form::text('first_name', null, array('placeholder'=>'Enter your first name...', 'class'=>'txt text-signup')) !!}
       {!! Form::text('last_name', null, array('placeholder'=>'Enter your last name...', 'class'=>'txt text-signup')) !!}
+      <span class="notif">Your password is the combination of your last name and the last 3 digit of your student number.</span>
       {!! Form::submit('Sign me up!', array('class'=>'txt btn-signup')) !!}
       {!! Form::close() !!}
 
@@ -27,6 +29,22 @@
         <h2>An intelligent tutoring system built for students learning linear equations. Register now and be a part of the group!</h2>
     </div>
     </div>
+    </div>
+    <div class="main-content">
+    <div class="module-type">
+        <h1>
+          <strong>P I A</strong>
+          <br>
+          An intelligent tutoring system built for students learning linear equation.
+        </h1>
+        <h2>Please choose a module for PIA</h2>
+        <a href="/pia/method/auto" id="moduleA" class="btn option">User Given Equation-Auto</a>
+        <a href="#" id="moduleB" class="btn option">User Given Equation-Manual</a>
+        <a href="/pia" id="moduleC" class="btn option">Computer Generated Equation</a>
+    </div>
+    <div class="module-message">
 
+    </div>
+    </div>
 </body>
 </html>
