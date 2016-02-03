@@ -2,11 +2,11 @@
 
 use Carbon\Carbon;
 
-header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
-header("Content-Disposition: attachment; filename=abc.xls");  //File name extension was wrong
-header("Expires: 0");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("Cache-Control: private",false);
+// header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+// header("Content-Disposition: attachment; filename=abc.xls");  //File name extension was wrong
+// header("Expires: 0");
+// header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+// header("Cache-Control: private",false);
 
 
 ?>
@@ -17,7 +17,8 @@ header("Cache-Control: private",false);
 <?php $ctrCorrect =  0; ?>
 <?php $ctrWrong =  0 ?>
 <?php $hints_used = "" ?>
-
+<?php $emotion_count = 0; ?>
+<?php $hint_count = 0; ?>
 <?php $responses = array("Good Job!",
                        "Keep it up!",
                        "You're doing great.",
@@ -51,16 +52,18 @@ header("Cache-Control: private",false);
     <td>{!! $equation->equation !!}</td>
     <td>{!! $equation->difficulty !!}</td>
     <td>{!! $equation->status !!}</td>
-    <?php $hint_said = "" ?>
+    <?php $hint_said = ""; ?>
     @foreach ($equation->PiaLogs as $plogs)
       <?php in_array($plogs->reaction, $responses) ? "" : $hint_said .= $plogs->reaction ?>
+      <?php in_array($plogs->reaction, $responses) ? "" : $hint_count++; ?>
     @endforeach
     <td>{!! $hint_said !!}</td>
     <td>{!! $equation->hints->count() !!}</td>
 
-    <?php $emotion_exhibited = "" ?>
+    <?php $emotion_exhibited = ""; ?>
     @foreach ($equation->logs as $emotion)
       <?php $emotion_exhibited = $emotion_exhibited . $emotion->emotion . " "?>
+      <?php $emotion_count++; ?>
     @endforeach
     <td>{!! $emotion_exhibited !!}</td>
     <td>{!! $equation->status == 'finished' ? strtotime($equation->time_finished) - strtotime($equation->time_started) : "N/A" !!}</td>
@@ -68,6 +71,7 @@ header("Cache-Control: private",false);
   @endforeach
 
   </table>
-  @endforeach
 
+  @endforeach
+  <?php echo "hint count: " . $hint_count . "<br>" . "emotion count: " . $emotion_count ?>
 </html>
