@@ -46,5 +46,30 @@
 
     </div>
     </div>
+    <div class="modules">
+        <div class="module-wrapper">
+          <h3>Three modules to rule them all.</h3>
+          <ul id="module-types">
+            <li style="float:left">
+              <span class="glyphicon glyphicon-random"></span>
+              <h4>Computer Generated</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </li>
+            <li>
+              <span class="glyphicon glyphicon-repeat"></span>
+              <h4>Automatic Solving</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </li>
+            <li style="float:right;">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <h4>Step by Step</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </li>
+          </ul>
+        </div>
+    </div>
 </body>
 </html>
