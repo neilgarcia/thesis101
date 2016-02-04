@@ -16,10 +16,11 @@ body{
 }
 
 .content{
+    padding: 45px 80px 20px;
     position: relative;
     margin: 0 auto;
     width: 100%;
-    height: 550px;
+    height: 680px;
     background: #202021 url('/images/design.png') fixed repeat ;
 }
 
@@ -326,6 +327,7 @@ body{
 }
 
 #module-types li, #maker-container li{
+    position: relative;
     width: 25%;
     display: inline-block;
     text-align: center;
@@ -341,10 +343,14 @@ body{
 }
 
 #maker-container li img{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s ease-out;
     width: 250px;
     height: 250px;
     border-radius: 50%;
     margin-bottom: 30px;
+
 }
 
 #module-types li h4, #maker-container li h4{
@@ -416,4 +422,33 @@ body{
     margin-top: 3px;
     margin-bottom: 15px;
     font-weight: 500;
+}
+
+
+footer{
+    padding: 10px 110px 10px;
+    text-align: center;
+    background-color: #2e3234;
+    width: 100%;
+    color: #747474;
+}
+
+footer span{
+    width: 80%;
+    font-size: 32px;
+}
+
+
+footer .copyright{
+    width: 10%;
+    display: inline-block;
+    float: left;
+    margin-top: 10px;
+}
+
+footer .contact{
+    width: 10%;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
 }

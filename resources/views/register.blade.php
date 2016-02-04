@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="/css/register-style.css">
   <script src="/js/jquery.js"></script>
   <script src="/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body>
     @include('layouts.header')
@@ -82,7 +82,7 @@
               tempor incididunt ut labore et dolore magna aliqua.</p>
             </li>
               <li>
-              <img src="/images/josf.jpg">
+              <img src="/images/drickz.jpg">
               <h4>Josf Yorobe</h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -96,5 +96,10 @@
             </ul>
         </div>
     </div>
+    <footer>
+      <div class="copyright">Copyright © 2016</div>
+      <span class="glyphicon glyphicon-education"></span>
+      <div class="contact">Copyright © 2016</div>
+    </footer>
 </body>
 </html>
