@@ -15,9 +15,9 @@
 </head>
 <body>
     @include('layouts.header')
-    <div id="#main">
-    <div class="content">
-    <div class="wrapper">
+    <div id="main">
+    <div class="section content">
+      <div class="wrapper">
 
       {!! Form::open(array('class'=>'form-signup', 'method'=>'POST', 'url'=>'pia/register')) !!}
       {!! Form::text('student_number', null, array('placeholder'=>'Enter your student number...', 'class'=>'txt text-signup')) !!}
@@ -27,28 +27,28 @@
       {!! Form::submit('Sign me up!', array('class'=>'txt btn-signup')) !!}
       {!! Form::close() !!}
 
-    <div class="message">
+      <div class="message">
         <h1>Personal Instructing Agent</h1>
         <h2>An intelligent tutoring system built for students learning linear equations. Register now and be a part of the group!</h2>
+      </div>
+      </div>
     </div>
-    </div>
-    </div>
-    <div class="main-content">
+    <div class="section main-content">
     <div class="main-content-wrapper">
-    <div class="module-type">
-        <h1>
-          <strong>P I A</strong>
-          <br>
-          An intelligent tutoring system built for students learning linear equation.
-        </h1>
-        <h2>Please login in order to use PIA.</h2>
-        <input type="text" class="login-form" placeholder="Enter student number">
-        <input type="text" class="login-form" placeholder="Enter password">
-        <input type="submit" class="login-btn">
-    </div>
-    <div class="module-message">
+        <div class="module-type">
+            <h1>
+            <strong>P I A</strong>
+            <br>
+            An intelligent tutoring system built for students learning linear equation.
+          </h1>
+          <h2>Please login in order to use PIA.</h2>
+          <input type="text" class="login-form" placeholder="Enter student number">
+          <input type="text" class="login-form" placeholder="Enter password">
+          <input type="submit" class="login-btn">
+        </div>
+        <div class="module-message">
 
-    </div>
+        </div>
     </div>
     </div>
     <div class="section modules light-bg">
@@ -76,8 +76,8 @@
           </ul>
         </div>
     </div>
-    <div class="makers">
-        <div class="maker-wrapper">
+    <div class="section makers">
+      <div class="maker-wrapper">
             <h3>Meet the Makers</h3>
             <ul id="maker-container">
               <li style="float:left">
