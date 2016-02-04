@@ -46,7 +46,7 @@
 
     </div>
     </div>
-    <div class="modules">
+    <div class="modules light-bg">
         <div class="module-wrapper">
           <h3>Three modules to rule them all.</h3>
           <ul id="module-types">
@@ -69,6 +69,31 @@
               tempor incididunt ut labore et dolore magna aliqua.</p>
             </li>
           </ul>
+        </div>
+    </div>
+    <div class="makers">
+        <div class="maker-wrapper">
+            <h3>Meet the Makers</h3>
+            <ul id="maker-container">
+              <li style="float:left">
+              <img src="/images/josf.jpg">
+              <h4>Josf Yorobe</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </li>
+              <li>
+              <img src="/images/josf.jpg">
+              <h4>Josf Yorobe</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </li>
+              <li style="float:right">
+              <img src="/images/josf.jpg">
+              <h4>Josf Yorobe</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+            </li>
+            </ul>
         </div>
     </div>
 </body>

@@ -40,6 +40,10 @@ body{
     color: #444;
 }
 
+.login-form:focus{
+    border: 1px solid #288feb;
+}
+
 .login-btn{
     width: 85%;
     height: 52px;
@@ -255,13 +259,53 @@ body{
 }
 
 
-.modules{
+.light-bg{
     background-color: #F3F5F7;
+}
+
+.modules, .makers{
     border-top: 1px solid #ddd;
     height: 100%;
     color: #666;
-
 }
+
+
+.makers > .maker-wrapper{
+    padding: 50px 80px;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.makers > .maker-wrapper > h3{
+    position: relative;
+    text-align: center;
+    font-size: 38px;
+    font-weight: 100;
+    margin-bottom: 55px;
+}
+
+.makers > .maker-wrapper > h3:before{
+    position: absolute;
+    content: '';
+    bottom: -10px;
+    left: 50%;
+    margin-left: -25px;
+    width: 50px;
+    height: 1px;
+    background-color: #4c4c4c;
+}
+
+.makers > .maker-wrapper > h3:after{
+    position: absolute;
+    content: '';
+    bottom: -15px;
+    left: 50%;
+    margin-left: -12px;
+    width: 24px;
+    height: 1px;
+    background-color: #4c4c4c;
+}
+
 
 .module-wrapper{
     padding: 110px 80px;
@@ -276,12 +320,12 @@ body{
     margin-bottom: 55px;
 }
 
-#module-types{
+#module-types, #maker-container{
     text-align: center;
     margin-top: 80px;
 }
 
-#module-types li{
+#module-types li, #maker-container li{
     width: 25%;
     display: inline-block;
     text-align: center;
@@ -296,12 +340,19 @@ body{
     font-size: 175px;
 }
 
-#module-types li h4{
+#maker-container li img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+}
+
+#module-types li h4, #maker-container li h4{
     font-size: 28px;
     margin-bottom: 20px;
 }
 
-#module-types li p{
+#module-types li p, #maker-container li p{
     font-size: 18px;
     color: #999;
     line-height: 28px;
