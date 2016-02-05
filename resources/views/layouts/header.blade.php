@@ -28,9 +28,16 @@
                 </ul>
 
       </li>
-    </ul>
+      </ul>
         @else
-          <ul class="nav navbar-nav navbar-right">
+        <ul id="menu" class="nav navbar-nav navbar-right">
+          <li data-menuanchor="register"><a href="#register">Register</a></li>
+          <li data-menuanchor="login"><a href="#login">Login</a></li>
+          <li data-menuanchor="modules"><a href="#modules">Modules</a></li>
+          <li data-menuanchor="aboutus"><a href="#aboutus">About Us</a></li>
+          <li data-menuanchor="contactus"><a href="#contactus">Contact Us</a></li>
+        </ul>
+          {{--  <ul class="nav navbar-nav navbar-right">
           <li><p class="navbar-text">Already have an account?</p></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -56,7 +63,7 @@
           </li>
         </ul>
       </li>
-    </ul>
+    </ul>  --}}
         @endif
 
   </div>

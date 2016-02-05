@@ -15,20 +15,12 @@ body{
     /*background-color: #F3F5F7;*/
 }
 
-.content{
-    top: 52px;
-    padding: 45px 80px 20px;
-    /*position: relative;*/
-    margin: 0 auto;
-    width: 100%;
-    /*height: 680px;*/
-    background: #202021 url('/images/design.png') fixed repeat ;
-}
+
 
 .wrapper{
     position: relative;
     width: 970px;
-    height: 680px;
+    height: 580px;
     margin: 0 auto;
 }
 
@@ -106,11 +98,16 @@ body{
     vertical-align: middle;
     width: 100%;
     max-width: 100%;
-    min-height: 34px;
+    min-height: 44px;
     border: 1px solid #ccc;
     outline: none;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
 }
+
+.form-control-feedback{
+    line-height: 44px;
+}
+
 .text-signup:focus{
     outline: none;
     border-color: #9ecaed;
@@ -169,7 +166,7 @@ body{
     line-height: 1.5;
 }
 
-.main-content{
+.main-content, .content{
     background: #fff;
     margin: auto;
     max-width: 1400px;
@@ -178,7 +175,71 @@ body{
     /*margin-bottom: 90px;*/
 }
 
-.main-content-wrapper{
+.content{
+    background: #202021 url('/images/design.png') center repeat ;
+}
+
+.contactus{
+
+    background-color: #487CAB;
+    margin: auto;
+    max-width: 1400px;
+}
+
+.contactus-message > a{
+    display: inline-block;
+    margin-right: 60px;
+    margin-top: 24px;
+    transition: all 0.4s ease;
+}
+
+.icon-facebook:hover{
+    transform: scale(1.25);
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+.icon-twitter:hover{
+    transform: scale(1.25);
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+.icon-google:hover{
+    transform: scale(1.25);
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+
+.contactus-message > a > i{
+    color: white;
+    font-size: 61px;
+    /* margin: 60px 30px; */
+    cursor: pointer;
+    opacity: 0.75;
+    transition:  all 0.4s ease;
+}
+
+.contactus-form{
+    color: white;
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    /*min-height: 515px;*/
+    padding-left: 55px;
+    float: right;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 39px;
+    border-left: 1px solid #efefef;
+}
+
+.green{
+    background-color: #5CB85C;
+}
+
+.main-content-wrapper, .contactus-wrapper{
     padding: 110px 80px 60px;
     margin: auto;
     max-width: 1400px;
@@ -191,6 +252,14 @@ body{
     width: 45%;
     margin-bottom: 20px;
     /*background: white;*/
+}
+
+.contactus-message{
+    color: white;
+    display: inline-block;
+    position: relative;
+    width: 45%;
+    margin-bottom: 20px;
 }
 
 .module-message{
@@ -217,20 +286,21 @@ body{
     letter-spacing: -1.5px;
 }
 
-.module-type > h1{
+.module-type > h1, .contactus-message > h1{
     font-weight: 100;
-    font-size: 36px;
-    line-height: 56px;
+    font-size: 30px;
+    line-height: 49px;
     margin: 0;
     text-align: left;
     letter-spacing: -1.5px;
 }
 
-.module-type > h1 > strong{
+.module-type > h1 > strong, .contactus-message > h1 > strong{
     font-size: 61px;
+    font-weight: 100;
 }
 
-.module-type > h1:after, .module-message > h1:after{
+.module-type > h1:after, .module-message > h1:after, .contactus-message > h1:after, .contactus-message > h1 > strong:after{
     height: 1px;
     background-color: #bbb;
     margin: 30px 0;
@@ -462,4 +532,9 @@ footer .contact{
     display: inline-block;
     float: right;
     margin-top: 10px;
+}
+
+#menu > li{
+    list-style: none;
+    display: inline-block;
 }

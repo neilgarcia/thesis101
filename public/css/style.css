@@ -328,13 +328,14 @@ section div {
   width: 45px;
   overflow: hidden;
   height: 42px;
-  font-size: 24px;
+  font-size: 22px;
   border-radius: 35px;
   margin: 10px;
 
   padding-right: 5px;
   padding-top: 8px;
   text-align: left;
+  border: 1px solid white;
 }
 
 .hint{
