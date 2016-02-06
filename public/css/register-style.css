@@ -13,6 +13,7 @@
 body{
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     /*background-color: #F3F5F7;*/
+    overflow: hidden;
 }
 
 
@@ -245,6 +246,10 @@ body{
     max-width: 1400px;
 }
 
+.module{
+    padding: 80px 80px 60px;
+}
+
 .module-type{
     color: #666;
     display: inline-block;
@@ -269,9 +274,8 @@ body{
     width: 50%;
     /*min-height: 515px;*/
     padding-left: 55px;
-    padding-top: 18px;
     float: right;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 300;
     line-height: 39px;
     border-left: 1px solid #efefef;

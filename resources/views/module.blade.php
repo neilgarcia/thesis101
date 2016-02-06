@@ -13,6 +13,7 @@
 
 
     <div class="main-content">
+    <div class="main-content-wrapper module">
     <div class="module-type">
         <h1>
           <strong>P I A</strong>
@@ -26,6 +27,7 @@
     </div>
     <div class="module-message">
 
+    </div>
     </div>
     </div>
 

@@ -8,6 +8,11 @@
   src: url('/fonts/Justaword.ttf')
 }
 
+@font-face{
+  font-family: "Proxima Nova";
+  src: url('/fonts/ProximaNova-Light.otf');
+}
+
 ::selection{
     background-color: transparent;
 }
@@ -386,3 +391,37 @@ section div {
 .nano .nano-content { padding: 10px; margin: 0 0 10px 10px; }
 .nano .nano-pane   { background: #5cb85c; }
 .nano .nano-slider { background: #111; }
+
+.content{
+    font-family: "Proxima Nova";
+    margin: auto;
+    max-width: 1400px;
+    border: 1px solid #ddd;
+    height: 100%;
+}
+
+.wrapper{
+    padding: 100px 80px 60px;
+    margin: auto;
+    max-width: 1400px;
+    /*height: 100%;*/
+}
+
+.wrapper > h1{
+    margin-bottom: 30px;
+}
+
+.wrapper > h1::after{
+  margin-top: 20px;
+  display: block;
+  position: relative;
+  height: 1px;
+  width: 30%;
+  background-color: black;
+  content: " ";
+}
+
+.form-wrapper{
+  width: 55%;
+  padding-right: 30px;
+}

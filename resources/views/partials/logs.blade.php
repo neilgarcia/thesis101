@@ -12,6 +12,12 @@
     $(document).ready(function() {
       $('#equations-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false });
       $('#wrong-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false});
+      $('#correct-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false});
+      $('#easy-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false});
+      $('#average-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false});
+      $('#difficult-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false});
+      $('#hint-table').DataTable({bFilter: false, bInfo: false, bLengthChange: false});
+
     } );
   </script>
 @stop

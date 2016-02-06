@@ -11,7 +11,7 @@ function verticalAlign(containerHeight,content){
     var marginTop = Math.floor(containerHeight/2)-Math.floor(content.scrollHeight/2);
     if(marginTop<0)
         marginTop = 0;
-    content.style.marginTop = marginTop + "px";
+    content.style.marginTop = marginTop + 19 + "px";
 }
 
 function removeFromArray(index,list){
