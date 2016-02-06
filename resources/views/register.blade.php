@@ -64,7 +64,7 @@
             An intelligent tutoring system built for students learning linear equation.
           </h1>
           <h2>Please login in order to use PIA.</h2>
-          <form data-toggle="validator" method="post" action="pia/login">
+          <form data-toggle="validator" method="post" action="/pia/login">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group has-feedback">
             <input type="text" name="student_number" class="login-form form-control" required placeholder="Enter student number" pattern="^[201][0-9]{10}">
