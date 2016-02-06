@@ -34,7 +34,8 @@ else if(given != "none")
     given = $('#current-equation').val();
 eq = eq.replace(/\//g, '|');
 given = given.replace(/\//g, '|');
-if(eq){
+if(eq && eq.split("=").length <= 2){
+
     $.ajax({
 
         url: '/analyze/' + eq + '/given/' + given + '/method/manual',
@@ -128,6 +129,9 @@ if(eq){
                 // $('.from-them p').text("Divide " + data.finalize[0].substring(0, data.finalize[0].length-1) + " from " + data.finalize[1] + " to simplify x.");
                 respond(mood, "finalize", data.error, data.finalize);
             }
+        }, error: function(e){
+            $('.from-them p').text("There is something wrong with your input.");
+            respond();
         }
 
     });
@@ -162,21 +166,32 @@ $('#form-log').on('submit', function(e){
             label: 'Yes',
             cssClass: 'btn-primary',
             action: function(dialogItself){
-                $.ajax({
-                    url: '/pia/data/seed',
-                    method: 'post',
-                    dataType: 'json',
-                    beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
-                    success: function(result){
-                        $('#input').removeAttr('disabled');
-                        $('#given-equation').html("Given: " + result.equation);
-                        $('#equation_id').val(result.equation_id);
+
+                    if($('#user-input').val()){
+                        $('#current-equation').val("");
+                        $('#input-given').val("");
+                        $('#given-equation').html("");
+                        $('#equation_id').val("");
                         $('#content-board').html("");
-                        $('#current-equation').val(result.equation);
-                        $('#input-given').val(result.equation);
                         dialogItself.close();
+                    }else{
+                        $.ajax({
+                        url: '/pia/data/seed',
+                        method: 'post',
+                        dataType: 'json',
+                        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+                        success: function(result){
+                            $('#input').removeAttr('disabled');
+                            $('#given-equation').html("Given: " + result.equation);
+                            $('#equation_id').val(result.equation_id);
+                            $('#content-board').html("");
+                            $('#current-equation').val(result.equation);
+                            $('#input-given').val(result.equation);
+                            dialogItself.close();
+                        }
+                        });
                     }
-                });
+
             }
         },{
             label: 'No',
@@ -285,6 +300,9 @@ function saveEquation (equation) {
         success: function(result){
             $('#equation_id').val(result);
             console.log("success!");
+            $('.from-them p').text("Let's answer this equation!");
+            respond();
+            react('happy');
         }
     });
 }

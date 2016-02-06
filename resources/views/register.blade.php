@@ -125,7 +125,7 @@
               main logic of system and some of its designs.</p>
             </li>
               <li style="float:right">
-              <img src="/images/josf.jpg">
+              <img src="/images/josf2.jpg">
               <h4>Josf Yorobe</h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</p>

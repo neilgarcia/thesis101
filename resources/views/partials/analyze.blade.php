@@ -516,10 +516,13 @@ function paren($char){
         $finalAnswer = false;
         $data['error'] = false;
         $ctr++;
-      if($given[0] <> "none")
+      if($given[0] <> "none"){
         $checkIfEqual = check($expr, $given);
-      else
+      }
+      else{
         $checkIfEqual = true;
+        break;
+      }
       if(!$checkIfEqual){
         $data['error'] = true;
         $expr = $given;

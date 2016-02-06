@@ -98,13 +98,13 @@
             </div>
             </div>
 
-                    <h1 class="given" id="given-equation">Given: {!! isset($eq) ? $eq : "" !!}</h1>
+                    <h1 class="given" id="given-equation">{!! isset($eq) ? "Given: " . $eq : "" !!}</h1>
 
-              <input type="hidden" id="current-equation" value={!! isset($eq) ? $eq : "" !!} autocomplete="off">
+              <input type="hidden" id="current-equation" value="{!! isset($eq) ? $eq : "" !!}" autocomplete="off">
               <input type="hidden" id="input-correct-ctr" value=0 autocomplete="off">
               <input type="hidden" id="input-wrong-ctr" value=0 autocomplete="off">
-              <input type="hidden" id="student-group" value={!! $user->student_group !!}>
-
+              <input type="hidden" id="student-group" value="{!! $user->student_group !!}">
+              <input type="hidden" id="user-input" value="{!! $method == 'user-input' ? "true" : "false" !!}">
               <form method="post" id="form-log">
                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
                   <input type="hidden" name="equation_id" id="equation_id" value={!! isset($id) ? $id : "" !!} autocomplete="off">

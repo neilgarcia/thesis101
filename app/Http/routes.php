@@ -34,7 +34,7 @@ Route::post('pia/data/seed', 'DataController@seed');
 Route::get('pia/user/logs', 'StudentController@logs');
 Route::get('pia/seedstudents', 'DataController@seed_students');
 Route::get('pia/user/profile', 'StudentController@profile');
-
+Route::get('pia/method/manual/user', 'StudentController@userInput');
 Route::get('/test', function(){
   return view('test')->with('user',null);
 });

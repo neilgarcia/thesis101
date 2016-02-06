@@ -22,8 +22,8 @@
         </h1>
         <h2>Please choose a module for PIA</h2>
         <a href="/pia/method/auto" id="moduleA" class="btn option">User Given Equation-Auto</a>
-        <a href="#" id="moduleB" class="btn option">User Given Equation-Manual</a>
-        <a href="/pia" id="moduleC" class="btn option">Computer Generated Equation</a>
+        <a href="/pia/method/manual/user" id="moduleB" class="btn option">User Given Equation-Manual</a>
+        <a href="/pia/method/manual" id="moduleC" class="btn option">Computer Generated Equation</a>
     </div>
     <div class="module-message">
 
