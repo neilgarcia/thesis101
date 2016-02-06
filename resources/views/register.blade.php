@@ -78,7 +78,6 @@
           </form>
         </div>
         <div class="module-message">
-
         </div>
     </div>
     </div>

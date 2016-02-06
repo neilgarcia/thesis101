@@ -17,6 +17,11 @@ body{
 }
 
 
+.module-message > video{
+    height: 570px;
+    width: 544px;
+}
+
 
 .wrapper{
     position: relative;
