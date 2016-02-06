@@ -90,20 +90,20 @@
             <li style="float:left">
               <span class="glyphicon glyphicon-random"></span>
               <h4>Computer Generated</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Lets PIA generate unique linear equations for you to solve.
+              PIA will then assist you in answering the equation giving hints when needed.</p>
             </li>
             <li>
               <span class="glyphicon glyphicon-repeat"></span>
               <h4>Automatic Solving</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Allows the user to input his own linear equation, PIA then solves
+              the problem immediately showing you how she's done it step by step.</p>
             </li>
             <li style="float:right;">
               <span class="glyphicon glyphicon-pencil"></span>
               <h4>Step by Step</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Allows the user to input his own linear equation. PIA then instructs you
+              on what to do, giving you hints until you get the final answer.</p>
             </li>
           </ul>
         </div>
@@ -113,16 +113,16 @@
             <h3>Meet the Makers</h3>
             <ul id="maker-container">
               <li style="float:left">
-              <img src="/images/josf.jpg">
-              <h4>Josf Yorobe</h4>
+              <img src="/images/ian2.jpg">
+              <h4>Ian Fosgate</h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</p>
             </li>
               <li>
-              <img src="/images/drickz.jpg">
-              <h4>Josf Yorobe</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="/images/neil2.jpg">
+              <h4>Neil Garcia</h4>
+              <p>Neil Garcia is the programmer of the team. He is in charge of the
+              main logic of system and some of its designs.</p>
             </li>
               <li style="float:right">
               <img src="/images/josf.jpg">

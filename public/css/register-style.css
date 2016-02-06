@@ -241,7 +241,7 @@ body{
 }
 
 .main-content-wrapper, .contactus-wrapper{
-    padding: 110px 80px 60px;
+    padding: 90px 80px 50px;
     margin: auto;
     max-width: 1400px;
 }
@@ -357,7 +357,7 @@ body{
 
 
 .maker-wrapper{
-    padding: 110px 80px 60px;
+    padding: 90px 80px 50px;
     max-width: 1400px;
     margin: auto;
 }
@@ -394,7 +394,7 @@ body{
 
 
 .module-wrapper{
-    padding: 110px 80px 60px;
+    padding: 90px 80px 50px;
     max-width: 1400px;
     margin: auto;
 }
@@ -444,6 +444,7 @@ body{
 }
 
 #module-types li p, #maker-container li p{
+
     font-size: 18px;
     color: #999;
     line-height: 28px;
