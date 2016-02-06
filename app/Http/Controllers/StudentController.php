@@ -208,7 +208,7 @@ class StudentController extends Controller {
 		return json_encode($data);
 	}
 
-	public function profile()
+	public function logs()
 	{
 		$user = Auth::user();
 		$equations = $user->equations()->get();
@@ -218,11 +218,15 @@ class StudentController extends Controller {
 		$easy = $user->equations()->where('difficulty', '=', 'easy')->where('status', '=', 'finished')->get();
 		$average  = $user->equations()->where('difficulty', '=', 'average')->where('status', '=', 'finished')->get();
 		$difficult = $user->equations()->where('difficulty', '=', 'difficult')->where('status', '=', 'finished')->get();
-		return view('partials.profile', compact('user', 'equations', 'correctEquations' ,'wrongEquations', 'hints', 'easy', 'average', 'difficult'));
+		return view('partials.logs', compact('user', 'equations', 'correctEquations' ,'wrongEquations', 'hints', 'easy', 'average', 'difficult'));
 
 	}
 
-
+	public function profile()
+	{
+		$user = Auth::user();
+		return view('partials.profile', compact('user'));
+	}
 
 }
 

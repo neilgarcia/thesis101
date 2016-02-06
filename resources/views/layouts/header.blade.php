@@ -21,8 +21,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b id="user-name">{!! $user->first_name !!}</b> <span class="caret"></span></a>
 
               <ul class="dropdown-menu">
-                  <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;My Account</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;&nbsp;My Logs</a></li>
+                  <li><a href="pia/user/profile"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;My Account</a></li>
+                  <li><a href="pia/user/logs"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;&nbsp;My Logs</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="/pia/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;&nbsp;Logout</a></li>
                 </ul>

@@ -53,7 +53,10 @@
 
                 </div>
                 <div class="chatbox shadow">
-                  <h1>User Logs</h1>
+                  <h1>
+                  <span class="glyphicon glyphicon-comment"></span>
+                    User Logs
+                  </h1>
                   <div class="chat-logs nano">
                       <div class="nano-content">
 

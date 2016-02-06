@@ -18,6 +18,11 @@
 <body>
     @include('layouts.header')
 
+    <div class="navigator">
+        <a href="#" id="navigateUp"><span class="glyphicon glyphicon-circle-arrow-up"></span></a>
+        <a href="#" id="navigateDown"><span class="glyphicon glyphicon-circle-arrow-down"></span></a>
+    </div>
+
     <div id="main">
 
     <div class="section content">

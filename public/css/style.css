@@ -97,6 +97,11 @@ body{
     /*overflow: hidden;*/
 }
 
+.chatbox > h1 > span{
+  font-size: 32px;
+  margin-left: 10px;
+}
+
 .chat-logs{
   text-align: left;
   letter-spacing: 4px;

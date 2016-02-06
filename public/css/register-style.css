@@ -538,3 +538,21 @@ footer .contact{
     list-style: none;
     display: inline-block;
 }
+
+.navigator{
+    display: inline-block;
+    position: fixed;
+    bottom: 0;
+    margin:20px;
+    z-index: 99999;
+    right: 0;
+    font-size: 42px;
+}
+
+.navigator > a > span{
+    color: #337ab7;
+}
+
+.navigator > a >span:hover{
+    color: #23527c;
+}
