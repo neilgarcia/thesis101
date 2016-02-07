@@ -114,8 +114,8 @@
               <li style="float:left">
               <img src="/images/ian2.jpg">
               <h4>Ian Fosgate</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Ian Fosgate is the project manager of the team. He is in charge of
+              the documentation and external communications</p>
             </li>
               <li>
               <img src="/images/neil2.jpg">
@@ -126,8 +126,8 @@
               <li style="float:right">
               <img src="/images/josf2.jpg">
               <h4>Josf Yorobe</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Josf Yorobe is the head animator and designer of the team. He is the one responsible
+              for the main design of the system.</p>
             </li>
             </ul>
         </div>
