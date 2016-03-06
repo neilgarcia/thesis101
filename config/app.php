@@ -197,7 +197,6 @@ return [
 		'Carbon'    => 'Carbon\Carbon',
 		'Form'			=> 'Illuminate\Html\FormFacade',
     'Html'			=> 'Illuminate\Html\HtmlFacade',
-    'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
 	],
 
