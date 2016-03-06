@@ -263,6 +263,8 @@ $('.abandon').on('click', function(){
                         $('#current-equation').val(result.equation);
                         $('#input-given').val(result.equation);
                         $('#input').removeAttr("disabled");
+                        $('#input-wrong-ctr').val(0);
+                        $('#input-correct-ctr').val(0);
                         dialogItself.close();
                     }
                 });

@@ -44,6 +44,8 @@ header("Cache-Control: private",false);
     <td>Hints Said</td>
     <td>Number of Assist</td>
     <td>Emotions Exhibited</td>
+    <td>Time Started</td>
+    <td>Time Finished</td>
     <td>Time Spent</td>
   </tr>
   @foreach ($log->equations as $equation)
@@ -65,6 +67,8 @@ header("Cache-Control: private",false);
       <?php $emotion_count++; ?>
     @endforeach
     <td>{!! $emotion_exhibited !!}</td>
+    <td>{!! $equation->time_started !!}</td>
+    <td>{!! $equation->time_finished !!}</td>
     <td>{!! $equation->status == 'finished' ? strtotime($equation->time_finished) - strtotime($equation->time_started) : "N/A" !!}</td>
   </tr>
   @endforeach
