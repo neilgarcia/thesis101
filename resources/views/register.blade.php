@@ -67,7 +67,7 @@
           <form data-toggle="validator" method="post" action="/pia/login">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group has-feedback">
-            <input type="text" name="student_number" class="login-form form-control" required placeholder="Enter student number" pattern="^[201][0-9]{10}">
+            <input type="text" name="student_number" class="login-form form-control" required placeholder="Enter student number">
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
           </div>
           <div class="form-group has-feedback">
