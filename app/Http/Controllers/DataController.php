@@ -85,7 +85,8 @@ class DataController extends Controller {
 	{
 			$id = Input::get('equation_id');
 			$eq = Equation::find($id);
-			$eq->time_finished = Carbon::now();
+			if($eq->status != "finished")
+				$eq->time_finished = Carbon::now();
 			$eq->save();
 	}
 

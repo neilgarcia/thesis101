@@ -69,7 +69,7 @@ header("Cache-Control: private",false);
     <td>{!! $emotion_exhibited !!}</td>
     <td>{!! $equation->time_started !!}</td>
     <td>{!! $equation->time_finished !!}</td>
-    <td>{!! $equation->status == 'finished' ? strtotime($equation->time_finished) - strtotime($equation->time_started) : "N/A" !!}</td>
+    <td>{!! strtotime($equation->time_finished) != 0 ? strtotime($equation->time_finished) - strtotime($equation->time_started) : "N/A" !!}</td>
   </tr>
   @endforeach
 
