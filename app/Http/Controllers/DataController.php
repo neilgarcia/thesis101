@@ -81,6 +81,15 @@ class DataController extends Controller {
 			return $eq->toArray();
 	}
 
+	public function updateStatusAbandon()
+	{
+			$id = Input::get('equation_id');
+			$eq = Equation::find($id);
+			$eq->time_finished = Carbon::now();
+			$eq->save();
+	}
+
+
 
 	public function savereaction()
 	{
@@ -92,6 +101,7 @@ class DataController extends Controller {
 
 	public function seed()
 	{
+
 		$data = json_decode($this->generateLexer());
 		$lexer = new  Lexer($data->{'lexer'});
 		srand();

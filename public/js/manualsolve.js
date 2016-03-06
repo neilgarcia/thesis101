@@ -250,6 +250,16 @@ $('.abandon').on('click', function(){
             label: 'Yes',
             cssClass: 'btn-primary',
             action: function(dialogItself){
+                data = $('#form-log').serialize();
+                $.ajax({
+                    url: '/pia/abandoned',
+                    method: 'post',
+                    data: data,
+                    beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+                    success: function(e){
+                        // console.log(e);
+                    }
+                });
                 $.ajax({
                     url: '/pia/data/seed',
                     method: 'post',

@@ -19,6 +19,7 @@ Route::get('/', 'StudentController@index');
 Route::post('/pia/savehint', 'DataController@savehint');
 Route::post('/pia/savereact', "DataController@savereaction");
 Route::post('/pia/finished', 'DataController@updateStatus');
+Route::post('/pia/abandoned', 'DataController@updateStatusAbandon');
 Route::post('/pia/register', 'StudentController@store');
 Route::post('pia/saveEquation', 'DataController@savegiven');
 Route::get('/analyze/{id}/given/{given}/method/{method}', 'DataController@analyze');
