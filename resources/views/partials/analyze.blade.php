@@ -270,7 +270,14 @@ function paren($char){
       if($num%$var == 0){
         $result = $num/$var;
       }else{
+        if($num>0 && $var>0)
         $result = "$num/$var";
+      else{
+        $num = $num * -1;
+        $var = $var * -1;
+        $result = "$num/$var";
+
+      }
       }
 
     }
@@ -468,6 +475,7 @@ function paren($char){
       if($distribute <> $eq){
         $result = infix($distribute['left']) . " = " . infix($distribute['right']);
         echo json_encode(array('result'=>$result, 'finalAnswer'=>false));
+        return "";
       }
       $firststep = firststep($distribute);
       // var_dump($firststep);
@@ -475,6 +483,7 @@ function paren($char){
       if($firststep <> $distribute){
         $result = infix($firststep['left']) . " = " . infix($firststep['right']);
         echo json_encode(array('result'=>$result, 'finalAnswer'=>false));
+        return "";
       }
 
       $eq['left'] = analyze($firststep['left'], 'left');
@@ -487,6 +496,7 @@ function paren($char){
 
         $result = $eq['left'] . "=" . $eq['right'];
         echo json_encode(array('result'=>$result, 'finalAnswer'=>false));
+        return "";
       }
 
       $result = simplify($eq['left'], $eq['right']);

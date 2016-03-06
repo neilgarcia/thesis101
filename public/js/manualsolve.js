@@ -22,7 +22,7 @@ var simplifyRightResponse = ["Something's wrong with your answer. Please simplif
                             "Your answer is wrong. Have you tried simplifying the right side of the equation?"];
 
 
-
+var congratsResponse = ['Congrats!', 'Awesome!', 'Congratulations!', 'We did it!', 'You did it!'];
 
 function analyze () {
 
@@ -167,12 +167,14 @@ $('#form-log').on('submit', function(e){
             cssClass: 'btn-primary',
             action: function(dialogItself){
 
-                    if($('#user-input').val()){
+                    if($('#user-input').val() == true){
+                        console.log('wew');
                         $('#current-equation').val("");
                         $('#input-given').val("");
                         $('#given-equation').html("");
                         $('#equation_id').val("");
                         $('#content-board').html("");
+                        $('#input').removeAttr('disabled');
                         dialogItself.close();
                     }else{
                         $.ajax({
@@ -188,6 +190,8 @@ $('#form-log').on('submit', function(e){
                             $('#current-equation').val(result.equation);
                             $('#input-given').val(result.equation);
                             dialogItself.close();
+                        },error: function(xhr, status, error){
+                            console.log(error);
                         }
                         });
                     }
@@ -204,6 +208,7 @@ $('#form-log').on('submit', function(e){
 });
 
 $('.hint').on('click', function(e){
+    console.log("hint");
     $('#input-wrong-ctr').val(0);
     eq = '';
     if($('#current-equation').val()){
@@ -213,21 +218,26 @@ $('.hint').on('click', function(e){
     }else{
         $('.from-them p').text("Please input an equation first.");
         respond();
-        return;
     }
 
     $.ajax({
         url: '/analyze/' + eq + '/given/' + eq + '/method/hint',
-        dataType: 'json',
+        dataType: 'JSON',
         success: function(result){
+            console.log(result.result);
             id = $('#equation_id').val();
             $('#content-board').append("<span class=a-step>" + result.result + "</span>");
             $('#current-equation').val(result.result);
             $('.hint').css({'opacity':'0', 'visibility':'hidden'});
             saveHint(result.result, id);
             if(result.finalAnswer){
-                $('#form-log').submit();
+                $('.from-them p').text("We have arrived at the final answer!");
+                respond();
+                react('excited');
             }
+
+        },error: function(xhr, status, error){
+            console.log(error);
         }
     });
 });
@@ -299,6 +309,7 @@ function saveEquation (equation) {
         beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
         success: function(result){
             $('#equation_id').val(result);
+
             console.log("success!");
             $('.from-them p').text("Let's answer this equation!");
             respond();
@@ -388,7 +399,8 @@ function react(mood) {
           setTimeout(fadeInResponse, 100);
           setTimeout(fadeOutResponse, 5000);
           if(arguments.length == 1){
-            $('.from-them p').text("Congrats!");
+            var text = congratsResponse[Math.floor(Math.random()*congratsResponse.length)];
+            $('.from-them p').text(text);
             react("excited");
         }else if(arguments.length == 3){
             if(type == "simplifyLeft"){
