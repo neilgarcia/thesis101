@@ -145,7 +145,6 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-		'Maatwebsite\Excel\ExcelServiceProvider',
 
 	],
 

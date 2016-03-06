@@ -21,12 +21,13 @@ $given = explode('=', $given);
   $GLOBALS['stack'] = array();
   $GLOBALS['output'] = "";
   for ($i=0; $i < strlen($equation); $i++) {
+
     //123+5*6
    $char = $equation{$i};
    switch ($char) {
      case '+':
      case '-':
-     if($i == 0){
+     if($i == 0 || ($i > 0 && is_operator($equation{$i-1}))){
       $GLOBALS['output'] = $char . $GLOBALS['output'];
       break;
      }
@@ -426,16 +427,18 @@ function paren($char){
         $resultExpr = $eq['right'] / $eq['left'];
 
       $eq['left'] = postfix($given[0]);
-
       $eq['right'] = postfix($given[1]);
       $eq = distribute($eq);
+
       $eq = firststep($eq);
       $eq['left'] = analyze($eq['left'], 'left');
       $eq['right'] = analyze($eq['right'], 'right');
       $eq['left'] = array_pop($eq['left']);
       $eq['right'] = array_pop($eq['right']);
-      if($eq['left'] == "x")
+      if($eq['left'] == "x"){
         $resultGiven = $eq['right'] / 1;
+      }
+
       else
         $resultGiven = $eq['right'] / $eq['left'];
 

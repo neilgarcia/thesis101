@@ -157,7 +157,7 @@ class StudentController extends Controller {
 
 	public function test()
 	{
-		$logs = Student::with('equations', 'piaLogs')->where('student_group', '=', 'non-emphatic')->get();
+		$logs = Student::with('equations', 'piaLogs')->get();
 		// dd($logs);
 		return view('partials.test', compact('logs'));
 	}
