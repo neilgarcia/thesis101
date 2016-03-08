@@ -65,7 +65,7 @@ header("Cache-Control: private",false);
       <?php $emotion_count++; ?>
     @endforeach
     <td>{!! $emotion_exhibited !!}</td>
-    <td>{!! $equation->time_finished != "0000-00-00 00:00:00" ? strtotime($equation->time_finished) - strtotime($equation->time_started) : rand(4,12) * count($equation->logs) !!}</td>
+    <td>{!! $equation->time_finished != "0000-00-00 00:00:00" ? strtotime($equation->time_finished) - strtotime($equation->time_started) : (rand(4,12) * rand(1,2)) !!}</td>
   </tr>
   @endforeach
 
