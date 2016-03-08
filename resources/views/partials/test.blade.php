@@ -1,23 +1,28 @@
 <?php
-
-use Carbon\Carbon;
-
-header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
-header("Content-Disposition: attachment; filename=abc.xls");  //File name extension was wrong
-header("Expires: 0");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("Cache-Control: private",false);
-
+  $file="formatted.xlsx";
+  $test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
+  header("Content-type: application/vnd.ms-excel");
+  header("Content-Disposition: attachment; filename=$file");
 ?>
 
 <html>
 
-
+  <table border = 1>
+  <tr>
+    <th>Student Code</th>
+    <th>Student Name</th>
+    <th>Software Category</th>
+    <th>Math Performance</th>
+    <th>No. of Problems Solved</th>
+    <th>No. of Problems Unsolved</th>
+    <th>No. of hints</th>
+    <th>Hints Said</th>
+    <th>Emotions Exhibited</th>
+  </tr>
 <?php $ctrCorrect =  0; ?>
 <?php $ctrWrong =  0 ?>
 <?php $hints_used = "" ?>
-<?php $emotion_count = 0; ?>
-<?php $hint_count = 0; ?>
+
 <?php $responses = array("Good Job!",
                        "Keep it up!",
                        "You're doing great.",
@@ -32,45 +37,31 @@ header("Cache-Control: private",false);
                        "Amazing! That's right!",
                        "Yahoo! You're pretty good.") ?>
   @foreach ($logs as $log)
-  <table border = 1>
-  <tr>
-    <th colspan=6>Student Name</th>
-  </tr>
-  <tr><td colspan=6>{!! $log->first_name . " " . $log->last_name !!}</td></tr>
     <tr>
-    <td>Equations</td>
-    <td>Difficulty</td>
-    <td>Status</td>
-    <td>Hints Said</td>
-    <td>Number of Assist</td>
-    <td>Emotions Exhibited</td>
-    <td>Time Spent</td>
-  </tr>
-  @foreach ($log->equations as $equation)
-  <tr>
-    <td>{!! $equation->equation !!}</td>
-    <td>{!! $equation->difficulty !!}</td>
-    <td>{!! $equation->status !!}</td>
-    <?php $hint_said = ""; ?>
-    @foreach ($equation->PiaLogs as $plogs)
-      <?php in_array($plogs->reaction, $responses) ? "" : $hint_said .= $plogs->reaction ?>
-      <?php in_array($plogs->reaction, $responses) ? "" : $hint_count++; ?>
+    <td>{!! $log->student_number !!}</td>
+    <td>{!! $log->first_name . " " . $log->last_name !!}
+    <td>{!! $log->student_group !!}</td>
+    <td>High</td>
+    <td>{!! $log->equations()->where('status', '=', 'finished')->count() !!}</td>
+    <td>{!! $log->equations()->where('status', '=', 'abandoned')->count() !!}</td>
+    <td>{!! $log->hints->count() !!}</td>
+    <?php $chat = "" ?>
+    @foreach ($log->piaLogs as $pl)
+    @if (!in_array($pl->reaction, $responses))
+      <?php $chat = $chat . $pl->reaction . "," ?>
+    @endif
     @endforeach
-    <td>{!! $hint_said !!}</td>
-    <td>{!! $equation->hints->count() !!}</td>
+    <td>{!! $chat !!}</td>
+    <?php $hints = ""; ?>
+    @foreach ($log->equations as $e)
+      @foreach ($e->logs as $em)
 
-    <?php $emotion_exhibited = ""; ?>
-    @foreach ($equation->logs as $emotion)
-      <?php $emotion_exhibited = $emotion_exhibited . $emotion->emotion . " "?>
-      <?php $emotion_count++; ?>
+        <?php $hints = $hints . $em->emotion . "," ?>
+      @endforeach
+
     @endforeach
-    <td>{!! $emotion_exhibited !!}</td>
-    <td>{!! $equation->time_finished != "0000-00-00 00:00:00" ? strtotime($equation->time_finished) - strtotime($equation->time_started) : rand(4,16) !!}</td>
-  </tr>
+<td>{!! $hints !!}</td>
   @endforeach
 
   </table>
-
-  @endforeach
-  <?php echo "hint count: " . $hint_count . "<br>" . "emotion count: " . $emotion_count ?>
 </html>
